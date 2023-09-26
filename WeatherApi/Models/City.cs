@@ -5,7 +5,7 @@ namespace WeatherApi.Models;
 public class City
 {
     [Key]
-    public long IdCity { get; set; }
+    public Guid IdCity { get; set; }
 
     [Required(ErrorMessage = "O nome da cidade é obrigatório")]
     public string Name { get; set; }

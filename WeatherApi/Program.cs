@@ -15,11 +15,6 @@ var connectionString = builder.Configuration.GetConnectionString
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddDbContext<CityContext>(opts =>
-{
-    opts.UseNpgsql(connectionString);
-});
-
 builder.Services.AddDbContext<WeatherContext>(opts => 
 {
     opts.UseNpgsql(connectionString);

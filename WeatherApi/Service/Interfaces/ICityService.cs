@@ -8,7 +8,7 @@ public interface ICityService
     City Save(City city);
    // IEnumerable<City> FindAll();
 
-    City FindById(long id);
+    City FindById(Guid id);
 
     //Page<WeatherDataEntity> FindAllByCityNameIgnoreCase(String cityName, Pageable pageable);
     //IEnumerable<City> FindAllById(String cityName, Guid IdCity);

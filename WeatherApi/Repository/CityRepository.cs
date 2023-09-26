@@ -6,9 +6,9 @@ namespace WeatherApi.Repository
 {
     public class CityRepository : ICityRepository
     {
-        private readonly CityContext _context; // Substitua pelo seu contexto de banco de dados
+        private readonly WeatherContext _context; // Substitua pelo seu contexto de banco de dados
 
-        public CityRepository(CityContext context)
+        public CityRepository(WeatherContext context)
         {
             _context = context;
         }
@@ -25,7 +25,7 @@ namespace WeatherApi.Repository
         //}
 
 
-        public City? FindByID(long idCity)
+        public City? FindByID(Guid idCity)
         {
             return _context.CityData.FirstOrDefault(data => data.IdCity == idCity);
 

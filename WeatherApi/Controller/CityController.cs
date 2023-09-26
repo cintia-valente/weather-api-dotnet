@@ -49,7 +49,7 @@ public class CityController : ControllerBase
     /// Lista a cidade por id
     /// </summary>
     [HttpGet("{id}")]
-    public IActionResult GetCityForId(long id)
+    public IActionResult GetCityForId(Guid id)
     {
         var city = _cityService.FindById(id);
         return city is null ? NotFound("Weather not found") : Ok(city);

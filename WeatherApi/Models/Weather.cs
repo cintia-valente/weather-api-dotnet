@@ -6,7 +6,6 @@ namespace WeatherApi.Models;
 public class Weather
 {
     [Key]
-    [Required]
     public Guid IdWeather { get; set; }
    
     public DateTime Date { get; set; }
@@ -18,6 +17,5 @@ public class Weather
     public DayTimeEnum DayTime { get; set; }
     public NightTimeEnum NightTime { get; set; }
 
-    public int IdCity { get; set; }
     public City City { get; set; }
 }

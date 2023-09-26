@@ -4,7 +4,7 @@
         <name>WeatherApi</name>
     </assembly>
     <members>
-        <member name="M:WeatherApi.Controller.CityController.GetCityForId(System.Int64)">
+        <member name="M:WeatherApi.Controller.CityController.GetCityForId(System.Guid)">
             <summary>
             Lista a cidade por id
             </summary>
@@ -13,6 +13,18 @@
             <summary>
             Lista registros de um estado pelo id
             </summary>
+        </member>
+        <member name="T:WeatherApi.Migrations.initmigration">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.initmigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.initmigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.initmigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
         </member>
     </members>
 </doc>

@@ -4,9 +4,11 @@
         <name>WeatherApi</name>
     </assembly>
     <members>
+        <!-- Badly formed XML comment ignored for member "M:WeatherApi.Controller.CityController.PostWeather(WeatherApi.Data.DTOs.PostCityDTO)" -->
+        <!-- Badly formed XML comment ignored for member "M:WeatherApi.Controller.CityController.GetAll" -->
         <member name="M:WeatherApi.Controller.CityController.GetCityForId(System.Guid)">
             <summary>
-            Lista a cidade por id
+            Lista uma cidade por id
             </summary>
         </member>
         <member name="M:WeatherApi.Controller.WeatherController.GetWeatherForId(System.Guid)">

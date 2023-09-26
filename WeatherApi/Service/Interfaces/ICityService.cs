@@ -6,7 +6,7 @@ public interface ICityService
 {
     //IEnumerable<Weather> GetAll();
     City Save(City city);
-   // IEnumerable<City> FindAll();
+    IEnumerable<City> FindAll();
 
     City FindById(Guid id);
 

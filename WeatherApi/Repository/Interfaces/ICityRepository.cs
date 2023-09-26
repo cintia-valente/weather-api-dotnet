@@ -6,7 +6,7 @@ namespace WeatherApi.Repository.Interfaces
     {
 
         void Save(City city);
-     //   IEnumerable<City> FindAll();
+        IEnumerable<City> FindAll();
       
         City? FindByID(Guid idCity);
 

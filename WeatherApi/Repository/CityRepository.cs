@@ -19,10 +19,10 @@ namespace WeatherApi.Repository
             _context.SaveChanges();
         }
 
-        //public IEnumerable<City> FindAll()
-        //{
-        //    return _context.CityData.ToList();
-        //}
+        public IEnumerable<City> FindAll()
+        {
+            return _context.CityData.ToList();
+        }
 
 
         public City? FindByID(Guid idCity)

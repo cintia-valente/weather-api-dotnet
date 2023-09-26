@@ -7,7 +7,7 @@ using WeatherApi.Service.Interfaces;
 namespace WeatherApi.Controller;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api")]
 
 public class CityController : ControllerBase
 {
@@ -20,7 +20,10 @@ public class CityController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpPost]
+    /// <summary>
+    /// Cria uma cidade
+    //// </summary>
+    [HttpPost("register-city")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public IActionResult PostWeather(
         [FromBody] PostCityDTO postCityDTO)
@@ -35,18 +38,18 @@ public class CityController : ControllerBase
 
     /// <summary>
     /// Lista todas as cidades
-    /// </summary>
-    //[HttpGet("cities/all")]
-    //public IActionResult GetAll()
-    //{
-    //    var cityData = _cityService.FindAll();
+    //// </summary>
+    [HttpGet("cities/all")]
+    public IActionResult GetAll()
+    {
+        var cityData = _cityService.FindAll();
 
-    //    return Ok(cityData);
+        return Ok(cityData);
 
-    //}
+    }
 
     /// <summary>
-    /// Lista a cidade por id
+    /// Lista uma cidade por id
     /// </summary>
     [HttpGet("{id}")]
     public IActionResult GetCityForId(Guid id)

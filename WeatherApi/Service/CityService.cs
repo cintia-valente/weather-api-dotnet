@@ -1,4 +1,5 @@
 ﻿using WeatherApi.Models;
+using WeatherApi.Repository;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service.Interfaces;
 
@@ -17,6 +18,13 @@ namespace WeatherApi.Service
         {
             _cityRepository.Save(city);
             return city;
+        }
+
+        public IEnumerable<City> FindAll()
+        {
+            return _cityRepository.FindAll();
+            //_cityRepository.FindAll();
+            //return cityAll;
         }
 
         public City FindById(Guid id)

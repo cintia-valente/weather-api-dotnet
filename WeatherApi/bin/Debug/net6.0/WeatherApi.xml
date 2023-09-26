@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WeatherApi</name>
+    </assembly>
+    <members>
+        <member name="M:WeatherApi.Controller.CityController.GetCityForId(System.Int64)">
+            <summary>
+            Lista a cidade por id
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherForId(System.Guid)">
+            <summary>
+            Lista registros de um estado pelo id
+            </summary>
+        </member>
+    </members>
+</doc>

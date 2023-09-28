@@ -16,9 +16,21 @@ namespace WeatherApi.Service
 
         public City Save(City city)
         {
-            _cityRepository.Save(city);
-            return city;
+            var citySaved = _cityRepository.Save(city);
+            return citySaved;
         }
+
+
+        public IEnumerable<City> FindAllWithWeatherData()
+        {
+            return _cityRepository.FindAll().ToList();
+        }
+
+        //public IEnumerable<City> FindAll()
+        //{
+        //    // Include para carregar os dados meteorológicos relacionados a cada cidade
+        //    return _cityRepository.FindAll().Include(city => city.WeatherDataList).ToList();
+        //}
 
         public IEnumerable<City> FindAll()
         {

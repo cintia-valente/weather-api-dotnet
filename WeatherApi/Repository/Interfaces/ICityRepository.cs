@@ -5,9 +5,11 @@ namespace WeatherApi.Repository.Interfaces
     public interface ICityRepository
     {
 
-        void Save(City city);
+        City Save(City city);
         IEnumerable<City> FindAll();
-      
+        IQueryable<City> FindAllWithWeatherData();
+
+
         City? FindByID(Guid idCity);
 
        // bool DeleteById(Guid idCity);

@@ -12,7 +12,7 @@ namespace WeatherApi.Repository.Interfaces
         //void Update(T entity);
         //void Delete(T entity);
 
-        void Save(Weather weather);
+        Weather Save(Weather weather);
 
         IEnumerable<Weather> FindAll();
         IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize);

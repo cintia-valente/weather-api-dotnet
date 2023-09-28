@@ -22,11 +22,11 @@ public class CityController : ControllerBase
 
     /// <summary>
     /// Cria uma cidade
-    //// </summary>
+    /// </summary>
     [HttpPost("register-city")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public IActionResult PostWeather(
-        [FromBody] PostCityDTO postCityDTO)
+        [FromBody] CityRequestDto postCityDTO)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -36,10 +36,17 @@ public class CityController : ControllerBase
         return CreatedAtAction(nameof(GetCityForId), new { id = citySave.IdCity }, citySave);
     }
 
+    [HttpGet("cities/all")]
+    public IEnumerable<City> GetCitiesWithWeatherData()
+    {
+        return _cityService.FindAllWithWeatherData();
+    }
+
+
     /// <summary>
     /// Lista todas as cidades
-    //// </summary>
-    [HttpGet("cities/all")]
+    /// </summary>
+    [HttpGet("cities/all2")]
     public IActionResult GetAll()
     {
         var cityData = _cityService.FindAll();

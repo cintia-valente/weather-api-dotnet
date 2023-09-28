@@ -36,8 +36,14 @@ namespace WeatherApi.Repository
             modelBuilder.Entity<City>()
                 .HasMany(city => city.WeatherDataList)
                 .WithOne(weather => weather.City)
-                .HasForeignKey(weather => weather.City)
+                .HasForeignKey(weather => weather.IdCity)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.Entity<Weather>()
+            //   .HasOne(w => w.City)
+            //   .WithMany()
+            //   .HasForeignKey(w => w.IdCity) // Chave estrangeira
+            //   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using WeatherApi.Models;
+using WeatherApi.Repository;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service.Interfaces;
 
@@ -7,16 +8,22 @@ namespace WeatherApi.Service;
 public class WeatherService : IWeatherService
 {
     private IWeatherRepository _weatherRepository;
+    private ICityRepository _cityRepository;
 
-    public WeatherService(IWeatherRepository weatherRepository)
+    public WeatherService(IWeatherRepository weatherRepository, ICityRepository cityRepository)
     {
-        _weatherRepository = weatherRepository; 
+        _weatherRepository = weatherRepository;
+        _cityRepository = cityRepository;
+
     }
 
     public Weather Save(Weather weather)
     {
-        _weatherRepository.Save(weather);
-        return weather;
+        weather.City = _cityRepository.FindByID(weather.IdCity);
+
+        var weatherSaved = _weatherRepository.Save(weather);
+        return weatherSaved;
+
     }
 
     //public IEnumerable<Weather> FindAll()

@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using WeatherApi.Data;
+using WeatherApi.Repository;
 
 #nullable disable
 
 namespace WeatherApi.Migrations
 {
     [DbContext(typeof(WeatherContext))]
-    [Migration("20230926192359_init-migration")]
+    [Migration("20230928195320_initmigration")]
     partial class initmigration
     {
         /// <inheritdoc />
@@ -37,6 +37,9 @@ namespace WeatherApi.Migrations
 
                     b.HasKey("IdCity");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("CityData");
                 });
 
@@ -44,9 +47,6 @@ namespace WeatherApi.Migrations
                 {
                     b.Property<Guid>("IdWeather")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("CityIdCity")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Date")
@@ -57,6 +57,9 @@ namespace WeatherApi.Migrations
 
                     b.Property<double>("Humidity")
                         .HasColumnType("double precision");
+
+                    b.Property<Guid>("IdCity")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("MaxTemperature")
                         .HasColumnType("integer");
@@ -75,7 +78,7 @@ namespace WeatherApi.Migrations
 
                     b.HasKey("IdWeather");
 
-                    b.HasIndex("CityIdCity");
+                    b.HasIndex("IdCity");
 
                     b.ToTable("WeatherData");
                 });
@@ -84,7 +87,7 @@ namespace WeatherApi.Migrations
                 {
                     b.HasOne("WeatherApi.Models.City", "City")
                         .WithMany("WeatherDataList")
-                        .HasForeignKey("CityIdCity")
+                        .HasForeignKey("IdCity")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using WeatherApi.Data;
+using System.Text.Json.Serialization;
 using WeatherApi.Repository;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service;
@@ -15,7 +14,7 @@ var connectionString = builder.Configuration.GetConnectionString
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddDbContext<WeatherApi.Data.WeatherContext>(opts => 
+builder.Services.AddDbContext<WeatherContext>(opts => 
 {
     opts.UseNpgsql(connectionString);
 });
@@ -27,6 +26,19 @@ builder.Services.AddScoped<ICityService, CityService>();
 
 builder.Services.AddScoped<IWeatherRepository, WeatherRepository>();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
+
+builder.Services.AddMvc()
+
+    .AddJsonOptions(options =>
+
+    {
+
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+
+    });
+
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

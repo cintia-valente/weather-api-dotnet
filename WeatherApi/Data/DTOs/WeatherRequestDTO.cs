@@ -4,8 +4,9 @@ using WeatherApi.Models;
 
 namespace WeatherApi.Data.DTOs;
 
-public class PutWeatherDTO
+public class WeatherRequestDTO
 {
+    public Guid IdWeather { get; set; }
     public DateTime Date { get; set; }
     public int MaxTemperature { get; set; }
     public int MinTemperature { get; set; }
@@ -15,5 +16,6 @@ public class PutWeatherDTO
     public DayTimeEnum DayTime { get; set; }
     public NightTimeEnum NightTime { get; set; }
 
-    public City City { get; set; }
+    public Guid IdCity { get; set; }
+    public CityResponseDto? City { get; set; }
 }

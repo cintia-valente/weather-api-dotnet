@@ -21,11 +21,11 @@ public class WeatherController : ControllerBase
 
     /// <summary>
     /// Cria um clima
-    //// </summary>
+    /// </summary>
     [HttpPost("register-weather")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public IActionResult PostWeather(
-        [FromBody] PostWeatherDTO postWeatherDTO)
+        [FromBody] WeatherRequestDTO postWeatherDTO)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -48,9 +48,9 @@ public class WeatherController : ControllerBase
 
     //}
 
-    ///// <summary>
-    ///// Lista 10 registros por página de todas as cidades quando pesquisar a cidade
-    ///// </summary>
+    /// <summary>
+    /// Lista 10 registros por página de todas as cidades quando pesquisar a cidade
+    /// </summary>
     //[HttpGet("{cityName}")]
     //public IActionResult GetAll([FromQuery] string cityName, int page, int pageSize)
     //{

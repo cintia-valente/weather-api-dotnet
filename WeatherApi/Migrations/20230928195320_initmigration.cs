@@ -36,23 +36,29 @@ namespace WeatherApi.Migrations
                     WindSpeed = table.Column<double>(type: "double precision", nullable: false),
                     DayTime = table.Column<int>(type: "integer", nullable: false),
                     NightTime = table.Column<int>(type: "integer", nullable: false),
-                    CityIdCity = table.Column<Guid>(type: "uuid", nullable: false)
+                    IdCity = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WeatherData", x => x.IdWeather);
                     table.ForeignKey(
-                        name: "FK_WeatherData_CityData_CityIdCity",
-                        column: x => x.CityIdCity,
+                        name: "FK_WeatherData_CityData_IdCity",
+                        column: x => x.IdCity,
                         principalTable: "CityData",
                         principalColumn: "IdCity",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_WeatherData_CityIdCity",
+                name: "IX_CityData_Name",
+                table: "CityData",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WeatherData_IdCity",
                 table: "WeatherData",
-                column: "CityIdCity");
+                column: "IdCity");
         }
 
         /// <inheritdoc />

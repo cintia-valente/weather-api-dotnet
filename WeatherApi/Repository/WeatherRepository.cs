@@ -1,4 +1,6 @@
-﻿using WeatherApi.Data;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using WeatherApi.Data;
 using WeatherApi.Models;
 using WeatherApi.Repository.Interfaces;
 
@@ -7,16 +9,20 @@ namespace WeatherApi.Repository
     public class WeatherRepository : IWeatherRepository
     {
         private readonly WeatherContext _context; // Substitua pelo seu contexto de banco de dados
-
-        public WeatherRepository(WeatherContext context)
+        private IMapper _mapper;
+        public WeatherRepository(WeatherContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public void Save(Weather weather)
+        public Weather Save(Weather weather)
         {
-            _context.WeatherData.Add(weather);
+            EntityEntry<Weather?> weatherEntity = _context.WeatherData.Add(weather);
+           
             _context.SaveChanges();
+            var weatherConvert = _mapper.Map<Weather>(weatherEntity.Entity);
+            return weatherConvert;
         }
 
         public IEnumerable<Weather> FindAll()

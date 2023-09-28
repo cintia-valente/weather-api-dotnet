@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WeatherApi.Models;
 
@@ -10,6 +11,8 @@ public class City
     [Required(ErrorMessage = "O nome da cidade é obrigatório")]
     public string Name { get; set; }
 
-    public List<Weather> WeatherDataList { get; set; }
+    [ForeignKey("IdCity")]
+    public virtual List<Weather> WeatherDataList { get; set; } = new List<Weather>();
+   
 
 }

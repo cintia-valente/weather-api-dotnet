@@ -7,7 +7,7 @@ using WeatherApi.Service.Interfaces;
 namespace WeatherApi.Controller;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]/api")]
 public class WeatherController : ControllerBase
 {
     private IWeatherService _weatherService;
@@ -19,7 +19,10 @@ public class WeatherController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpPost]
+    /// <summary>
+    /// Cria um clima
+    //// </summary>
+    [HttpPost("register-weather")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public IActionResult PostWeather(
         [FromBody] PostWeatherDTO postWeatherDTO)

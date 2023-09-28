@@ -11,6 +11,7 @@
             Lista uma cidade por id
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:WeatherApi.Controller.WeatherController.PostWeather(WeatherApi.Data.DTOs.PostWeatherDTO)" -->
         <member name="M:WeatherApi.Controller.WeatherController.GetWeatherForId(System.Guid)">
             <summary>
             Lista registros de um estado pelo id

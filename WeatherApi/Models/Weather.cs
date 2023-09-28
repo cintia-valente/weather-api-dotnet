@@ -17,5 +17,6 @@ public class Weather
     public DayTimeEnum DayTime { get; set; }
     public NightTimeEnum NightTime { get; set; }
 
+    //public Guid IdCity { get; set; }
     public City City { get; set; }
 }

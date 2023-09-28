@@ -7,7 +7,7 @@ using WeatherApi.Service.Interfaces;
 namespace WeatherApi.Controller;
 
 [ApiController]
-[Route("api")]
+[Route("[controller]/api")]
 
 public class CityController : ControllerBase
 {

@@ -14,9 +14,10 @@ namespace WeatherApi.Repository.Interfaces
 
         Weather Save(Weather weather);
 
-        IEnumerable<Weather> FindAll();
+        IQueryable<Weather> FindAll();
+        //IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize);
         IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize);
-        IEnumerable<Weather> FindAllByCityNameIgnoreCase(string cityName, int page, int pageSize);
+        IQueryable<Weather> FindAllByCityName(string cityName);
         //   IEnumerable<Weather> FindAllPage(int page, int pageSize);
         //  IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize);
 
@@ -25,6 +26,8 @@ namespace WeatherApi.Repository.Interfaces
         // Page<WeatherDataEntity> FindByCityNextSixWeek(String cityName, Pageable pageable);
        // IEnumerable<Weather> FindByCityNameIgnoreCaseAndDateBetween(string cityName, DateTime startDate, DateTime endDate, string sortField, bool ascending);
         Weather? FindByID(Guid idWeather);
+
+        IEnumerable<Weather> FindByDates(List<DateTime> dates);
 
         void Update();
         bool DeleteById(Guid idWheater);

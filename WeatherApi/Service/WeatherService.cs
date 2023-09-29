@@ -1,5 +1,4 @@
 ﻿using WeatherApi.Models;
-using WeatherApi.Repository;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service.Interfaces;
 
@@ -26,40 +25,46 @@ public class WeatherService : IWeatherService
 
     }
 
-    //public IEnumerable<Weather> FindAll()
-    //{
-    //    return _weatherRepository.FindAllByOrderByDateDesc();
-    //}
-
-    //public IEnumerable<Weather> FindAllByName(String cityName, string sortField, bool ascending)
-    //{
-    //    return _weatherRepository.FindAllByCityNameIgnoreCase(cityName, sortField, ascending);
-    //}
-
     public Weather FindById(Guid id)
     {
         var wheaterById = _weatherRepository.FindByID(id);
         return wheaterById;
     }
 
-    //public IEnumerable<Weather> FindAllPage(int page, int pageSize)
-    //{
-    //    int skipAmount = (page - 1) * pageSize;
+    public IEnumerable<Weather> FindAll()
+    {
+        return _weatherRepository.FindAll();
+    }
 
-    //    return _weatherRepository.FindAll()
-    //        .Skip(skipAmount)
-    //        .Take(pageSize);
-    //}
+    public IEnumerable<Weather> FindAllPage(int page, int pageSize)
+    {
+        return _weatherRepository.FindAllByOrderByDateDesc(page, pageSize);
+    }
 
-    //public IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize)
-    //{
-    //    int skipAmount = (page - 1) * pageSize;
+    public IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize)
+    {
+        var weatherList = _weatherRepository.FindAllByCityName(cityName)
+                                       .Skip((page - 1) * pageSize)
+                                       .Take(pageSize)
+                                       .ToList();
 
-    //    // Obter os registros da cidade paginados
-    //    return _weatherRepository.FindAllByCityNameIgnoreCase(cityName, page, pageSize)
-    //        .Skip(skipAmount)
-    //        .Take(pageSize);
-    //}
+        return weatherList;
+    }
+
+    public IEnumerable<Weather> GetWeatherForNext7Days()
+        {
+            DateTime today = DateTime.UtcNow;
+            List<DateTime> dateList = new List<DateTime>();
+
+            for (int i = 0; i < 7; i++)
+            {
+                DateTime date = today.AddDays(i);
+                dateList.Add(date.Date);
+            }
+
+            return _weatherRepository.FindByDates(dateList);
+        }
+
 
     //public Weather Update(Guid idWheaterData, Weather weather)
     //{

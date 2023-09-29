@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using WeatherApi.Data;
 using WeatherApi.Models;
 using WeatherApi.Repository.Interfaces;
 
@@ -25,34 +25,80 @@ namespace WeatherApi.Repository
             return weatherConvert;
         }
 
-        public IEnumerable<Weather> FindAll()
+        public IQueryable<Weather> FindAll()
         {
-            return _context.WeatherData.ToList();
+            return _context.WeatherData.Include(w => w.City).Select(x => new Weather() { 
+                City = new City(){ 
+                    IdCity = x.IdCity,
+                    Name = x.City.Name,
+                    WeatherDataList = null
+                }, 
+                IdWeather = x.IdWeather,
+                Date = x.Date,
+                MaxTemperature = x.MaxTemperature,
+                MinTemperature = x.MinTemperature,
+                Precipitation = x.Precipitation,
+                Humidity = x.Humidity,
+                WindSpeed = x.WindSpeed,
+                DayTime = x.DayTime,
+                NightTime = x.NightTime
+            }).AsQueryable();
         }
 
         public IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize)
         {
-            var allWeather = _context.WeatherData
-           .OrderByDescending(data => data.Date); // Ordenar por data em ordem descendente
-
-            int skipAmount = (page - 1) * pageSize;
-
-            return allWeather.Skip(skipAmount).Take(pageSize);
-           
+            return _context.WeatherData
+            .Include(w => w.City)
+            .OrderByDescending(x => x.Date)  // Ordenando por data descendente
+            .Skip((page - 1) * pageSize)     // Pulando os registros das páginas anteriores
+            .Take(pageSize)                  // Pegando a quantidade de registros por página
+            .Select(x => new Weather
+            {
+                City = new City
+                {
+                    IdCity = x.IdCity,
+                    Name = x.City.Name,
+                    WeatherDataList = null
+                },
+                IdWeather = x.IdWeather,
+                Date = x.Date,
+                MaxTemperature = x.MaxTemperature,
+                MinTemperature = x.MinTemperature,
+                Precipitation = x.Precipitation,
+                Humidity = x.Humidity,
+                WindSpeed = x.WindSpeed,
+                DayTime = x.DayTime,
+                NightTime = x.NightTime
+            })
+            .AsQueryable();
         }
 
-        public IEnumerable<Weather> FindAllByCityNameIgnoreCase(string cityName, int page, int pageSize)
+        
+        public IQueryable<Weather> FindAllByCityName(string cityName)
         {
-           // var filteredWeather = _context.WeatherData
-           //.Where(w => w.City == cityName)
-           //.OrderByDescending(w => w.Date);
-
-            var filteredWeather = _context.WeatherData
-                .Where(data => data.City.Name.Equals(cityName, StringComparison.OrdinalIgnoreCase));
-
-            int skipAmount = (page - 1) * pageSize;
-
-            return filteredWeather.Skip(skipAmount).Take(pageSize);
+            return _context.WeatherData
+            .Include(w => w.City)
+            .Where(w => w.City.Name == cityName)
+            .OrderByDescending(x => x.Date)
+            .Select(x => new Weather
+                {
+                    City = new City
+                    {
+                        IdCity = x.IdCity,
+                        Name = x.City.Name,
+                        WeatherDataList = null
+                    },
+                    IdWeather = x.IdWeather,
+                    Date = x.Date,
+                    MaxTemperature = x.MaxTemperature,
+                    MinTemperature = x.MinTemperature,
+                    Precipitation = x.Precipitation,
+                    Humidity = x.Humidity,
+                    WindSpeed = x.WindSpeed,
+                    DayTime = x.DayTime,
+                    NightTime = x.NightTime
+            })
+            .AsQueryable();
         }
 
         public IEnumerable<Weather> FindByCityNextSixWeek(string cityName)
@@ -71,6 +117,14 @@ namespace WeatherApi.Repository
         {
             return _context.WeatherData.FirstOrDefault(metData => metData.IdWeather == idWeather);
            
+        }
+
+        public IEnumerable<Weather> FindByDates(List<DateTime> dates)
+        {
+            return _context.WeatherData
+                .Where(w => dates.Contains(w.Date))
+                .Include(w => w.City)
+                .ToList();
         }
 
         public void Update()

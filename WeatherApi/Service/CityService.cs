@@ -21,10 +21,10 @@ namespace WeatherApi.Service
         }
 
 
-        public IEnumerable<City> FindAllWithWeatherData()
-        {
-            return _cityRepository.FindAll().ToList();
-        }
+        //public IEnumerable<City> FindAllWithWeatherData()
+        //{
+        //    return _cityRepository.FindAllWithWeatherData().ToList();
+        //}
 
         //public IEnumerable<City> FindAll()
         //{
@@ -34,7 +34,7 @@ namespace WeatherApi.Service
 
         public IEnumerable<City> FindAll()
         {
-            return _cityRepository.FindAll();
+            return _cityRepository.FindAllWithWeatherData().ToList();
             //_cityRepository.FindAll();
             //return cityAll;
         }

@@ -7,7 +7,7 @@ namespace WeatherApi.Repository.Interfaces
 
         City Save(City city);
         IEnumerable<City> FindAll();
-        IQueryable<City> FindAllWithWeatherData();
+        IEnumerable<City> FindAllWithWeatherData();
 
 
         City? FindByID(Guid idCity);

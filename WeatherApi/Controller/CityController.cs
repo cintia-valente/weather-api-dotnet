@@ -36,23 +36,14 @@ public class CityController : ControllerBase
         return CreatedAtAction(nameof(GetCityForId), new { id = citySave.IdCity }, citySave);
     }
 
-    [HttpGet("cities/all")]
-    public IEnumerable<City> GetCitiesWithWeatherData()
-    {
-        return _cityService.FindAllWithWeatherData();
-    }
-
-
     /// <summary>
     /// Lista todas as cidades
     /// </summary>
-    [HttpGet("cities/all2")]
-    public IActionResult GetAll()
+    [HttpGet("cities/all")]
+    public IEnumerable<City> GetCitiesWithWeatherData()
     {
-        var cityData = _cityService.FindAll();
-
-        return Ok(cityData);
-
+        var result = _cityService.FindAll();
+        return result;
     }
 
     /// <summary>

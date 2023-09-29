@@ -9,7 +9,7 @@
             Cria uma cidade
             </summary>
         </member>
-        <member name="M:WeatherApi.Controller.CityController.GetAll">
+        <member name="M:WeatherApi.Controller.CityController.GetCitiesWithWeatherData">
             <summary>
             Lista todas as cidades
             </summary>
@@ -21,10 +21,30 @@
         </member>
         <member name="M:WeatherApi.Controller.WeatherController.PostWeather(WeatherApi.Data.DTOs.WeatherRequestDTO)">
             <summary>
-            Cria um clima
+            Cria um dado metereológico
             </summary>
         </member>
-        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherForId(System.Guid)">
+        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherWithWeatherData">
+            <summary>
+            Lista todos registros de dados meteorológicos
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetWithWeatherData(System.Int32,System.Int32)">
+            <summary>
+            Lista 10 registros de dados meteorológicos por página quando NÃO pesquisar a cidade
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetAllByName(System.String,System.Int32,System.Int32)">
+            <summary>
+            Lista 10 registros de dados meteorológicos por página de todas as cidades quando pesquisar a cidade
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherForNext7Days">
+            <summary>
+            Lista dados meteorológicos por página de todas as cidades quando pesquisar a cidade
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherById(System.Guid)">
             <summary>
             Lista registros de um estado pelo id
             </summary>

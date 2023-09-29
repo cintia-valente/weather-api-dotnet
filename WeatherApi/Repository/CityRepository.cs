@@ -26,7 +26,7 @@ namespace WeatherApi.Repository
             return cityConvert;
         }
 
-        public IQueryable<City> FindAllWithWeatherData()
+        public IEnumerable<City> FindAllWithWeatherData()
         {
             return _context.CityData.Include(city => city.WeatherDataList);
         }
@@ -34,13 +34,13 @@ namespace WeatherApi.Repository
 
         public IEnumerable<City> FindAll()
         {
-            return _context.CityData.ToList();
+            return _context.CityData.Include(city => city.WeatherDataList);
         }
 
 
         public City? FindByID(Guid idCity)
         {
-            return _context.CityData.FirstOrDefault(data => data.IdCity == idCity);
+            return _context.CityData.Include(city => city.WeatherDataList).FirstOrDefault(data => data.IdCity == idCity);
 
         }
 

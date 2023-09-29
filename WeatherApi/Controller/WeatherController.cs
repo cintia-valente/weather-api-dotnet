@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using WeatherApi.Data.DTOs;
 using WeatherApi.Models;
+using WeatherApi.Service;
 using WeatherApi.Service.Interfaces;
 
 namespace WeatherApi.Controller;
@@ -20,7 +22,7 @@ public class WeatherController : ControllerBase
     }
 
     /// <summary>
-    /// Cria um clima
+    /// Cria um dado metereológico
     /// </summary>
     [HttpPost("register-weather")]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -32,39 +34,51 @@ public class WeatherController : ControllerBase
         var weatherConverter = _mapper.Map<Weather>(postWeatherDTO);
         var weatherSave = _weatherService.Save(weatherConverter);
 
-        return CreatedAtAction(nameof(GetWeatherForId), new { id = weatherSave.IdWeather }, weatherSave);
+        return CreatedAtAction(nameof(GetWeatherById), new { id = weatherSave.IdWeather }, weatherSave);
     }
 
+    /// <summary>
+    /// Lista todos registros de dados meteorológicos
+    /// </summary>
+    [HttpGet("weather-all")]
+    public IEnumerable<Weather> GetWeatherWithWeatherData()
+    {
+        return _weatherService.FindAll();
+    }
 
     /// <summary>
-    /// Lista 10 registros por página quando NÃO pesquisar a cidade
+    /// Lista 10 registros de dados meteorológicos por página quando NÃO pesquisar a cidade
     /// </summary>
-    //[HttpGet]
-    //public IActionResult GetAll([FromQuery] int page, int pageSize)
-    //{
-    //    var weatherData = _weatherService.FindAllPage(page, pageSize);
-
-    //    return Ok(weatherData);
-
-    //}
+    [HttpGet("list-all-page")]
+    public IEnumerable<Weather> GetWithWeatherData(int pageNumber = 1, int pageSize = 10)
+    {
+        return _weatherService.FindAllPage(pageNumber, pageSize);
+    }
 
     /// <summary>
-    /// Lista 10 registros por página de todas as cidades quando pesquisar a cidade
+    /// Lista 10 registros de dados meteorológicos por página de todas as cidades quando pesquisar a cidade
     /// </summary>
-    //[HttpGet("{cityName}")]
-    //public IActionResult GetAll([FromQuery] string cityName, int page, int pageSize)
-    //{
-    //    var weatherData = _weatherService.FindAllPageByNameCity(cityName, page, pageSize);
+    [HttpGet("{cityName}/list-all-page")]
+    public IEnumerable<Weather> GetAllByName([FromQuery] string cityName, int page, int pageSize)
+    {
+        return _weatherService.FindAllPageByNameCity(cityName, page, pageSize);
+    }
 
-    //    return Ok(weatherData);
-
-    //}
+    /// <summary>
+    /// Lista dado meteorológico do dia atual e de mais 6 dias consecutivos.
+    /// </summary>
+    [HttpGet("weather-next-7-days")]
+    public IActionResult GetWeatherForNext7Days()
+    {
+        var weatherData = _weatherService.GetWeatherForNext7Days();
+        return Ok(weatherData);
+    }
 
     /// <summary>
     /// Lista registros de um estado pelo id
     /// </summary>
     [HttpGet("{id}")]
-    public IActionResult GetWeatherForId(Guid id)
+    public IActionResult GetWeatherById(Guid id)
     {
         var weather = _weatherService.FindById(id);
         return weather is null ? NotFound("Weather not found") : Ok(weather);

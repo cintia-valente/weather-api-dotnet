@@ -11,18 +11,18 @@ public interface IWeatherService
     //void DeleteEstado(int id);
 
     Weather Save(Weather weather);
-    //IEnumerable<Weather> FindAll();
+    IEnumerable<Weather> FindAll();
 
     //Page<WeatherDataEntity> FindAllByCityNameIgnoreCase(String cityName, Pageable pageable);
-  //  IEnumerable<Weather> FindAllByName(string cityName, string sortField, bool ascending);
-
+    IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize);
     Weather FindById(Guid id);
    // IEnumerable<Weather> FindByDateBetween(string cityName);
 
-    //IEnumerable<Weather> FindAllPage(int page, int pageSize);
+    IEnumerable<Weather> FindAllPage(int page, int pageSize);
+    IEnumerable<Weather> GetWeatherForNext7Days();
 
     //IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize);
-    
+
     //Weather Update(Guid idWheaterData, Weather weather);
 
     //bool DeleteById(Guid idWheaterData);

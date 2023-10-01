@@ -31,22 +31,32 @@
         </member>
         <member name="M:WeatherApi.Controller.WeatherController.GetWithWeatherData(System.Int32,System.Int32)">
             <summary>
-            Lista 10 registros de dados meteorológicos por página quando NÃO pesquisar a cidade
+            Lista 10 registros de dados meteorológicos por página, quando NÃO pesquisar uma cidade, em ordem descrescente, por data.
             </summary>
         </member>
         <member name="M:WeatherApi.Controller.WeatherController.GetAllByName(System.String,System.Int32,System.Int32)">
             <summary>
-            Lista 10 registros de dados meteorológicos por página de todas as cidades quando pesquisar a cidade
+            Lista 10 registros de dados meteorológicos por página, quando PESQUISAR uma cidade, em ordem descrescente por data.
             </summary>
         </member>
-        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherForNext7Days">
+        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherForNext7Days(System.String)">
             <summary>
-            Lista dados meteorológicos por página de todas as cidades quando pesquisar a cidade
+            Lista o dado meteorológico do dia atual e de mais 6 dias consecutivos de uma cidade, em ordem crescente por data.
             </summary>
         </member>
         <member name="M:WeatherApi.Controller.WeatherController.GetWeatherById(System.Guid)">
             <summary>
-            Lista registros de um estado pelo id
+            Lista registros de dados meteorológicos pelo id.
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.PutWeather(System.Guid,WeatherApi.Data.DTOs.WeatherRequestDTO)">
+            <summary>
+            Atualiza um registro de dado meteorológico.
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.DeleteWeather(System.Guid)">
+            <summary>
+            Exclui um registro de dado meteorológico.
             </summary>
         </member>
         <member name="T:WeatherApi.Migrations.initmigration">
@@ -71,6 +81,18 @@
             <inheritdoc />
         </member>
         <member name="M:WeatherApi.Migrations.migrationv2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WeatherApi.Migrations.migrationv3">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.migrationv3.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.migrationv3.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.migrationv3.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

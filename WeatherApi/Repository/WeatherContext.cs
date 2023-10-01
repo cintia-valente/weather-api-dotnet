@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeatherApi.Models;
+using WeatherApi.Models.Enums;
 
 namespace WeatherApi.Repository
 {

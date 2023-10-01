@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using WeatherApi.Data.DTOs;
 using WeatherApi.Models;
-using WeatherApi.Service;
 using WeatherApi.Service.Interfaces;
 
 namespace WeatherApi.Controller;
@@ -47,7 +45,7 @@ public class WeatherController : ControllerBase
     }
 
     /// <summary>
-    /// Lista 10 registros de dados meteorológicos por página quando NÃO pesquisar a cidade
+    /// Lista 10 registros de dados meteorológicos por página, quando NÃO pesquisar uma cidade, em ordem descrescente, por data.
     /// </summary>
     [HttpGet("list-all-page")]
     public IEnumerable<Weather> GetWithWeatherData(int pageNumber = 1, int pageSize = 10)
@@ -56,7 +54,7 @@ public class WeatherController : ControllerBase
     }
 
     /// <summary>
-    /// Lista 10 registros de dados meteorológicos por página de todas as cidades quando pesquisar a cidade
+    /// Lista 10 registros de dados meteorológicos por página, quando PESQUISAR uma cidade, em ordem descrescente por data.
     /// </summary>
     [HttpGet("{cityName}/list-all-page")]
     public IEnumerable<Weather> GetAllByName([FromQuery] string cityName, int page, int pageSize)
@@ -65,17 +63,17 @@ public class WeatherController : ControllerBase
     }
 
     /// <summary>
-    /// Lista dado meteorológico do dia atual e de mais 6 dias consecutivos.
+    /// Lista o dado meteorológico do dia atual e de mais 6 dias consecutivos de uma cidade, em ordem crescente por data.
     /// </summary>
-    [HttpGet("weather-next-7-days")]
-    public IActionResult GetWeatherForNext7Days()
+    [HttpGet("{cityName}/weather-next-7-days")]
+    public IActionResult GetWeatherForNext7Days([FromRoute] string cityName)
     {
-        var weatherData = _weatherService.GetWeatherForNext7Days();
+        var weatherData = _weatherService.GetWeatherForNext7Days(cityName);
         return Ok(weatherData);
     }
 
     /// <summary>
-    /// Lista registros de um estado pelo id
+    /// Lista registros de dados meteorológicos pelo id.
     /// </summary>
     [HttpGet("{id}")]
     public IActionResult GetWeatherById(Guid id)
@@ -84,31 +82,36 @@ public class WeatherController : ControllerBase
         return weather is null ? NotFound("Weather not found") : Ok(weather);
     }
 
-    //[HttpPut("{id}")]
-    //public IActionResult PutWeather(Guid id, [FromBody] PutWeatherDTO weatherDto)
-    //{
+    /// <summary>
+    /// Atualiza um registro de dado meteorológico.
+    /// </summary>
+    [HttpPut("{id}")]
+    public IActionResult PutWeather(Guid id, [FromBody] WeatherRequestDTO weatherDto)
+    {
 
-    //    Weather weather = new Weather();
-    //    //var weatherConverter = _mapper.Map<Weather>(weatherDto);
+        if (weatherDto == null)
+        {
+            return BadRequest("Invalid weather data.");
+        }
 
-    //    var weatherConverter = _mapper.Map(weatherDto, weather);
-    //    var weatherEdit = _weatherService.Update(id, weatherConverter);
+        var weather = _mapper.Map<Weather>(weatherDto);
+        var updatedWeather = _weatherService.Update(id, weather);
 
-    //    return Ok(weatherEdit);
-    //    //var weather = _weatherContext.Weathers.FirstOrDefault(
-    //    //    weather => weather.IdWeather == id);
-    //    //if (weather == null) return NotFound();
-    //    //_mapper.Map(weatherDto, weather);
-    //    //_weatherContext.SaveChanges();
+        if (updatedWeather == null)
+        {
+            return NotFound("Weather data not found.");
+        }
 
-    //    //return NoContent();
-    //}
+        return Ok(updatedWeather);
+     }
 
-    //[HttpDelete("{id}")]
-    //public IActionResult DeleteWeather(Guid id)
-    //{
-
-    //    _weatherService.DeleteById(id);
-    //    return NoContent();
-    //}
+    /// <summary>
+    /// Exclui um registro de dado meteorológico.
+    /// </summary>
+    [HttpDelete("{id}")]
+    public IActionResult DeleteWeather(Guid id)
+    {
+        _weatherService.DeleteById(id);
+        return NoContent();
+    }
 }

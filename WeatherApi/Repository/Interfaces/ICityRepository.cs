@@ -7,12 +7,11 @@ namespace WeatherApi.Repository.Interfaces
 
         City Save(City city);
         IEnumerable<City> FindAll();
-        IEnumerable<City> FindAllWithWeatherData();
-
 
         City? FindByID(Guid idCity);
 
-       // bool DeleteById(Guid idCity);
+        City FindAllByCityName(string cityName);
+
     }
 }
 

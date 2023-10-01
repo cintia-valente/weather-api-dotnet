@@ -1,4 +1,5 @@
 ﻿using WeatherApi.Models;
+using WeatherApi.Models.Enums;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service.Interfaces;
 
@@ -20,7 +21,14 @@ public class WeatherService : IWeatherService
     {
         weather.City = _cityRepository.FindByID(weather.IdCity);
 
+        if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
+            !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
+        {
+            throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
+        }
+
         var weatherSaved = _weatherRepository.Save(weather);
+       
         return weatherSaved;
 
     }
@@ -51,50 +59,46 @@ public class WeatherService : IWeatherService
         return weatherList;
     }
 
-    public IEnumerable<Weather> GetWeatherForNext7Days()
+    public IEnumerable<Weather> GetWeatherForNext7Days(string cityName)
+    {
+        return _weatherRepository.FindByCityNextSixWeek(cityName);
+    }
+
+
+    public Weather Update(Guid idWheaterData, Weather weather)
+    {
+
+        var data = _weatherRepository.FindByID(idWheaterData);
+
+        if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
+         !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
         {
-            DateTime today = DateTime.UtcNow;
-            List<DateTime> dateList = new List<DateTime>();
-
-            for (int i = 0; i < 7; i++)
-            {
-                DateTime date = today.AddDays(i);
-                dateList.Add(date.Date);
-            }
-
-            return _weatherRepository.FindByDates(dateList);
+            throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
         }
 
+        data.Date = weather.Date;
+        data.MaxTemperature = weather.MaxTemperature;
+        data.MinTemperature = weather.MinTemperature;
+        data.Precipitation = weather.Precipitation;
+        data.Humidity = weather.Humidity;
+        data.WindSpeed = weather.WindSpeed;
+        data.DayTime = weather.DayTime;
+        data.NightTime = weather.NightTime;
 
-    //public Weather Update(Guid idWheaterData, Weather weather)
-    //{
+        data.City = weather.City;
 
-    //    var data = _weatherRepository.FindByID(idWheaterData);
-    //    _weatherRepository.Update();
-    //    return data;
-    //    //var weatheredit = _weatherRepository.FindByID(idWheaterData);
+        Console.WriteLine("weatherUpdate: " + data.DayTime);
+        Console.WriteLine("weatherUpdate: " + data.NightTime);
 
-    //    //if (weatheredit == null)
-    //    //    return null;
+        _weatherRepository.Update();
 
-    //    //weatheredit.Date = weather.Date;
-    //    //weatheredit.MaxTemperature = weather.MaxTemperature;
-    //    //weatheredit.MinTemperature = weather.MinTemperature;
-    //    //weatheredit.Precipitation = weather.Precipitation;
-    //    //weatheredit.Humidity = weather.Humidity;
-    //    //weatheredit.WindSpeed = weather.WindSpeed;
-    //    //weatheredit.DayTime = weather.DayTime;
-    //    //weatheredit.NightTime = weather.NightTime;
-    //    //weatheredit.City.Name = weather.City.Name;
+        return data;
+     
+    }
 
-    //    //return _weatherRepository.Save(weatheredit);
-
-
-    //}
-
-    //public bool DeleteById(Guid idWheaterData)
-    //{
-    //    return _weatherRepository.DeleteById(idWheaterData);
-    //}
+    public bool DeleteById(Guid idWheaterData)
+    {
+        return _weatherRepository.DeleteById(idWheaterData);
+    }
 
 }

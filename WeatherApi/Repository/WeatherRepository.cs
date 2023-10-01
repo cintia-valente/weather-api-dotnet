@@ -101,16 +101,33 @@ namespace WeatherApi.Repository
             .AsQueryable();
         }
 
-        public IEnumerable<Weather> FindByCityNextSixWeek(string cityName)
+        public IQueryable<Weather> FindByCityNextSixWeek(string cityName)
         {
-            DateTime currentDate = DateTime.Today;
-            DateTime endDate = currentDate.AddDays(6);  // Dia atual mais 6 dias
+            DateTime currentDate = DateTime.Now.Date;
 
-            var filteredWeather = _context.WeatherData
-                .Where(data => data.City.Name == cityName && data.Date >= currentDate && data.Date <= endDate)
-                .OrderBy(data => data.Date);  // Ordenar por data em ordem ascendente
-
-            return filteredWeather;
+            return _context.WeatherData
+              .Include(w => w.City)
+              .Where(w => w.City.Name == cityName)
+              .OrderBy(x => x.Date)
+              .Select(x => new Weather
+              {
+                  City = new City
+                  {
+                      IdCity = x.IdCity,
+                      Name = x.City.Name,
+                      WeatherDataList = null
+                  },
+                  IdWeather = x.IdWeather,
+                  Date = x.Date,
+                  MaxTemperature = x.MaxTemperature,
+                  MinTemperature = x.MinTemperature,
+                  Precipitation = x.Precipitation,
+                  Humidity = x.Humidity,
+                  WindSpeed = x.WindSpeed,
+                  DayTime = x.DayTime,
+                  NightTime = x.NightTime
+              })
+              .AsQueryable();
         }
 
         public Weather? FindByID(Guid idWeather)

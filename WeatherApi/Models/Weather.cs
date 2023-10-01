@@ -14,7 +14,11 @@ public class Weather
     public double Precipitation { get; set; }
     public double Humidity { get; set; }
     public double WindSpeed { get; set; }
+    
+    [EnumDataType(typeof(DayTimeEnum))]
     public DayTimeEnum DayTime { get; set; }
+    
+    [EnumDataType(typeof(DayTimeEnum))]
     public NightTimeEnum NightTime { get; set; }
 
     public Guid IdCity { get; set; }

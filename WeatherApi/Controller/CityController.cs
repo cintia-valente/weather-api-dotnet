@@ -56,11 +56,4 @@ public class CityController : ControllerBase
         return city is null ? NotFound("Weather not found") : Ok(city);
     }
 
-    //[HttpDelete("{id}")]
-    //public IActionResult DeleteCity(long id)
-    //{
-
-    //    _cityService.DeleteById(id);
-    //    return NoContent();
-    //}
 }

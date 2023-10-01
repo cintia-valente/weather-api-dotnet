@@ -12,20 +12,15 @@ public interface IWeatherService
 
     Weather Save(Weather weather);
     IEnumerable<Weather> FindAll();
-
-    //Page<WeatherDataEntity> FindAllByCityNameIgnoreCase(String cityName, Pageable pageable);
     IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize);
     Weather FindById(Guid id);
-   // IEnumerable<Weather> FindByDateBetween(string cityName);
 
     IEnumerable<Weather> FindAllPage(int page, int pageSize);
-    IEnumerable<Weather> GetWeatherForNext7Days();
+    IEnumerable<Weather> GetWeatherForNext7Days(string cityName);
 
-    //IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize);
+    Weather Update(Guid idWheaterData, Weather weather);
 
-    //Weather Update(Guid idWheaterData, Weather weather);
-
-    //bool DeleteById(Guid idWheaterData);
+    bool DeleteById(Guid idWheaterData);
 
 
 }

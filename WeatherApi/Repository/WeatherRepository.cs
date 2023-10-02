@@ -49,9 +49,9 @@ namespace WeatherApi.Repository
         {
             return _context.WeatherData
             .Include(w => w.City)
-            .OrderByDescending(x => x.Date)  // Ordenando por data descendente
-            .Skip((page - 1) * pageSize)     // Pulando os registros das páginas anteriores
-            .Take(pageSize)                  // Pegando a quantidade de registros por página
+            .OrderByDescending(x => x.Date)  // Ordena por data descendente
+            .Skip((page - 1) * pageSize)     // Pula os registros das páginas anteriores
+            .Take(pageSize)                  // Pega a quantidade de registros por página
             .Select(x => new Weather
             {
                 City = new City
@@ -74,12 +74,14 @@ namespace WeatherApi.Repository
         }
 
         
-        public IQueryable<Weather> FindAllByCityName(string cityName)
+        public IQueryable<Weather> FindAllByCityName(string cityName, int page, int pageSize)
         {
             return _context.WeatherData
             .Include(w => w.City)
             .Where(w => w.City.Name == cityName)
             .OrderByDescending(x => x.Date)
+            .Skip((page - 1) * pageSize)     
+            .Take(pageSize)
             .Select(x => new Weather
                 {
                     City = new City
@@ -158,8 +160,6 @@ namespace WeatherApi.Repository
                 _context.SaveChanges();
                 return true;
             }
-
-            // Weather data = FindByID(idWeather);
 
             return false;
            

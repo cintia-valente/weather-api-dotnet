@@ -51,12 +51,8 @@ public class WeatherService : IWeatherService
 
     public IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize)
     {
-        var weatherList = _weatherRepository.FindAllByCityName(cityName)
-                                       .Skip((page - 1) * pageSize)
-                                       .Take(pageSize)
-                                       .ToList();
-
-        return weatherList;
+        return _weatherRepository.FindAllByCityName(cityName, page, pageSize);
+                                      
     }
 
     public IEnumerable<Weather> GetWeatherForNext7Days(string cityName)
@@ -70,12 +66,6 @@ public class WeatherService : IWeatherService
 
         var data = _weatherRepository.FindByID(idWheaterData);
 
-        if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
-         !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
-        {
-            throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
-        }
-
         data.Date = weather.Date;
         data.MaxTemperature = weather.MaxTemperature;
         data.MinTemperature = weather.MinTemperature;
@@ -87,8 +77,11 @@ public class WeatherService : IWeatherService
 
         data.City = weather.City;
 
-        Console.WriteLine("weatherUpdate: " + data.DayTime);
-        Console.WriteLine("weatherUpdate: " + data.NightTime);
+        if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
+        !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
+        {
+            throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
+        }
 
         _weatherRepository.Update();
 

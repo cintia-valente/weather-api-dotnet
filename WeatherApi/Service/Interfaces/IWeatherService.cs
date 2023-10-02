@@ -4,12 +4,7 @@ namespace WeatherApi.Service.Interfaces;
 
 public interface IWeatherService
 {
-    //T GetEstadoById(int id);
-    //IEnumerable<T> GetAllEstados();
-    //void AddEstado(T estado);
-    //void UpdateEstado(T estado);
-    //void DeleteEstado(int id);
-
+    
     Weather Save(Weather weather);
     IEnumerable<Weather> FindAll();
     IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize);

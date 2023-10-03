@@ -14,7 +14,6 @@ public class WeatherService : IWeatherService
     {
         _weatherRepository = weatherRepository;
         _cityRepository = cityRepository;
-
     }
 
     public Weather Save(Weather weather)

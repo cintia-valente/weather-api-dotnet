@@ -105,8 +105,6 @@ namespace WeatherApi.Repository
 
         public IQueryable<Weather> FindByCityNextSixWeek(string cityName)
         {
-            DateTime currentDate = DateTime.Now.Date;
-
             return _context.WeatherData
               .Include(w => w.City)
               .Where(w => w.City.Name == cityName)
@@ -164,6 +162,7 @@ namespace WeatherApi.Repository
             return false;
            
         }
+
     }
     
 }

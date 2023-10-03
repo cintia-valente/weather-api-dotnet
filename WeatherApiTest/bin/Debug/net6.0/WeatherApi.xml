@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WeatherApi</name>
+    </assembly>
+    <members>
+        <member name="M:WeatherApi.Controller.CityController.PostWeather(WeatherApi.Data.DTOs.CityRequestDto)">
+            <summary>
+            Cria uma cidade
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.CityController.GetCitiesWithWeatherData">
+            <summary>
+            Lista todas as cidades
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.CityController.GetCityForId(System.Guid)">
+            <summary>
+            Lista uma cidade por id
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.PostWeather(WeatherApi.Data.DTOs.WeatherRequestDTO)">
+            <summary>
+            Cria um dado metereológico
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherWithWeatherData">
+            <summary>
+            Lista todos registros de dados meteorológicos
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetWithWeatherData(System.Int32,System.Int32)">
+            <summary>
+            Lista 10 registros de dados meteorológicos por página, quando NÃO pesquisar uma cidade, em ordem descrescente, por data.
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetAllByName(System.String,System.Int32,System.Int32)">
+            <summary>
+            Lista 10 registros de dados meteorológicos por página, quando PESQUISAR uma cidade, em ordem descrescente por data.
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherForNext7Days(System.String)">
+            <summary>
+            Lista o dado meteorológico do dia atual e de mais 6 dias consecutivos de uma cidade, em ordem crescente por data.
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.GetWeatherById(System.Guid)">
+            <summary>
+            Lista registros de dados meteorológicos pelo id.
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.PutWeather(System.Guid,WeatherApi.Data.DTOs.WeatherRequestDTO)">
+            <summary>
+            Atualiza um registro de dado meteorológico.
+            </summary>
+        </member>
+        <member name="M:WeatherApi.Controller.WeatherController.DeleteWeather(System.Guid)">
+            <summary>
+            Exclui um registro de dado meteorológico.
+            </summary>
+        </member>
+        <member name="T:WeatherApi.Migrations.initmigration">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.initmigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.initmigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.initmigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WeatherApi.Migrations.migrationv2">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.migrationv2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.migrationv2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.migrationv2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WeatherApi.Migrations.migrationv3">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.migrationv3.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.migrationv3.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeatherApi.Migrations.migrationv3.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

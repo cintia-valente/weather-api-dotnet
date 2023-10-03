@@ -114,4 +114,5 @@ public class WeatherController : ControllerBase
         _weatherService.DeleteById(id);
         return NoContent();
     }
+
 }

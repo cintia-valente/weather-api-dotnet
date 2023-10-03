@@ -21,7 +21,7 @@ namespace WeatherApiTest
             _weatherService = new WeatherService(_weatherRepositoryMock.Object, _cityRepositoryMock.Object);
         }
 
-        [Fact(DisplayName = "Deve salvar um objeto Weather com Sucesso")]
+        [Fact(DisplayName = "Dado um objeto Weather, quando salvar o objeto, então chama os métodos FindByID e Save exatamente uma vez.")]
         public void SaveWeatherSaved()
         {
             // Arrange

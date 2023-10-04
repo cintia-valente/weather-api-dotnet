@@ -16,7 +16,7 @@ public class WeatherService : IWeatherService
         _cityRepository = cityRepository;
     }
 
-    public Weather Save(Weather weather)
+    public Weather Save(Weather weather) 
     {
         weather.City = _cityRepository.FindByID(weather.IdCity);
 

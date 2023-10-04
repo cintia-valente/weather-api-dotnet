@@ -88,22 +88,11 @@ public class WeatherController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult PutWeather(Guid id, [FromBody] WeatherRequestDTO weatherDto)
     {
-
-        if (weatherDto == null)
-        {
-            return BadRequest("Invalid weather data.");
-        }
-
         var weather = _mapper.Map<Weather>(weatherDto);
         var updatedWeather = _weatherService.Update(id, weather);
 
-        if (updatedWeather == null)
-        {
-            return NotFound("Weather data not found.");
-        }
-
-        return Ok(updatedWeather);
-     }
+        return weatherDto == null ? BadRequest("Invalid weather data.") : (updatedWeather == null ? NotFound("Weather data not found.") : Ok(updatedWeather));
+    }
 
     /// <summary>
     /// Exclui um registro de dado meteorológico.

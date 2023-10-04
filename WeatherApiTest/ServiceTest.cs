@@ -21,8 +21,8 @@ namespace WeatherApiTest
             _weatherService = new WeatherService(_weatherRepositoryMock.Object, _cityRepositoryMock.Object);
         }
 
-        [Fact(DisplayName = "Dado um objeto Weather, quando salvar o objeto, então chama os métodos FindByID e Save exatamente uma vez.")]
-        public void SaveWeatherSaved()
+        [Fact(DisplayName = "Dado um objeto Weather, quando salvar o objeto Weather, então chama os métodos FindByID e Save exatamente uma vez.")]
+        public void SaveWeatherSavedSucess()
         {
             // Arrange
             var validWeather = new Weather
@@ -59,5 +59,38 @@ namespace WeatherApiTest
 
         }
 
+        [Fact(DisplayName = "Dado um objeto Weather, quando passar valores de enums inválidos, então lança uma exceção.")]
+        public void SaveWeatherSavedEnumsError()
+        {
+            // Arrange
+            var validWeather = new Weather
+            {
+                IdWeather = Guid.NewGuid(),
+                Date = DateTime.Now,
+                MaxTemperature = 20,
+                MinTemperature = 10,
+                Precipitation = 30,
+                Humidity = 20,
+                WindSpeed = 30,
+                DayTime = (DayTimeEnum)10,
+                NightTime = (NightTimeEnum).20,
+                IdCity = Guid.NewGuid(),
+                City = new City
+                {
+                    IdCity = Guid.NewGuid(),
+                    Name = "Porto Alegre"
+                }
+            };
+
+            _weatherRepositoryMock.Setup(repo => repo.Save(It.IsAny<Weather>()))
+            .Throws<ArgumentException>();
+
+            // Act
+            var exception = Assert.Throws<ArgumentException>(() => _weatherService.Save(validWeather));
+
+            // Assert
+            Assert.Equal("Valores inválidos para enums DayTime e/ou NightTime.", exception.Message);
+            Assert.Throws<ArgumentException>(() => _weatherService.Save(validWeather));
+        }
     }
 }

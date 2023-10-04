@@ -17,7 +17,7 @@ namespace WeatherApi.Repository.Interfaces
 
         IEnumerable<Weather> FindByDates(List<DateTime> dates);
 
-        void Update();
+        void Update(Guid idWheaterData, Weather weather);
         bool DeleteById(Guid idWheater);
     }
 }

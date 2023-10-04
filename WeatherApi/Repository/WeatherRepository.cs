@@ -144,8 +144,21 @@ namespace WeatherApi.Repository
                 .ToList();
         }
 
-        public void Update()
+        public void Update(Guid idWheaterData, Weather weather)
         {
+            var data = FindByID(idWheaterData);
+
+            data.Date = weather.Date;
+            data.MaxTemperature = weather.MaxTemperature;
+            data.MinTemperature = weather.MinTemperature;
+            data.Precipitation = weather.Precipitation;
+            data.Humidity = weather.Humidity;
+            data.WindSpeed = weather.WindSpeed;
+            data.DayTime = weather.DayTime;
+            data.NightTime = weather.NightTime;
+
+            data.City = weather.City;
+
             _context.SaveChanges();
         }
 

@@ -63,18 +63,8 @@ public class WeatherService : IWeatherService
     public Weather Update(Guid idWheaterData, Weather weather)
     {
 
-        var data = _weatherRepository.FindByID(idWheaterData);
+        var data = FindById(idWheaterData);
 
-        data.Date = weather.Date;
-        data.MaxTemperature = weather.MaxTemperature;
-        data.MinTemperature = weather.MinTemperature;
-        data.Precipitation = weather.Precipitation;
-        data.Humidity = weather.Humidity;
-        data.WindSpeed = weather.WindSpeed;
-        data.DayTime = weather.DayTime;
-        data.NightTime = weather.NightTime;
-
-        data.City = weather.City;
 
         if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
         !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
@@ -82,7 +72,7 @@ public class WeatherService : IWeatherService
             throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
         }
 
-        _weatherRepository.Update();
+        _weatherRepository.Update(idWheaterData, weather);
 
         return data;
      

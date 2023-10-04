@@ -26,7 +26,7 @@ namespace WeatherApi.Service
 
         public City FindById(Guid id)
         {
-            var cityById = _cityRepository.FindByID(id);
+            var cityById = _cityRepository.FindById(id);
             return cityById;
         }
 

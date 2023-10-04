@@ -13,7 +13,7 @@ namespace WeatherApi.Repository.Interfaces
         IQueryable<Weather> FindAllByCityName(string cityName, int page, int pageSize);
         IQueryable<Weather> FindByCityNextSixWeek(string cityName);
        
-        Weather? FindByID(Guid idWeather);
+        Weather? FindById(Guid idWeather);
 
         IEnumerable<Weather> FindByDates(List<DateTime> dates);
 

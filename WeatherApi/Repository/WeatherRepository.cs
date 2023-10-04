@@ -130,7 +130,7 @@ namespace WeatherApi.Repository
               .AsQueryable();
         }
 
-        public Weather? FindByID(Guid idWeather)
+        public Weather? FindById(Guid idWeather)
         {
             return _context.WeatherData.FirstOrDefault(metData => metData.IdWeather == idWeather);
            
@@ -146,7 +146,7 @@ namespace WeatherApi.Repository
 
         public void Update(Guid idWheaterData, Weather weather)
         {
-            var data = FindByID(idWheaterData);
+            var data = FindById(idWheaterData);
 
             data.Date = weather.Date;
             data.MaxTemperature = weather.MaxTemperature;

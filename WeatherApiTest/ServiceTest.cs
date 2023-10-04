@@ -22,7 +22,7 @@ namespace WeatherApiTest
         }
 
         [Fact(DisplayName = "Dado um objeto Weather, quando salvar o objeto Weather, então chama os métodos FindByID e Save exatamente uma vez.")]
-        public void SaveWeatherSavedSucess()
+        public void SaveWeatherSucess()
         {
             // Arrange
             var validWeather = new Weather
@@ -54,13 +54,13 @@ namespace WeatherApiTest
             Assert.NotNull(result);
             Assert.Equal(validWeather, result);//verifica se o mock passado como parâmetro é igual ao obj retornado pelo método Save.
 
-            _cityRepositoryMock.Verify(repo => repo.FindByID(It.IsAny<Guid>()), Times.Once); //verifica se FindByID foi chamado exatamente uma vez, passando como parâmetro qualquer argumento do tipo GUID.
+            _cityRepositoryMock.Verify(repo => repo.FindById(It.IsAny<Guid>()), Times.Once); //verifica se FindByID foi chamado exatamente uma vez, passando como parâmetro qualquer argumento do tipo GUID.
             _weatherRepositoryMock.Verify(repo => repo.Save(validWeather), Times.Once); //verifica se Save foi chamado exatamente uma vez, passando como parâmetro o mock criado.
 
         }
 
         [Fact(DisplayName = "Dado um objeto Weather, quando passar valores de enums inválidos, então lança uma exceção.")]
-        public void SaveWeatherSavedEnumsError()
+        public void SaveWeatherEnumsError()
         {
             // Arrange
             var validWeather = new Weather
@@ -86,11 +86,44 @@ namespace WeatherApiTest
             .Throws<ArgumentException>();
 
             // Act
-            var exception = Assert.Throws<ArgumentException>(() => _weatherService.Save(validWeather));
+            var exceptionSave = Assert.Throws<ArgumentException>(() => _weatherService.Save(validWeather));
 
             // Assert
-            Assert.Equal("Valores inválidos para enums DayTime e/ou NightTime.", exception.Message);
+            Assert.Equal("Valores inválidos para enums DayTime e/ou NightTime.", exceptionSave.Message);
             Assert.Throws<ArgumentException>(() => _weatherService.Save(validWeather));
+        }
+
+        [Fact(DisplayName = "Dado um id do Weather, então chama o método FindById exatamente uma vez.")]
+        public void FindByIdSucess()
+        {
+            Guid idWeather = Guid.NewGuid();
+
+            // Arrange
+            _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
+            .Returns((Guid id) => new Weather { IdWeather = id });
+
+            // Act
+            var result = _weatherService.FindById(idWeather);
+
+            // Assert
+            Assert.Equal(idWeather, result.IdWeather);
+            _weatherRepositoryMock.Verify(repo => repo.FindById(It.IsAny<Guid>()), Times.Once);
+        }
+
+        [Fact(DisplayName = "Dado um id do Weather, quando chamar o método FindById, então lança uma exceção.")]
+        public void FindByIdError()
+        {
+            Guid idWeather = Guid.NewGuid();
+
+            // Arrange
+            _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
+            .Throws<Exception>();
+
+            // Act
+            var exceptionFindById = Assert.Throws<Exception>(() => _weatherService.FindById(idWeather));
+
+            // Assert
+            Assert.Throws<Exception>(() => _weatherService.FindById(idWeather));
         }
     }
 }

@@ -18,7 +18,7 @@ public class WeatherService : IWeatherService
 
     public Weather Save(Weather weather) 
     {
-        weather.City = _cityRepository.FindByID(weather.IdCity);
+        weather.City = _cityRepository.FindById(weather.IdCity);
 
         if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
             !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
@@ -34,7 +34,7 @@ public class WeatherService : IWeatherService
 
     public Weather FindById(Guid id)
     {
-        var wheaterById = _weatherRepository.FindByID(id);
+        var wheaterById = _weatherRepository.FindById(id);
         return wheaterById;
     }
 

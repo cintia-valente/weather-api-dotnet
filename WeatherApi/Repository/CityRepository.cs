@@ -35,7 +35,7 @@ namespace WeatherApi.Repository
             return _context.CityData.FirstOrDefault(c => c.Name == cityName);
         }
 
-        public City? FindByID(Guid idCity)
+        public City? FindById(Guid idCity)
         {
             return _context.CityData.Include(city => city.WeatherDataList).FirstOrDefault(data => data.IdCity == idCity);
 

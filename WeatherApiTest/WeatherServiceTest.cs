@@ -592,8 +592,6 @@ public class WeatherServiceTest
             }
         };
 
-
-
         _weatherRepositoryMock.Setup(repo => repo.FindById(weather.IdWeather))
            .Throws<Exception>();
 

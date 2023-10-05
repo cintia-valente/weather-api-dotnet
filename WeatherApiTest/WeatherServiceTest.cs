@@ -3,18 +3,17 @@ using WeatherApi.Models;
 using WeatherApi.Models.Enums;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service;
-using WeatherApi.Service.Interfaces;
 
 namespace WeatherApiTest;
 
-public class ServiceTest
+public class WeatherServiceTest
 {
 
     private readonly Mock<IWeatherRepository> _weatherRepositoryMock;
     private readonly Mock<ICityRepository> _cityRepositoryMock;
     private readonly WeatherService _weatherService;
 
-    public ServiceTest()
+    public WeatherServiceTest()
     {
         _weatherRepositoryMock = new Mock<IWeatherRepository>();
         _cityRepositoryMock = new Mock<ICityRepository>();
@@ -152,7 +151,6 @@ public class ServiceTest
                 }
             }
         };
-
 
         _weatherRepositoryMock.Setup(repo => repo.FindAll())
         .Returns(weatherList.AsQueryable());

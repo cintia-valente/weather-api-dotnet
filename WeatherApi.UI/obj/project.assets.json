@@ -3678,6 +3678,7 @@
           "Swashbuckle.AspNetCore": "6.5.0",
           "WeatherApi": "1.0.0",
           "WeatherApi.Application": "1.0.0",
+          "WeatherApi.Domain": "1.0.0",
           "WeatherApi.Persistence": "1.0.0",
           "WeatherApi.Test": "1.0.0"
         },

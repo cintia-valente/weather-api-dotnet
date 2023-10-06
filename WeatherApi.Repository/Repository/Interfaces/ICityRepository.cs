@@ -1,17 +1,16 @@
-﻿using WeatherApi.Models;
+﻿using WeatherApi.Entity;
 
-namespace WeatherApi.Repository.Interfaces
+namespace WeatherApi.Repository.Interfaces;
+
+public interface ICityRepository
 {
-    public interface ICityRepository
-    {
 
-        City Save(City city);
-        IEnumerable<City> FindAll();
+    City Save(City city);
+    IEnumerable<City> FindAll();
 
-        City? FindById(Guid idCity);
+    City? FindById(Guid idCity);
 
-        City FindAllByCityName(string cityName);
-
-    }
+    City FindAllByCityName(string cityName);
+    void Save(City validCity);
 }
 

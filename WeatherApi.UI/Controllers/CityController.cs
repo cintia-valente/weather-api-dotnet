@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WeatherApi.Data.DTOs;
-using WeatherApi.Models;
+using WeatherApi.Entity;
 using WeatherApi.Service.Interfaces;
 
 namespace WeatherApi.Controller;

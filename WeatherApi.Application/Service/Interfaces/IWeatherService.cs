@@ -1,4 +1,4 @@
-﻿using WeatherApi.Models;
+﻿using WeatherApi.Entity;
 
 namespace WeatherApi.Service.Interfaces;
 

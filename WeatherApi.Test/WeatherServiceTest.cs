@@ -1,5 +1,6 @@
 using Moq;
-using WeatherApi.Models;
+using WeatherApi.Entity;
+using WeatherApi.Entity.Enums;
 using WeatherApi.Models.Enums;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service;

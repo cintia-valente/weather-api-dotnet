@@ -1,23 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Runtime.InteropServices;
-using WeatherApi.Models;
+﻿using WeatherApi.Entity;
 
-namespace WeatherApi.Repository.Interfaces
+namespace WeatherApi.Repository.Interfaces;
+
+public interface IWeatherRepository
 {
-    public interface IWeatherRepository
-    {
-        Weather Save(Weather weather);
+    Weather Save(Weather weather);
 
-        IQueryable<Weather> FindAll();
-        IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize);
-        IQueryable<Weather> FindAllByCityName(string cityName, int page, int pageSize);
-        IQueryable<Weather> FindByCityNextSixWeek(string cityName);
-       
-        Weather? FindById(Guid idWeather);
+    IQueryable<Weather> FindAll();
+    IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize);
+    IQueryable<Weather> FindAllByCityName(string cityName, int page, int pageSize);
+    IQueryable<Weather> FindByCityNextSixWeek(string cityName);
+   
+    Weather? FindById(Guid idWeather);
 
-        IEnumerable<Weather> FindByDates(List<DateTime> dates);
+    IEnumerable<Weather> FindByDates(List<DateTime> dates);
 
-        void Update(Guid idWheaterData, Weather weather);
-        bool DeleteById(Guid idWheater);
-    }
+    void Update(Guid idWheaterData, Weather weather);
+    bool DeleteById(Guid idWheater);
 }

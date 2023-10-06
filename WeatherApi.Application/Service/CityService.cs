@@ -1,4 +1,5 @@
-﻿using WeatherApi.Service.Interfaces;
+﻿using WeatherApi.Entity;
+using WeatherApi.Service.Interfaces;
 
 namespace WeatherApi.Service;
 

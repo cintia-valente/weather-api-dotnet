@@ -1,14 +1,7 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WeatherApi.Models.Enums;
-using WeatherApi.Models;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service;
-using WeatherApi.Service.Interfaces;
+using WeatherApi.Entity;
 
 namespace WeatherApiTest;
 

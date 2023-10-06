@@ -277,6 +277,9 @@
               "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj": {
                 "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj"
               },
+              "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj": {
+                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj"
+              },
               "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj": {
                 "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj"
               },

@@ -1,6 +1,5 @@
-﻿using WeatherApi.Models;
-using WeatherApi.Models.Enums;
-using WeatherApi.Repository.Interfaces;
+﻿using WeatherApi.Entity;
+using WeatherApi.Entity.Enums;
 using WeatherApi.Service.Interfaces;
 
 namespace WeatherApi.Service;

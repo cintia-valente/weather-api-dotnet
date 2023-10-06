@@ -277,6 +277,9 @@
               "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj": {
                 "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj"
               },
+              "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj": {
+                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj"
+              },
               "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj": {
                 "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj"
               },
@@ -399,13 +402,25 @@
             },
             "xunit": {
               "target": "Package",
-              "version": "[2.4.1, )"
+              "version": "[2.5.1, )"
+            },
+            "xunit.abstractions": {
+              "target": "Package",
+              "version": "[2.0.3, )"
+            },
+            "xunit.assert": {
+              "target": "Package",
+              "version": "[2.5.1, )"
+            },
+            "xunit.core": {
+              "target": "Package",
+              "version": "[2.5.1, )"
             },
             "xunit.runner.visualstudio": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.4.3, )"
+              "version": "[2.5.1, )"
             }
           },
           "imports": [

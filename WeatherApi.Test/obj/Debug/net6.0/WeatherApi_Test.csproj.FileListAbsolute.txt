@@ -1,0 +1,6 @@
+C:\Projetos\WeatherApi\WeatherApi.Test\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\Projetos\WeatherApi\WeatherApi.Test\obj\Debug\net6.0\WeatherApi_Test.csproj.AssemblyReference.cache
+C:\Projetos\WeatherApi\WeatherApi.Test\obj\Debug\net6.0\WeatherApi_Test.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\WeatherApi\WeatherApi.Test\obj\Debug\net6.0\WeatherApi_Test.AssemblyInfoInputs.cache
+C:\Projetos\WeatherApi\WeatherApi.Test\obj\Debug\net6.0\WeatherApi_Test.AssemblyInfo.cs
+C:\Projetos\WeatherApi\WeatherApi.Test\obj\Debug\net6.0\WeatherApi_Test.csproj.CoreCompileInputs.cache

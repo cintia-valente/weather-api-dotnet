@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.Persistence", "WeatherApi.Persistence\WeatherApi.Persistence.csproj", "{A8F40CD3-F15E-4BE3-91E5-28FEA5D58CD4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.Application", "WeatherApi.Application\WeatherApi.Application.csproj", "{B134DDE0-AB85-4A7C-A951-B844F7844459}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.Repository", "WeatherApi.Repository\WeatherApi.Repository.csproj", "{ADF5A68D-BB69-4E1C-B3C5-69F31DF3A9EC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.Domain", "WeatherApi.Domain\WeatherApi.Domain.csproj", "{83955F9B-ED8D-4342-8E10-B6173374E85F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi_Test", "WeatherApi.Test\WeatherApi_Test.csproj", "{5C98A6C6-3435-42E5-8E61-3C24B62669AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.UI", "WeatherApi.UI\WeatherApi.UI.csproj", "{8E319CE2-1C31-448C-A6E7-EF312836DBDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.UI", "WeatherApi.UI\WeatherApi.UI.csproj", "{8E319CE2-1C31-448C-A6E7-EF312836DBDB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.DotNet.Persistence", "ExemplodeClassLib\WeatherApi.DotNet.Persistence.csproj", "{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.DotNet.Application", "WeatherApi.DotNet.Application\WeatherApi.DotNet.Application.csproj", "{6AD634CF-2974-417D-AC7D-B87430F6D27C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.DotNet.Domain", "WeatherApi.DotNet.Domain\WeatherApi.DotNet.Domain.csproj", "{1C3834AB-F791-427B-AD5E-7CB482183C45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.DotNet.Repository", "WeatherApi.DotNet.Repository\WeatherApi.DotNet.Repository.csproj", "{EEFC4891-3929-4291-BBE3-8EA1554F69D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,22 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A8F40CD3-F15E-4BE3-91E5-28FEA5D58CD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8F40CD3-F15E-4BE3-91E5-28FEA5D58CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8F40CD3-F15E-4BE3-91E5-28FEA5D58CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8F40CD3-F15E-4BE3-91E5-28FEA5D58CD4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B134DDE0-AB85-4A7C-A951-B844F7844459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B134DDE0-AB85-4A7C-A951-B844F7844459}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B134DDE0-AB85-4A7C-A951-B844F7844459}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B134DDE0-AB85-4A7C-A951-B844F7844459}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ADF5A68D-BB69-4E1C-B3C5-69F31DF3A9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADF5A68D-BB69-4E1C-B3C5-69F31DF3A9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADF5A68D-BB69-4E1C-B3C5-69F31DF3A9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADF5A68D-BB69-4E1C-B3C5-69F31DF3A9EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83955F9B-ED8D-4342-8E10-B6173374E85F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83955F9B-ED8D-4342-8E10-B6173374E85F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83955F9B-ED8D-4342-8E10-B6173374E85F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83955F9B-ED8D-4342-8E10-B6173374E85F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C98A6C6-3435-42E5-8E61-3C24B62669AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C98A6C6-3435-42E5-8E61-3C24B62669AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C98A6C6-3435-42E5-8E61-3C24B62669AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +29,22 @@ Global
 		{8E319CE2-1C31-448C-A6E7-EF312836DBDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E319CE2-1C31-448C-A6E7-EF312836DBDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E319CE2-1C31-448C-A6E7-EF312836DBDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AD634CF-2974-417D-AC7D-B87430F6D27C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AD634CF-2974-417D-AC7D-B87430F6D27C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AD634CF-2974-417D-AC7D-B87430F6D27C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD634CF-2974-417D-AC7D-B87430F6D27C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3834AB-F791-427B-AD5E-7CB482183C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3834AB-F791-427B-AD5E-7CB482183C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3834AB-F791-427B-AD5E-7CB482183C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3834AB-F791-427B-AD5E-7CB482183C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEFC4891-3929-4291-BBE3-8EA1554F69D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEFC4891-3929-4291-BBE3-8EA1554F69D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEFC4891-3929-4291-BBE3-8EA1554F69D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEFC4891-3929-4291-BBE3-8EA1554F69D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

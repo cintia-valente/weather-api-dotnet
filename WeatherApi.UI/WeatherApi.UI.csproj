@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,14 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WeatherApi.Application\WeatherApi.Application.csproj" />
-    <ProjectReference Include="..\WeatherApi.Domain\WeatherApi.Domain.csproj" />
-    <ProjectReference Include="..\WeatherApi.Persistence\WeatherApi.Persistence.csproj" />
-    <ProjectReference Include="..\WeatherApi.Repository\WeatherApi.Repository.csproj" />
+    <ProjectReference Include="..\WeatherApi.DotNet.Application\WeatherApi.DotNet.Application.csproj" />
+    <ProjectReference Include="..\WeatherApi.DotNet.Domain\WeatherApi.DotNet.Domain.csproj" />
+    <ProjectReference Include="..\WeatherApi.DotNet.Repository\WeatherApi.DotNet.Repository.csproj" />
   </ItemGroup>
 
 </Project>

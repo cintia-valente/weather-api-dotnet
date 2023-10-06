@@ -6,6 +6,7 @@ using WeatherApi.Service.Interfaces;
 using WeatherApi.Service;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 

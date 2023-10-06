@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "LoTGIxA8asTfYY3xV0koHwRC3ahCoPrt8OWl4Tpn/1O1Hc0QlmD02DEN6YuLaPJpJ0sWXGdEfXqrKIkhykwhbQ==",
+  "success": true,
+  "projectFilePath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cintia.valente\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\cintia.valente\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

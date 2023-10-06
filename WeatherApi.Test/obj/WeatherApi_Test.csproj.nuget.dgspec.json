@@ -4,14 +4,14 @@
     "C:\\Projetos\\WeatherApi\\WeatherApi.Test\\WeatherApi_Test.csproj": {}
   },
   "projects": {
-    "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj": {
+    "C:\\Projetos\\WeatherApi\\ExemplodeClassLib\\WeatherApi.DotNet.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj",
-        "projectName": "WeatherApi.Application",
-        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj",
+        "projectUniqueName": "C:\\Projetos\\WeatherApi\\ExemplodeClassLib\\WeatherApi.DotNet.Persistence.csproj",
+        "projectName": "WeatherApi.DotNet.Persistence",
+        "projectPath": "C:\\Projetos\\WeatherApi\\ExemplodeClassLib\\WeatherApi.DotNet.Persistence.csproj",
         "packagesPath": "C:\\Users\\cintia.valente\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\obj\\",
+        "outputPath": "C:\\Projetos\\WeatherApi\\ExemplodeClassLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\cintia.valente\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,14 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj"
+              "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj": {
+                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj"
               }
             }
           }
@@ -54,13 +48,9 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[12.0.1, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
+              "version": "[7.0.11, )"
             }
           },
           "imports": [
@@ -75,9 +65,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -86,14 +73,14 @@
         }
       }
     },
-    "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj": {
+    "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Application\\WeatherApi.DotNet.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj",
-        "projectName": "WeatherApi.Domain",
-        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj",
+        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Application\\WeatherApi.DotNet.Application.csproj",
+        "projectName": "WeatherApi.DotNet.Application",
+        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Application\\WeatherApi.DotNet.Application.csproj",
         "packagesPath": "C:\\Users\\cintia.valente\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\obj\\",
+        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\cintia.valente\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -110,11 +97,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj"
+              "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj": {
+                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj"
               },
-              "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj"
+              "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Repository\\WeatherApi.DotNet.Repository.csproj": {
+                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Repository\\WeatherApi.DotNet.Repository.csproj"
               }
             }
           }
@@ -132,14 +119,6 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[12.0.1, )"
-            },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[12.0.1, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -154,9 +133,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -165,14 +141,14 @@
         }
       }
     },
-    "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj": {
+    "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj",
-        "projectName": "WeatherApi.Persistence",
-        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj",
+        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj",
+        "projectName": "WeatherApi.DotNet.Domain",
+        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj",
         "packagesPath": "C:\\Users\\cintia.valente\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\obj\\",
+        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\cintia.valente\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -188,20 +164,7 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -217,14 +180,6 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[12.0.1, )"
-            },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[12.0.1, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -239,9 +194,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -250,14 +202,14 @@
         }
       }
     },
-    "C:\\Projetos\\WeatherApi\\WeatherApi.Repository\\WeatherApi.Repository.csproj": {
+    "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Repository\\WeatherApi.DotNet.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.Repository\\WeatherApi.Repository.csproj",
-        "projectName": "WeatherApi.Repository",
-        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Repository\\WeatherApi.Repository.csproj",
+        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Repository\\WeatherApi.DotNet.Repository.csproj",
+        "projectName": "WeatherApi.DotNet.Repository",
+        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Repository\\WeatherApi.DotNet.Repository.csproj",
         "packagesPath": "C:\\Users\\cintia.valente\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Repository\\obj\\",
+        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\cintia.valente\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -274,17 +226,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj"
+              "C:\\Projetos\\WeatherApi\\ExemplodeClassLib\\WeatherApi.DotNet.Persistence.csproj": {
+                "projectPath": "C:\\Projetos\\WeatherApi\\ExemplodeClassLib\\WeatherApi.DotNet.Persistence.csproj"
               },
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj"
+              "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj": {
+                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Domain\\WeatherApi.DotNet.Domain.csproj"
               }
             }
           }
@@ -302,14 +248,6 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[12.0.1, )"
-            },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[12.0.1, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -324,9 +262,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -359,20 +294,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Repository\\WeatherApi.Repository.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Repository\\WeatherApi.Repository.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi.UI\\WeatherApi.UI.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.UI\\WeatherApi.UI.csproj"
+              "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Application\\WeatherApi.DotNet.Application.csproj": {
+                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Application\\WeatherApi.DotNet.Application.csproj"
               }
             }
           }
@@ -387,183 +310,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.NET.Test.Sdk": {
+            "AutoMapper": {
               "target": "Package",
-              "version": "[17.1.0, )"
-            },
-            "coverlet.collector": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[3.1.2, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.5.1, )"
-            },
-            "xunit.abstractions": {
-              "target": "Package",
-              "version": "[2.0.3, )"
-            },
-            "xunit.assert": {
-              "target": "Package",
-              "version": "[2.5.1, )"
-            },
-            "xunit.core": {
-              "target": "Package",
-              "version": "[2.5.1, )"
-            },
-            "xunit.runner.visualstudio": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.5.1, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Projetos\\WeatherApi\\WeatherApi.UI\\WeatherApi.UI.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.UI\\WeatherApi.UI.csproj",
-        "projectName": "WeatherApi.UI",
-        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.UI\\WeatherApi.UI.csproj",
-        "packagesPath": "C:\\Users\\cintia.valente\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi.UI\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\cintia.valente\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Persistence\\WeatherApi.Persistence.csproj"
-              },
-              "C:\\Projetos\\WeatherApi\\WeatherApi.Repository\\WeatherApi.Repository.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Repository\\WeatherApi.Repository.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj",
-        "projectName": "WeatherApi.Test",
-        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj",
-        "packagesPath": "C:\\Users\\cintia.valente\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApiTest\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\cintia.valente\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj": {
-                "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.Mvc": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Microsoft.AspNetCore.Mvc.Core": {
-              "target": "Package",
-              "version": "[2.2.5, )"
+              "version": "[12.0.1, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
@@ -614,112 +363,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj",
-        "projectName": "WeatherApi",
-        "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi\\WeatherApi.csproj",
-        "packagesPath": "C:\\Users\\cintia.valente\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\cintia.valente\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "AutoMapper": {
-              "target": "Package",
-              "version": "[12.0.1, )"
-            },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[12.0.1, )"
-            },
-            "Bogus": {
-              "target": "Package",
-              "version": "[34.0.2, )"
-            },
-            "FluentAssertions": {
-              "target": "Package",
-              "version": "[6.12.0, )"
-            },
-            "Microsoft.AspNetCore.Mvc": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Microsoft.AspNetCore.Mvc.Core": {
-              "target": "Package",
-              "version": "[2.2.5, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.11, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[7.0.11, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-              "target": "Package",
-              "version": "[7.0.11, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.5.1, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

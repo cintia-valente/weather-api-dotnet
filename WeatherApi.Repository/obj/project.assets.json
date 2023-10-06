@@ -10392,7 +10392,6 @@
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "WeatherApi >= 1.0.0",
-      "WeatherApi.Application >= 1.0.0",
       "WeatherApi.Domain >= 1.0.0",
       "WeatherApi.Persistence >= 1.0.0",
       "WeatherApi.Test >= 1.0.0"
@@ -10425,9 +10424,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj": {
-              "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Application\\WeatherApi.Application.csproj"
-            },
             "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj": {
               "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Domain\\WeatherApi.Domain.csproj"
             },

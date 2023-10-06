@@ -11,6 +11,5 @@ public interface ICityRepository
     City? FindById(Guid idCity);
 
     City FindAllByCityName(string cityName);
-    void Save(City validCity);
 }
 

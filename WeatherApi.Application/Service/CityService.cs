@@ -1,6 +1,6 @@
 ﻿using WeatherApi.Entity;
 using WeatherApi.Service.Interfaces;
-
+using WeatherApi.Repository.Interfaces;
 namespace WeatherApi.Service;
 
 public class CityService : ICityService

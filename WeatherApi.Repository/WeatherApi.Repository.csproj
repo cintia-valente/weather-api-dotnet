@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WeatherApi.Application\WeatherApi.Application.csproj" />
     <ProjectReference Include="..\WeatherApi.Domain\WeatherApi.Domain.csproj" />
     <ProjectReference Include="..\WeatherApi.Persistence\WeatherApi.Persistence.csproj" />
     <ProjectReference Include="..\WeatherApiTest\WeatherApi.Test.csproj" />

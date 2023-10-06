@@ -1,0 +1,7 @@
+C:\Projetos\WeatherApi\WeatherApi.Application\obj\Debug\net6.0\WeatherApi.Application.csproj.AssemblyReference.cache
+C:\Projetos\WeatherApi\WeatherApi.Application\obj\Debug\net6.0\WeatherApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\WeatherApi\WeatherApi.Application\obj\Debug\net6.0\WeatherApi.Application.AssemblyInfoInputs.cache
+C:\Projetos\WeatherApi\WeatherApi.Application\obj\Debug\net6.0\WeatherApi.Application.AssemblyInfo.cs
+C:\Projetos\WeatherApi\WeatherApi.Application\obj\Debug\net6.0\WeatherApi.Application.csproj.CoreCompileInputs.cache
+C:\Projetos\WeatherApi\WeatherApi.Application\obj\Debug\net6.0\WeatherApi.Application.MvcApplicationPartsAssemblyInfo.cs
+C:\Projetos\WeatherApi\WeatherApi.Application\obj\Debug\net6.0\WeatherApi.Application.MvcApplicationPartsAssemblyInfo.cache

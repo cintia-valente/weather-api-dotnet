@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pDKqAj+j+TbshVhHzv7Cn81EC4PoRsUC7/+ks9ylmYgh4vIDLrTdch3yKF6aiE6CPq8/57AuQqpgi3hJwbFBGQ==",
+  "dgSpecHash": "EsJvMIIVHJxGHrvSG18XzxiGsQWzkrJdpgPpbW70K8bQwEcO3jJW6rfMevUVkaisb33+TnwaYNlOhdnrNcBOCg==",
   "success": true,
-  "projectFilePath": "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApiTest.csproj",
+  "projectFilePath": "C:\\Projetos\\WeatherApi\\WeatherApiTest\\WeatherApi.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cintia.valente\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\cintia.valente\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rOWJouVMjuUt0PhMGbhx0peEs4FzBX9asQcASPyep8Ika+UwstVEBp99ocJkXCvjIGa85by/wmDvfSPydudOSQ==",
+  "dgSpecHash": "kSdiWyWHyEKcEnRRyVFl/XAoEoegaHMeFHJauZgXCRv3NjDW5RqK+nGVrlugzntH7xFpALfud/AWqdRGg20mQw==",
   "success": true,
   "projectFilePath": "C:\\Projetos\\WeatherApi\\WeatherApi.Test\\WeatherApi_Test.csproj",
   "expectedPackageFiles": [

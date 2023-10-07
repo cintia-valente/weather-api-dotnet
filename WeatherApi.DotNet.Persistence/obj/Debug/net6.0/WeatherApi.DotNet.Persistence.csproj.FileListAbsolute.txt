@@ -1,0 +1,5 @@
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Persistence\obj\Debug\net6.0\WeatherApi.DotNet.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Persistence\obj\Debug\net6.0\WeatherApi.DotNet.Persistence.AssemblyInfoInputs.cache
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Persistence\obj\Debug\net6.0\WeatherApi.DotNet.Persistence.AssemblyInfo.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Persistence\obj\Debug\net6.0\WeatherApi.DotNet.Persistence.csproj.CoreCompileInputs.cache
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Persistence\obj\Debug\net6.0\WeatherApi.DotNet.Persistence.csproj.AssemblyReference.cache

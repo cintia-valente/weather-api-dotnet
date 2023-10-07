@@ -259,7 +259,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "AutoMapper": "12.0.1",
           "Microsoft.EntityFrameworkCore": "7.0.11",
           "WeatherApi.DotNet.Domain": "1.0.0"
         },
@@ -275,6 +274,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper": "12.0.1",
+          "Microsoft.EntityFrameworkCore": "7.0.11",
           "WeatherApi.DotNet.Domain": "1.0.0",
           "WeatherApi.DotNet.Persistence": "1.0.0"
         },
@@ -714,8 +714,8 @@
     },
     "WeatherApi.DotNet.Persistence/1.0.0": {
       "type": "project",
-      "path": "../ExemplodeClassLib/WeatherApi.DotNet.Persistence.csproj",
-      "msbuildProject": "../ExemplodeClassLib/WeatherApi.DotNet.Persistence.csproj"
+      "path": "../WeatherApi.DotNet.Persistence/WeatherApi.DotNet.Persistence.csproj",
+      "msbuildProject": "../WeatherApi.DotNet.Persistence/WeatherApi.DotNet.Persistence.csproj"
     },
     "WeatherApi.DotNet.Repository/1.0.0": {
       "type": "project",
@@ -725,7 +725,6 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "AutoMapper >= 12.0.1",
       "WeatherApi.DotNet.Domain >= 1.0.0",
       "WeatherApi.DotNet.Repository >= 1.0.0"
     ]
@@ -775,12 +774,6 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
-        "dependencies": {
-          "AutoMapper": {
-            "target": "Package",
-            "version": "[12.0.1, )"
-          }
-        },
         "imports": [
           "net461",
           "net462",

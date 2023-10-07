@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+neoMnU1Gp+JAge7jD0HqEfvZlyeJ6v9/J2cEJbBQqjZBE+A1GBzuC+OzCiTkWikU/HMdNxp/vkBxO+YMiKBfg==",
+  "dgSpecHash": "ognKOQRfoZ0fa0oYWJGkOtz763E+EJ/04ITv1Fqx47dyDYu/gcQO7faVp/BdYOu1m2hroa5RapOZxHJ5tJZpvQ==",
   "success": true,
   "projectFilePath": "C:\\Projetos\\WeatherApi\\ExemplodeClassLib\\WeatherApi.DotNet.Persistence.csproj",
   "expectedPackageFiles": [

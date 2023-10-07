@@ -1,12 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using WeatherApi.Persistence;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Repository;
 using WeatherApi.Service.Interfaces;
 using WeatherApi.Service;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using WeatherApi.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

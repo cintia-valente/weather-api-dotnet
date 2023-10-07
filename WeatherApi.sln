@@ -7,13 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi_Test", "WeatherA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.UI", "WeatherApi.UI\WeatherApi.UI.csproj", "{8E319CE2-1C31-448C-A6E7-EF312836DBDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.DotNet.Persistence", "ExemplodeClassLib\WeatherApi.DotNet.Persistence.csproj", "{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.DotNet.Application", "WeatherApi.DotNet.Application\WeatherApi.DotNet.Application.csproj", "{6AD634CF-2974-417D-AC7D-B87430F6D27C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.DotNet.Application", "WeatherApi.DotNet.Application\WeatherApi.DotNet.Application.csproj", "{6AD634CF-2974-417D-AC7D-B87430F6D27C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.DotNet.Domain", "WeatherApi.DotNet.Domain\WeatherApi.DotNet.Domain.csproj", "{1C3834AB-F791-427B-AD5E-7CB482183C45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.DotNet.Domain", "WeatherApi.DotNet.Domain\WeatherApi.DotNet.Domain.csproj", "{1C3834AB-F791-427B-AD5E-7CB482183C45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.DotNet.Repository", "WeatherApi.DotNet.Repository\WeatherApi.DotNet.Repository.csproj", "{EEFC4891-3929-4291-BBE3-8EA1554F69D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi.DotNet.Repository", "WeatherApi.DotNet.Repository\WeatherApi.DotNet.Repository.csproj", "{EEFC4891-3929-4291-BBE3-8EA1554F69D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.DotNet.Persistence", "WeatherApi.DotNet.Persistence\WeatherApi.DotNet.Persistence.csproj", "{F64FBB12-0369-4117-94A9-E5324B53BB7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{5594A595-B717-4AAD-83FE-5FB8A0A20218}"
+	ProjectSection(SolutionItems) = preProject
+		.gitgnore = .gitgnore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +34,6 @@ Global
 		{8E319CE2-1C31-448C-A6E7-EF312836DBDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E319CE2-1C31-448C-A6E7-EF312836DBDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E319CE2-1C31-448C-A6E7-EF312836DBDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E2455BF-7D3A-4D29-9FF3-CFC53078CC6F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6AD634CF-2974-417D-AC7D-B87430F6D27C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6AD634CF-2974-417D-AC7D-B87430F6D27C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AD634CF-2974-417D-AC7D-B87430F6D27C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +46,10 @@ Global
 		{EEFC4891-3929-4291-BBE3-8EA1554F69D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEFC4891-3929-4291-BBE3-8EA1554F69D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEFC4891-3929-4291-BBE3-8EA1554F69D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F64FBB12-0369-4117-94A9-E5324B53BB7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F64FBB12-0369-4117-94A9-E5324B53BB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F64FBB12-0369-4117-94A9-E5324B53BB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F64FBB12-0369-4117-94A9-E5324B53BB7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

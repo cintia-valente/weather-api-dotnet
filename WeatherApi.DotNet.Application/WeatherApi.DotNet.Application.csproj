@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\WeatherApi.DotNet.Domain\WeatherApi.DotNet.Domain.csproj" />
     <ProjectReference Include="..\WeatherApi.DotNet.Repository\WeatherApi.DotNet.Repository.csproj" />
   </ItemGroup>

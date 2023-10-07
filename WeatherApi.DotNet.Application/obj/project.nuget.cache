@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tFlmzBhMtAecoJ+fp0EWRkD1SsJ3TtghCXaLp7sk2TsoZoQQE1v7EiVl5F5Knh7THhmLJ6IyIwD19K4eTe5SXQ==",
+  "dgSpecHash": "jgVbUFvbWbnCSyk6SOmImlod35CBF7BfGXEfYUG0zc/k2FczakyHyQGg+mC0PrYrOssnj76Dem6bTTUkol85cw==",
   "success": true,
   "projectFilePath": "C:\\Projetos\\WeatherApi\\WeatherApi.DotNet.Application\\WeatherApi.DotNet.Application.csproj",
   "expectedPackageFiles": [

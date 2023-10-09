@@ -50,3 +50,5 @@ C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\refint\WeatherApi.UI.dll
 C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.pdb
 C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.genruntimeconfig.cache
 C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\ref\WeatherApi.UI.dll
+C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\WeatherApi.UI.xml
+C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.xml

@@ -9,23 +9,22 @@ using WeatherApi.Persistence;
 
 #nullable disable
 
-namespace WeatherApi.Migrations
+namespace WeatherApi.DotNet.Persistence.Migrations
 {
     [DbContext(typeof(WeatherContext))]
-    [Migration("20230928195320_initmigration")]
-    partial class initmigration
+    [Migration("20231009190513_init")]
+    partial class init
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "6.0.22")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("WeatherApi.Models.City", b =>
+            modelBuilder.Entity("WeatherApi.Entity.City", b =>
                 {
                     b.Property<Guid>("IdCity")
                         .ValueGeneratedOnAdd()
@@ -43,7 +42,7 @@ namespace WeatherApi.Migrations
                     b.ToTable("CityData");
                 });
 
-            modelBuilder.Entity("WeatherApi.Models.Weather", b =>
+            modelBuilder.Entity("WeatherApi.Entity.Weather", b =>
                 {
                     b.Property<Guid>("IdWeather")
                         .ValueGeneratedOnAdd()
@@ -83,9 +82,9 @@ namespace WeatherApi.Migrations
                     b.ToTable("WeatherData");
                 });
 
-            modelBuilder.Entity("WeatherApi.Models.Weather", b =>
+            modelBuilder.Entity("WeatherApi.Entity.Weather", b =>
                 {
-                    b.HasOne("WeatherApi.Models.City", "City")
+                    b.HasOne("WeatherApi.Entity.City", "City")
                         .WithMany("WeatherDataList")
                         .HasForeignKey("IdCity")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -94,7 +93,7 @@ namespace WeatherApi.Migrations
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("WeatherApi.Models.City", b =>
+            modelBuilder.Entity("WeatherApi.Entity.City", b =>
                 {
                     b.Navigation("WeatherDataList");
                 });

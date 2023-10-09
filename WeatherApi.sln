@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.DotNet.Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi.DotNet.Persistence", "WeatherApi.DotNet.Persistence\WeatherApi.DotNet.Persistence.csproj", "{F64FBB12-0369-4117-94A9-E5324B53BB7E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{5594A595-B717-4AAD-83FE-5FB8A0A20218}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{AF08B36C-9DDE-4AEC-B95C-7BD66DD3F85C}"
 	ProjectSection(SolutionItems) = preProject
-		.gitgnore = .gitgnore
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Global

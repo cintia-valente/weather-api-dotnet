@@ -9,13 +9,12 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.22" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExemplodeClassLib\WeatherApi.DotNet.Persistence.csproj" />
     <ProjectReference Include="..\WeatherApi.DotNet.Application\WeatherApi.DotNet.Application.csproj" />
     <ProjectReference Include="..\WeatherApi.DotNet.Domain\WeatherApi.DotNet.Domain.csproj" />
     <ProjectReference Include="..\WeatherApi.DotNet.Persistence\WeatherApi.DotNet.Persistence.csproj" />

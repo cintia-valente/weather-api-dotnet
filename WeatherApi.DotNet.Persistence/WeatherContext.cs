@@ -38,11 +38,5 @@ public class WeatherContext : DbContext
             .WithOne(weather => weather.City)
             .HasForeignKey(weather => weather.IdCity)
             .OnDelete(DeleteBehavior.Cascade);
-
-        //modelBuilder.Entity<Weather>()
-        //   .HasOne(w => w.City)
-        //   .WithMany()
-        //   .HasForeignKey(w => w.IdCity) // Chave estrangeira
-        //   .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -1,6 +1,6 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "./Solution Items/Dockerfile"
+./Dockerfile = "./Solution Items/Dockerfile"
 
 [deploy]
 startCommand = "dotnet WeatherApi.dll"

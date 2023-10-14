@@ -44,9 +44,6 @@ builder.Services.AddMvc()
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "7038";
-builder.WebHost.UseUrls($"http://*:{port}");
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -56,7 +53,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

@@ -1,7 +1,0 @@
-[build]
-builder = "dockerfile"
-./Dockerfile = "./Solution Items/Dockerfile"
-
-[deploy]
-startCommand = "dotnet WeatherApi.dll"
-restartPolicyType = "never"

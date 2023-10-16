@@ -57,9 +57,9 @@ public class WeatherController : ControllerBase
     /// Lista 10 registros de dados meteorológicos por página, quando PESQUISAR uma cidade, em ordem descrescente por data.
     /// </summary>
     [HttpGet("{cityName}/list-all-page")]
-    public IEnumerable<Weather> GetAllByName([FromQuery] string cityName, int page, int pageSize)
+    public IEnumerable<Weather> GetAllByName([FromRoute] string cityName, int pageNumber = 1, int pageSize = 10)
     {
-        return _weatherService.FindAllPageByNameCity(cityName, page, pageSize);
+        return _weatherService.FindAllPageByNameCity(cityName, pageNumber, pageSize);
     }
 
     /// <summary>

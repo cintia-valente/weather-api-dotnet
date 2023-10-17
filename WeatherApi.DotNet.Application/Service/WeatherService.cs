@@ -43,20 +43,20 @@ public class WeatherService : IWeatherService
         return await _weatherRepository.FindAll();
     }
 
-    public IEnumerable<Weather> FindAllPage(int page, int pageSize)
+    public async Task<IEnumerable<Weather>> FindAllPage(int page, int pageSize)
     {
-        return _weatherRepository.FindAllByOrderByDateDesc(page, pageSize);
+        return await _weatherRepository.FindAllByOrderByDateDesc(page, pageSize);
     }
 
-    public IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize)
+    public async Task<IEnumerable<Weather>> FindAllPageByNameCity(string cityName, int page, int pageSize)
     {
-        return _weatherRepository.FindAllByCityName(cityName, page, pageSize);
-                                      
+        return await _weatherRepository.FindAllByCityName(cityName, page, pageSize);
+
     }
 
-    public IEnumerable<Weather> GetWeatherForNext7Days(string cityName)
+    public async Task<IEnumerable<Weather>> GetWeatherForNext7Days(string cityName)
     {
-        return _weatherRepository.FindByCityNextSixWeek(cityName);
+        return await _weatherRepository.FindByCityNextSixWeek(cityName);
     }
 
 

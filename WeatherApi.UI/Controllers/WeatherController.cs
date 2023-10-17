@@ -48,27 +48,27 @@ public class WeatherController : ControllerBase
     /// Lista 10 registros de dados meteorológicos por página, quando NÃO pesquisar uma cidade, em ordem descrescente, por data.
     /// </summary>
     [HttpGet("list-all-page")]
-    public IEnumerable<Weather> GetWithWeatherData(int pageNumber = 1, int pageSize = 10)
+    public async Task<IEnumerable<Weather>> GetWithWeatherData(int pageNumber = 1, int pageSize = 10)
     {
-        return _weatherService.FindAllPage(pageNumber, pageSize);
+        return await _weatherService.FindAllPage(pageNumber, pageSize);
     }
 
     /// <summary>
     /// Lista 10 registros de dados meteorológicos por página, quando PESQUISAR uma cidade, em ordem descrescente por data.
     /// </summary>
     [HttpGet("{cityName}/list-all-page")]
-    public IEnumerable<Weather> GetAllByName([FromRoute] string cityName, int pageNumber = 1, int pageSize = 10)
+    public async Task<IEnumerable<Weather>> GetAllByName([FromRoute] string cityName, int pageNumber = 1, int pageSize = 10)
     {
-        return _weatherService.FindAllPageByNameCity(cityName, pageNumber, pageSize);
+        return await _weatherService.FindAllPageByNameCity(cityName, pageNumber, pageSize);
     }
 
     /// <summary>
     /// Lista o dado meteorológico do dia atual e de mais 6 dias consecutivos de uma cidade, em ordem crescente por data.
     /// </summary>
     [HttpGet("{cityName}/weather-next-7-days")]
-    public IActionResult GetWeatherForNext7Days([FromRoute] string cityName)
+    public async Task<IActionResult> GetWeatherForNext7Days([FromRoute] string cityName)
     {
-        var weatherData = _weatherService.GetWeatherForNext7Days(cityName);
+        var weatherData = await _weatherService.GetWeatherForNext7Days(cityName);
         return Ok(weatherData);
     }
 

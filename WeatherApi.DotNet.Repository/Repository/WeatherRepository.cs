@@ -48,9 +48,9 @@ public class WeatherRepository : IWeatherRepository
         return weatherData.AsQueryable();
     }
 
-    public IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize)
+    public async Task<IEnumerable<Weather>> FindAllByOrderByDateDesc(int page, int pageSize)
     {
-        return _context.WeatherData
+        var weatherDataDyDateDesc = await _context.WeatherData
         .Include(w => w.City)
         .OrderByDescending(x => x.Date)  // Ordena por data descendente
         .Skip((page - 1) * pageSize)     // Pula os registros das páginas anteriores
@@ -72,45 +72,50 @@ public class WeatherRepository : IWeatherRepository
             WindSpeed = x.WindSpeed,
             DayTime = x.DayTime,
             NightTime = x.NightTime
-        })
-        .AsQueryable();
+        }).ToListAsync();
+
+        return weatherDataDyDateDesc.AsQueryable();
     }
 
     
-    public IQueryable<Weather> FindAllByCityName(string cityName, int page, int pageSize)
+    public async Task<IQueryable<Weather>> FindAllByCityName(string cityName, int page, int pageSize)
     {
-        return _context.WeatherData
+        var weatherDataByCityName = await _context.WeatherData
         .Include(w => w.City)
         .Where(w => w.City.Name == cityName)
         .OrderByDescending(x => x.Date)
-        .Skip((page - 1) * pageSize)     
+        .Skip((page - 1) * pageSize)
         .Take(pageSize)
         .Select(x => new Weather
+        {
+            City = new City
             {
-                City = new City
-                {
-                    IdCity = x.IdCity,
-                    Name = x.City.Name,
-                    WeatherDataList = null
-                },
-                IdWeather = x.IdWeather,
-                Date = x.Date,
-                MaxTemperature = x.MaxTemperature,
-                MinTemperature = x.MinTemperature,
-                Precipitation = x.Precipitation,
-                Humidity = x.Humidity,
-                WindSpeed = x.WindSpeed,
-                DayTime = x.DayTime,
-                NightTime = x.NightTime
-        })
-        .AsQueryable();
+                IdCity = x.IdCity,
+                Name = x.City.Name,
+                WeatherDataList = null
+            },
+            IdWeather = x.IdWeather,
+            Date = x.Date,
+            MaxTemperature = x.MaxTemperature,
+            MinTemperature = x.MinTemperature,
+            Precipitation = x.Precipitation,
+            Humidity = x.Humidity,
+            WindSpeed = x.WindSpeed,
+            DayTime = x.DayTime,
+            NightTime = x.NightTime
+        }).ToListAsync();
+
+        return weatherDataByCityName.AsQueryable();
     }
 
-    public IQueryable<Weather> FindByCityNextSixWeek(string cityName)
+    public async Task<IQueryable<Weather>> FindByCityNextSixWeek(string cityName)
     {
-        return _context.WeatherData
+        DateTime today = DateTime.UtcNow.Date;
+        DateTime next7Days = today.AddDays(7);
+
+        var weatherDataNextSixWeek = await _context.WeatherData
           .Include(w => w.City)
-          .Where(w => w.City.Name == cityName)
+          .Where(w => w.City.Name == cityName && w.Date >= today && w.Date <= next7Days)
           .OrderBy(x => x.Date)
           .Select(x => new Weather
           {
@@ -121,7 +126,7 @@ public class WeatherRepository : IWeatherRepository
                   WeatherDataList = null
               },
               IdWeather = x.IdWeather,
-              Date = x.Date,
+              Date = DateTime.SpecifyKind(x.Date, DateTimeKind.Utc),
               MaxTemperature = x.MaxTemperature,
               MinTemperature = x.MinTemperature,
               Precipitation = x.Precipitation,
@@ -129,8 +134,9 @@ public class WeatherRepository : IWeatherRepository
               WindSpeed = x.WindSpeed,
               DayTime = x.DayTime,
               NightTime = x.NightTime
-          })
-          .AsQueryable();
+          }).ToListAsync();
+
+            return weatherDataNextSixWeek.AsQueryable();
     }
 
     public Weather? FindById(Guid idWeather)

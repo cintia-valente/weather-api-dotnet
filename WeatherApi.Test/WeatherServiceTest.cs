@@ -22,7 +22,7 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado um objeto Weather, quando salvar o objeto Weather, então chama os métodos FindByID e Save exatamente uma vez.")]
-    public void SaveWeatherSucess()
+    public async Task SaveWeatherSucess()
     {
         // Arrange
         var validWeather = new Weather
@@ -45,10 +45,10 @@ public class WeatherServiceTest
         };
 
         _weatherRepositoryMock.Setup(repo => repo.Save(It.IsAny<Weather>()))
-       .Returns((Weather w) => w); //Configura (Setup) o comportamento que deve ocorrer quando Save for chamado, Save aceita qualquer obj do tipo Weather e retorna um objeto do tipo Weather quando for chamado.
+       .ReturnsAsync((Weather w) => w); //Configura (Setup) o comportamento que deve ocorrer quando Save for chamado, Save aceita qualquer obj do tipo Weather e retorna um objeto do tipo Weather quando for chamado.
 
         // Act
-        var result = _weatherService.Save(validWeather); //chama o método Save com o mock e armazena o resultado.
+        var result = await _weatherService.Save(validWeather); //chama o método Save com o mock e armazena o resultado.
 
         // Assert
         Assert.NotNull(result);
@@ -60,7 +60,7 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado um objeto Weather, quando passar valores de enums inválidos, então lança uma exceção.")]
-    public void SaveWeatherEnumsError()
+    public async Task SaveWeatherEnumsError()
     {
         // Arrange
         var invalidWeather = new Weather
@@ -86,11 +86,14 @@ public class WeatherServiceTest
         .Throws<ArgumentException>();
 
         // Act
-        var exceptionSave = Assert.Throws<ArgumentException>(() => _weatherService.Save(invalidWeather));
+        var exceptionSave = await Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeather));
 
         // Assert
-        Assert.Equal("Valores inválidos para enums DayTime e/ou NightTime.", exceptionSave.Message);
-        Assert.Throws<ArgumentException>(() => _weatherService.Save(invalidWeather));
+        var expectedMessage = "Valores inválidos para enums DayTime e/ou NightTime.";
+        Assert.Equal(expectedMessage, exceptionSave.Message);
+
+      //  Assert.Equal("Valores inválidos para enums DayTime e/ou NightTime.", exceptionSave.Message);
+        Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeather));
     }
 
     [Fact(DisplayName = "Dado um id do Weather, então chama o método FindById exatamente uma vez.")]
@@ -127,7 +130,7 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método FindAll, então deve retornar uma lista de weather.")]
-    public void FindAllSucess()
+    public async Task FindAllSucess()
     {
         // Arrange
         var weatherList = new List<Weather>
@@ -153,10 +156,10 @@ public class WeatherServiceTest
         };
 
         _weatherRepositoryMock.Setup(repo => repo.FindAll())
-        .Returns(weatherList.AsQueryable());
+        .ReturnsAsync(weatherList.AsQueryable());
 
         // Act
-        var result = _weatherService.FindAll();
+        var result = await _weatherService.FindAll();
 
         // Assert
         Assert.Equal(weatherList, result);
@@ -171,14 +174,14 @@ public class WeatherServiceTest
         .Throws<Exception>();
 
         // Act
-        var exceptionSave = Assert.Throws<Exception>(() => _weatherService.FindAll());
+        var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.FindAll());
 
         // Assert
-        Assert.Throws<Exception>(() => _weatherService.FindAll());
+        Assert.ThrowsAsync<Exception>(() => _weatherService.FindAll());
     }
 
     [Fact(DisplayName = "Dado uma page e pageSize, então chama o método FindAllByOrderByDateDesc exatamente uma vez.")]
-    public void FindAllPageSucess()
+    public async Task FindAllPageSucess()
     {
         // Arrange
         var page = 1;
@@ -225,10 +228,10 @@ public class WeatherServiceTest
         };
 
         _weatherRepositoryMock.Setup(repo => repo.FindAllByOrderByDateDesc(It.IsAny<int>(), It.IsAny<int>()))
-        .Returns(weatherList.AsQueryable());
+        .ReturnsAsync(weatherList.AsQueryable());
 
         // Act
-        var result = _weatherService.FindAllPage(page, pageSize);
+        var result = await _weatherService.FindAllPage(page, pageSize);
         var sortedByDateDescending = result.OrderByDescending(x => x.Date);//ordena o retorno
 
         // Assert
@@ -249,14 +252,14 @@ public class WeatherServiceTest
         .Throws<Exception>();
 
         // Act
-        var exceptionSave = Assert.Throws<Exception>(() => _weatherService.FindAllPage(page, pageSize));
+        var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.FindAllPage(page, pageSize));
 
         // Assert
-        Assert.Throws<Exception>(() => _weatherService.FindAllPage(page, pageSize));
+        Assert.ThrowsAsync<Exception>(() => _weatherService.FindAllPage(page, pageSize));
     }
 
     [Fact(DisplayName = "Dado uma cidade, page e uma pageSize, então chama o método FindAllByCityName exatamente uma vez.")]
-    public void FindAllPageByNameCitySucess()
+    public async Task FindAllPageByNameCitySucess()
     {
         // Arrange
         var page = 1;
@@ -303,10 +306,10 @@ public class WeatherServiceTest
         };
 
         _weatherRepositoryMock.Setup(repo => repo.FindAllByCityName(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()))
-        .Returns(weatherList.AsQueryable());
+        .ReturnsAsync(weatherList.AsQueryable());
 
         // Act
-        var result = _weatherService.FindAllPageByNameCity(weatherList[0].City.Name, page, pageSize);
+        var result = await _weatherService.FindAllPageByNameCity(weatherList[0].City.Name, page, pageSize);
         var sortedByDateDescending = result.OrderByDescending(x => x.Date);//ordena o retorno
 
         // Assert
@@ -318,7 +321,7 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método FindAllPageByNameCity, então lança uma exceção.")]
-    public void FindAllPageByNameCityError()
+    public async Task FindAllPageByNameCityError()
     {
         // Arrange
         var page = 1;
@@ -368,10 +371,10 @@ public class WeatherServiceTest
            .Throws<Exception>();
 
         // Act
-        var exceptionSave = Assert.Throws<Exception>(() => _weatherService.FindAllPageByNameCity(weatherList[0].City.Name, page, pageSize));
+        var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.FindAllPageByNameCity(weatherList[0].City.Name, page, pageSize));
 
         // Assert
-        Assert.Throws<Exception>(() => _weatherService.FindAllPageByNameCity(weatherList[0].City.Name, page, pageSize));
+        Assert.ThrowsAsync<Exception>(() => _weatherService.FindAllPageByNameCity(weatherList[0].City.Name, page, pageSize));
     }
 
     [Fact(DisplayName = "Dado uma cidade, então chama o método FindByCityNextSixWeek exatamente uma vez.")]

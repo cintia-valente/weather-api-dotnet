@@ -48,9 +48,9 @@ public class WeatherRepository : IWeatherRepository
         return weatherData.AsQueryable();
     }
 
-    public IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize)
+    public async Task<IEnumerable<Weather>> FindAllByOrderByDateDesc(int page, int pageSize)
     {
-        return _context.WeatherData
+        var weatherDataPage = await _context.WeatherData
         .Include(w => w.City)
         .OrderByDescending(x => x.Date)  // Ordena por data descendente
         .Skip((page - 1) * pageSize)     // Pula os registros das páginas anteriores
@@ -72,43 +72,45 @@ public class WeatherRepository : IWeatherRepository
             WindSpeed = x.WindSpeed,
             DayTime = x.DayTime,
             NightTime = x.NightTime
-        })
-        .AsQueryable();
+        }).ToListAsync();
+
+        return weatherDataPage.AsQueryable();
     }
 
     
-    public IQueryable<Weather> FindAllByCityName(string cityName, int page, int pageSize)
+    public async Task<IQueryable<Weather>> FindAllByCityName(string cityName, int page, int pageSize)
     {
-        return _context.WeatherData
+        var weatherDataPageByCity = await _context.WeatherData
         .Include(w => w.City)
         .Where(w => w.City.Name == cityName)
         .OrderByDescending(x => x.Date)
-        .Skip((page - 1) * pageSize)     
+        .Skip((page - 1) * pageSize)
         .Take(pageSize)
         .Select(x => new Weather
+        {
+            City = new City
             {
-                City = new City
-                {
-                    IdCity = x.IdCity,
-                    Name = x.City.Name,
-                    WeatherDataList = null
-                },
-                IdWeather = x.IdWeather,
-                Date = x.Date,
-                MaxTemperature = x.MaxTemperature,
-                MinTemperature = x.MinTemperature,
-                Precipitation = x.Precipitation,
-                Humidity = x.Humidity,
-                WindSpeed = x.WindSpeed,
-                DayTime = x.DayTime,
-                NightTime = x.NightTime
-        })
-        .AsQueryable();
+                IdCity = x.IdCity,
+                Name = x.City.Name,
+                WeatherDataList = null
+            },
+            IdWeather = x.IdWeather,
+            Date = x.Date,
+            MaxTemperature = x.MaxTemperature,
+            MinTemperature = x.MinTemperature,
+            Precipitation = x.Precipitation,
+            Humidity = x.Humidity,
+            WindSpeed = x.WindSpeed,
+            DayTime = x.DayTime,
+            NightTime = x.NightTime
+        }).ToListAsync();
+
+        return weatherDataPageByCity.AsQueryable();
     }
 
-    public IQueryable<Weather> FindByCityNextSixWeek(string cityName)
+    public async Task<IQueryable<Weather>> FindByCityNextSixWeek(string cityName)
     {
-        return _context.WeatherData
+        var weatherDataSixWeek = await _context.WeatherData
           .Include(w => w.City)
           .Where(w => w.City.Name == cityName)
           .OrderBy(x => x.Date)
@@ -129,8 +131,9 @@ public class WeatherRepository : IWeatherRepository
               WindSpeed = x.WindSpeed,
               DayTime = x.DayTime,
               NightTime = x.NightTime
-          })
-          .AsQueryable();
+          }).ToListAsync();
+
+        return weatherDataSixWeek.AsQueryable();
     }
 
     public Weather? FindById(Guid idWeather)

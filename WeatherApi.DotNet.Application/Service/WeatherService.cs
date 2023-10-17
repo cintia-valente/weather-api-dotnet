@@ -1,4 +1,5 @@
-﻿using WeatherApi.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using WeatherApi.Entity;
 using WeatherApi.Entity.Enums;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service.Interfaces;
@@ -34,8 +35,8 @@ public class WeatherService : IWeatherService
 
     public Weather FindById(Guid id)
     {
-        var wheaterById = _weatherRepository.FindById(id);
-        return wheaterById;
+        var weatherById = _weatherRepository.FindById(id);
+        return weatherById;
     }
 
     public async Task<IEnumerable<Weather>> FindAll()
@@ -43,20 +44,19 @@ public class WeatherService : IWeatherService
         return await _weatherRepository.FindAll();
     }
 
-    public IEnumerable<Weather> FindAllPage(int page, int pageSize)
+    public async Task<IEnumerable<Weather>> FindAllPage(int page, int pageSize)
     {
-        return _weatherRepository.FindAllByOrderByDateDesc(page, pageSize);
+        return await _weatherRepository.FindAllByOrderByDateDesc(page, pageSize);
     }
 
-    public IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize)
+    public async Task<IEnumerable<Weather>> FindAllPageByNameCity(string cityName, int page, int pageSize)
     {
-        return _weatherRepository.FindAllByCityName(cityName, page, pageSize);
-                                      
+        return await _weatherRepository.FindAllByCityName(cityName, page, pageSize);
     }
 
-    public IEnumerable<Weather> GetWeatherForNext7Days(string cityName)
+    public async Task<IEnumerable<Weather>> GetWeatherForNext7Days(string cityName)
     {
-        return _weatherRepository.FindByCityNextSixWeek(cityName);
+        return await _weatherRepository.FindByCityNextSixWeek(cityName).ToListAsync();
     }
 
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3nUHpw6H9skiWECdHpzHmBHVywKrp+yeU4BvJMMp17gaX2SjSt248K2FaWY6SZmAlXjHpIAV/7JSA0SYWwZqKQ==",
+  "dgSpecHash": "TYuxa2WLp4EMQJ+a7M3/ZodKy+l59BpUjWZBvO7CwTJxli9SGzbtWrfwuTQFqxewgTXxTHIlpogm+bmsP11RuQ==",
   "success": true,
-  "projectFilePath": "C:\\Projetos\\WeatherApi\\WeatherApi.Test\\WeatherApi_Test.csproj",
+  "projectFilePath": "C:\\Projetos\\WeatherApi\\WeatherApi.Test\\WeatherApi_Unit_Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cintia.valente\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\cintia.valente\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

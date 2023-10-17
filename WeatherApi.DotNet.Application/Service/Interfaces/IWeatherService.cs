@@ -4,8 +4,8 @@ namespace WeatherApi.Service.Interfaces;
 
 public interface IWeatherService
 { 
-    Weather Save(Weather weather);
-    IEnumerable<Weather> FindAll();
+    Task<Weather> Save(Weather weather);
+    Task<IEnumerable<Weather>> FindAll();
     IEnumerable<Weather> FindAllPageByNameCity(string cityName, int page, int pageSize);
     Weather FindById(Guid id);
 

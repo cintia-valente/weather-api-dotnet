@@ -24,13 +24,13 @@ public class WeatherController : ControllerBase
     /// </summary>
     [HttpPost("register-weather")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public IActionResult PostWeather(
+    public async Task<IActionResult> PostWeather(
         [FromBody] WeatherRequestDTO postWeatherDTO)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
         var weatherConverter = _mapper.Map<Weather>(postWeatherDTO);
-        var weatherSave = _weatherService.Save(weatherConverter);
+        var weatherSave = await _weatherService.Save(weatherConverter);
 
         return CreatedAtAction(nameof(GetWeatherById), new { id = weatherSave.IdWeather }, weatherSave);
     }
@@ -39,9 +39,9 @@ public class WeatherController : ControllerBase
     /// Lista todos registros de dados meteorológicos
     /// </summary>
     [HttpGet("weather-all")]
-    public IEnumerable<Weather> GetWeatherWithWeatherData()
+    public async Task<IEnumerable<Weather>> GetWeatherWithWeatherData()
     {
-        return _weatherService.FindAll();
+        return await _weatherService.FindAll();
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ public class WeatherService : IWeatherService
         _cityRepository = cityRepository;
     }
 
-    public Weather Save(Weather weather) 
+    public async Task<Weather> Save(Weather weather) 
     {
         weather.City = _cityRepository.FindById(weather.IdCity);
 
@@ -26,7 +26,7 @@ public class WeatherService : IWeatherService
             throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
         }
 
-        var weatherSaved = _weatherRepository.Save(weather);
+        var weatherSaved = await _weatherRepository.Save(weather);
        
         return weatherSaved;
 
@@ -38,9 +38,9 @@ public class WeatherService : IWeatherService
         return wheaterById;
     }
 
-    public IEnumerable<Weather> FindAll()
+    public async Task<IEnumerable<Weather>> FindAll()
     {
-        return _weatherRepository.FindAll();
+        return await _weatherRepository.FindAll();
     }
 
     public IEnumerable<Weather> FindAllPage(int page, int pageSize)

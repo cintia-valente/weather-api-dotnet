@@ -4,9 +4,9 @@ namespace WeatherApi.Repository.Interfaces;
 
 public interface IWeatherRepository
 {
-    Weather Save(Weather weather);
+    Task<Weather> Save(Weather weather);
 
-    IQueryable<Weather> FindAll();
+    Task<IQueryable<Weather>> FindAll();
     IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize);
     IQueryable<Weather> FindAllByCityName(string cityName, int page, int pageSize);
     IQueryable<Weather> FindByCityNextSixWeek(string cityName);

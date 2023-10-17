@@ -7027,9 +7027,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.Test\\WeatherApi_Test.csproj",
-      "projectName": "WeatherApi_Test",
-      "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Test\\WeatherApi_Test.csproj",
+      "projectUniqueName": "C:\\Projetos\\WeatherApi\\WeatherApi.Test\\WeatherApi_Unit_Test.csproj",
+      "projectName": "WeatherApi_Unit_Test",
+      "projectPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Test\\WeatherApi_Unit_Test.csproj",
       "packagesPath": "C:\\Users\\cintia.valente\\.nuget\\packages\\",
       "outputPath": "C:\\Projetos\\WeatherApi\\WeatherApi.Test\\obj\\",
       "projectStyle": "PackageReference",

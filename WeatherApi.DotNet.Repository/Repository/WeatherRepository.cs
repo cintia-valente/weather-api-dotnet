@@ -17,18 +17,18 @@ public class WeatherRepository : IWeatherRepository
         _mapper = mapper;
     }
 
-    public Weather Save(Weather weather)
+    public async Task<Weather> Save(Weather weather)
     {
         EntityEntry<Weather?> weatherEntity = _context.WeatherData.Add(weather);
-       
-        _context.SaveChanges();
+
+        await _context.SaveChangesAsync();
         var weatherConvert = _mapper.Map<Weather>(weatherEntity.Entity);
         return weatherConvert;
     }
 
-    public IQueryable<Weather> FindAll()
+    public async Task<IQueryable<Weather>> FindAll()
     {
-        return _context.WeatherData.Include(w => w.City).Select(x => new Weather() { 
+        var weatherData = await _context.WeatherData.Include(w => w.City).Select(x => new Weather() { 
             City = new City(){ 
                 IdCity = x.IdCity,
                 Name = x.City.Name,
@@ -43,7 +43,9 @@ public class WeatherRepository : IWeatherRepository
             WindSpeed = x.WindSpeed,
             DayTime = x.DayTime,
             NightTime = x.NightTime
-        }).AsQueryable();
+        }).ToListAsync();
+        
+        return weatherData.AsQueryable();
     }
 
     public IEnumerable<Weather> FindAllByOrderByDateDesc(int page, int pageSize)

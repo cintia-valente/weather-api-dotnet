@@ -12,11 +12,11 @@ public interface IWeatherRepository
 
     Task<IQueryable<Weather>> FindAllByCityName(string cityName, int page, int pageSize);
     Task<IQueryable<Weather>> FindByCityNextSixWeek(string cityName);
-
-    Weather? FindById(Guid idWeather);
+    Task<Weather?> FindById(Guid idWeather);
 
     IEnumerable<Weather> FindByDates(List<DateTime> dates);
 
-    void Update(Guid idWheaterData, Weather weather);
-    bool DeleteById(Guid idWheater);
+    Task Update(Guid idWheaterData, Weather weather);
+
+    Task<bool> DeleteById(Guid idWeather);
 }

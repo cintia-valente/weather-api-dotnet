@@ -18,7 +18,7 @@ public class WeatherService : IWeatherService
 
     public async Task<Weather> Save(Weather weather) 
     {
-        weather.City = _cityRepository.FindById(weather.IdCity);
+        weather.City = await _cityRepository.FindById(weather.IdCity);
 
         if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
             !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
@@ -29,12 +29,11 @@ public class WeatherService : IWeatherService
         var weatherSaved = await _weatherRepository.Save(weather);
        
         return weatherSaved;
-
     }
 
-    public Weather FindById(Guid id)
+    public async Task<Weather> FindById(Guid id)
     {
-        var wheaterById = _weatherRepository.FindById(id);
+        var wheaterById = await _weatherRepository.FindById(id);
         return wheaterById;
     }
 
@@ -51,7 +50,6 @@ public class WeatherService : IWeatherService
     public async Task<IEnumerable<Weather>> FindAllPageByNameCity(string cityName, int page, int pageSize)
     {
         return await _weatherRepository.FindAllByCityName(cityName, page, pageSize);
-
     }
 
     public async Task<IEnumerable<Weather>> GetWeatherForNext7Days(string cityName)
@@ -59,11 +57,10 @@ public class WeatherService : IWeatherService
         return await _weatherRepository.FindByCityNextSixWeek(cityName);
     }
 
-
-    public Weather Update(Guid idWheaterData, Weather weather)
+    public async Task<Weather> Update(Guid idWheaterData, Weather weather)
     {
 
-        var data = FindById(idWheaterData);
+        var data = await FindById(idWheaterData);
 
 
         if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
@@ -72,15 +69,14 @@ public class WeatherService : IWeatherService
             throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
         }
 
-        _weatherRepository.Update(idWheaterData, weather);
+        await _weatherRepository.Update(idWheaterData, weather);
 
         return data;
-     
     }
 
-    public bool DeleteById(Guid idWheaterData)
+    public async Task<bool> DeleteById(Guid idWheaterData)
     {
-        return _weatherRepository.DeleteById(idWheaterData);
+        return await _weatherRepository.DeleteById(idWheaterData);
     }
 
 }

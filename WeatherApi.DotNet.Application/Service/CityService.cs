@@ -12,20 +12,20 @@ public class CityService : ICityService
         _cityRepository = cityRepository;
     }
 
-    public City Save(City city)
+    public async Task<City> Save(City city)
     {
-        var citySaved = _cityRepository.Save(city);
+        var citySaved = await _cityRepository.Save(city);
         return citySaved;
     }
 
-    public IEnumerable<City> FindAll()
+    public async Task<IEnumerable<City>> FindAll()
     {
-        return _cityRepository.FindAll().ToList();
+        return await _cityRepository.FindAll();
     }
 
-    public City FindById(Guid id)
+    public async Task<City> FindById(Guid id)
     {
-        var cityById = _cityRepository.FindById(id);
+        var cityById = await _cityRepository.FindById(id);
         return cityById;
     }
 

@@ -4,12 +4,9 @@ namespace WeatherApi.Repository.Interfaces;
 
 public interface ICityRepository
 {
-
-    City Save(City city);
-    IEnumerable<City> FindAll();
-
-    City? FindById(Guid idCity);
-
-    City FindAllByCityName(string cityName);
+    Task<City> Save(City city);
+    Task<IEnumerable<City>> FindAll();
+    Task<City> FindAllByCityName(string cityName);
+    Task<City?> FindById(Guid idCity);
 }
 

@@ -139,10 +139,9 @@ public class WeatherRepository : IWeatherRepository
             return weatherDataNextSixWeek.AsQueryable();
     }
 
-    public Weather? FindById(Guid idWeather)
+    public async Task<Weather?> FindById(Guid idWeather)
     {
-        return _context.WeatherData.FirstOrDefault(metData => metData.IdWeather == idWeather);
-       
+        return await _context.WeatherData.Include(w => w.City).FirstOrDefaultAsync(metData => metData.IdWeather == idWeather);  
     }
 
     public IEnumerable<Weather> FindByDates(List<DateTime> dates)
@@ -153,9 +152,14 @@ public class WeatherRepository : IWeatherRepository
             .ToList();
     }
 
-    public void Update(Guid idWheaterData, Weather weather)
+    public async Task Update(Guid idWheaterData, Weather weather)
     {
-        var data = FindById(idWheaterData);
+        var data = await FindById(idWheaterData);
+
+        if (data == null)
+        {
+            throw new DllNotFoundException("Weather data not found.");
+        }
 
         data.Date = weather.Date;
         data.MaxTemperature = weather.MaxTemperature;
@@ -168,12 +172,12 @@ public class WeatherRepository : IWeatherRepository
 
         data.City = weather.City;
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public bool DeleteById(Guid idWeather)
+    public async Task<bool> DeleteById(Guid idWeather)
     {
-        var weatherToDelete = _context.WeatherData.FirstOrDefault(weather => weather.IdWeather == idWeather);
+        var weatherToDelete = _context.WeatherData.FirstOrDefaultAsync(weather => weather.IdWeather == idWeather);
         if (weatherToDelete != null)
         {
             _context.Remove(weatherToDelete);
@@ -182,7 +186,6 @@ public class WeatherRepository : IWeatherRepository
         }
 
         return false;
-       
     }
 
 }

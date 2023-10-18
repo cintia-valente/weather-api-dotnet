@@ -18,27 +18,27 @@ public class CityRepository : ICityRepository
         _mapper = mapper;
     }
 
-    public City Save(City city)
+    public async Task<City> Save(City city)
     {
         EntityEntry<City?> cityEntity = _context.CityData.Add(city);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         var cityConvert = _mapper.Map<City>(cityEntity.Entity);
         return cityConvert;
     }
 
-    public IEnumerable<City> FindAll()
+    public async Task<IEnumerable<City>> FindAll()
     {
-        return _context.CityData.Include(city => city.WeatherDataList);
+        return await _context.CityData.Include(city => city.WeatherDataList).ToListAsync(); 
     }
 
-    public City FindAllByCityName(string cityName)
+    public async Task<City> FindAllByCityName(string cityName)
     {
-        return _context.CityData.FirstOrDefault(c => c.Name == cityName);
+        return await _context.CityData.FirstOrDefaultAsync(c => c.Name == cityName); 
     }
 
-    public City? FindById(Guid idCity)
+    public async Task<City?> FindById(Guid idCity)
     {
-        return _context.CityData.Include(city => city.WeatherDataList).FirstOrDefault(data => data.IdCity == idCity);
+        return await _context.CityData.Include(city => city.WeatherDataList).FirstOrDefaultAsync(data => data.IdCity == idCity);
 
     }
 

@@ -7,14 +7,13 @@ public interface IWeatherService
     Task<Weather> Save(Weather weather);
     Task<IEnumerable<Weather>> FindAll();
     Task<IEnumerable<Weather>> FindAllPageByNameCity(string cityName, int page, int pageSize);
-    Weather FindById(Guid id);
+
+    Task<Weather> FindById(Guid id);
 
     Task<IEnumerable<Weather>> FindAllPage(int page, int pageSize);
     Task<IEnumerable<Weather>> GetWeatherForNext7Days(string cityName);
 
-    Weather Update(Guid idWheaterData, Weather weather);
+    Task<Weather> Update(Guid idWheaterData, Weather weather);
 
-    bool DeleteById(Guid idWheaterData);
-
-
+    Task<bool> DeleteById(Guid idWheaterData);
 }

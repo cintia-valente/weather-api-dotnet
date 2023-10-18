@@ -25,13 +25,13 @@ public class CityController : ControllerBase
     /// </summary>
     [HttpPost("register-city")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public IActionResult PostWeather(
+    public async Task<IActionResult> PostWeather(
         [FromBody] CityRequestDto postCityDTO)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
         var cityConverter = _mapper.Map<City>(postCityDTO);
-        var citySave = _cityService.Save(cityConverter);
+        var citySave =  await _cityService.Save(cityConverter);
 
         return CreatedAtAction(nameof(GetCityForId), new { id = citySave.IdCity }, citySave);
     }
@@ -40,9 +40,9 @@ public class CityController : ControllerBase
     /// Lista todas as cidades
     /// </summary>
     [HttpGet("cities/all")]
-    public IEnumerable<City> GetCitiesWithWeatherData()
+    public async Task<IEnumerable<City>> GetCitiesWithWeatherData()
     {
-        var result = _cityService.FindAll();
+        var result = await _cityService.FindAll();
         return (IEnumerable<City>)result;
     }
 
@@ -50,9 +50,9 @@ public class CityController : ControllerBase
     /// Lista uma cidade por id
     /// </summary>
     [HttpGet("{id}")]
-    public IActionResult GetCityForId(Guid id)
+    public async Task<IActionResult> GetCityForId(Guid id)
     {
-        var city = _cityService.FindById(id);
+        var city = await _cityService.FindById(id);
         return city is null ? NotFound("Weather not found") : Ok(city);
     }
 

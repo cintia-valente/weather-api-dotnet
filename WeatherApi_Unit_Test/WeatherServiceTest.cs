@@ -94,16 +94,16 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado um id do Weather, então chama o método FindById exatamente uma vez.")]
-    public async Task FindByIdSucess()
+    public void FindByIdSucess()
     {
         // Arrange
         Guid idWeather = Guid.NewGuid();
 
         _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
-        .ReturnsAsync((Guid id) => new Weather { IdWeather = id });
+        .Returns((Guid id) => new Weather { IdWeather = id });
 
         // Act
-        var result = await _weatherService.FindById(idWeather);
+        var result = _weatherService.FindById(idWeather);
 
         // Assert
         Assert.Equal(idWeather, result.IdWeather);
@@ -111,7 +111,7 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado um id do Weather, quando chamar o método FindById, então lança uma exceção.")]
-    public async Task FindByIdError()
+    public void FindByIdError()
     {
         // Arrange
         Guid idWeather = Guid.NewGuid();
@@ -120,10 +120,10 @@ public class WeatherServiceTest
         .Throws<Exception>();
 
         // Act
-        var exceptionFindById = Assert.ThrowsAsync<Exception>(() => _weatherService.FindById(idWeather));
+        var exceptionFindById = Assert.Throws<Exception>(() => _weatherService.FindById(idWeather));
 
         // Assert
-        Assert.ThrowsAsync<Exception>(() => _weatherService.FindById(idWeather));
+        Assert.Throws<Exception>(() => _weatherService.FindById(idWeather));
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método FindAll, então deve retornar uma lista de weather.")]
@@ -487,7 +487,7 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado um objeto Weather, quando editar o objeto, então chama os métodos FindById e Update exatamente uma vez.")]
-    public async Task UpdateSucess()
+    public void UpdateSucess()
     {
         // Arrange
         var weather = new Weather
@@ -529,7 +529,7 @@ public class WeatherServiceTest
         };
 
         _weatherRepositoryMock.Setup(repo => repo.FindById(weather.IdWeather))
-           .ReturnsAsync(weather);
+           .Returns(weather);
 
         Weather capturedWeather = null;
 
@@ -551,7 +551,7 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método UpdateError, então lança uma exceção.")]
-    public async Task UpdateError()
+    public void UpdateError()
     {
         // Arrange
         var weather = new Weather
@@ -601,10 +601,10 @@ public class WeatherServiceTest
          .Throws<Exception>();
 
         // Act
-        var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.Update(updateWeather.IdWeather, weather));
+        var exceptionSave = Assert.Throws<Exception>(() => _weatherService.Update(updateWeather.IdWeather, weather));
 
         // Assert
-        Assert.ThrowsAsync<Exception>(() => _weatherService.Update(updateWeather.IdWeather, weather));
+        Assert.Throws<Exception>(() => _weatherService.Update(updateWeather.IdWeather, weather));
     }
 
     [Fact(DisplayName = "Dado um id do Weather, quando editar o objeto, então chama o método DeleteById exatamente uma vez.")]

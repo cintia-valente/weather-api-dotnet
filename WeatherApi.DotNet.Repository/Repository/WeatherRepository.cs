@@ -139,22 +139,22 @@ public class WeatherRepository : IWeatherRepository
             return weatherDataNextSixWeek.AsQueryable();
     }
 
-    public async Task<Weather?> FindById(Guid idWeather)
+    public Weather FindById(Guid idWeather)
     {
-        return await _context.WeatherData.Include(w => w.City).FirstOrDefaultAsync(metData => metData.IdWeather == idWeather);  
+        return _context.WeatherData.Include(w => w.City).FirstOrDefault(metData => metData.IdWeather == idWeather);  
     }
 
-    public IEnumerable<Weather> FindByDates(List<DateTime> dates)
-    {
-        return _context.WeatherData
-            .Where(w => dates.Contains(w.Date))
-            .Include(w => w.City)
-            .ToList();
-    }
+    //public IEnumerable<Weather> FindByDates(List<DateTime> dates)
+    //{
+    //    return _context.WeatherData
+    //        .Where(w => dates.Contains(w.Date))
+    //        .Include(w => w.City)
+    //        .ToList();
+    //}
 
-    public async Task Update(Guid idWheaterData, Weather weather)
+    public void Update(Guid idWheaterData, Weather weather)
     {
-        var data = await FindById(idWheaterData);
+        var data = FindById(idWheaterData);
 
         if (data == null)
         {
@@ -172,16 +172,18 @@ public class WeatherRepository : IWeatherRepository
 
         data.City = weather.City;
 
-        await _context.SaveChangesAsync();
+        _context.SaveChangesAsync();
     }
+
 
     public async Task<bool> DeleteById(Guid idWeather)
     {
-        var weatherToDelete = _context.WeatherData.FirstOrDefaultAsync(weather => weather.IdWeather == idWeather);
+        var weatherToDelete = await _context.WeatherData.FirstOrDefaultAsync(weather => weather.IdWeather == idWeather);
+
         if (weatherToDelete != null)
         {
             _context.Remove(weatherToDelete);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return true;
         }
 

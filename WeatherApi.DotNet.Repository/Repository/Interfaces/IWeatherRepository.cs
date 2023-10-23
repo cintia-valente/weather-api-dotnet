@@ -14,9 +14,6 @@ public interface IWeatherRepository
     Task<IQueryable<Weather>> FindByCityNextSixWeek(string cityName);
 
     Task<Weather> FindById(Guid idWeather);
-    //Weather? FindById(Guid idWeather);
-
-   // IEnumerable<Weather> FindByDates(List<DateTime> dates);
 
     Task Update(Guid idWheaterData, Weather weather);
     //void Update(Guid idWheaterData, Weather weather);

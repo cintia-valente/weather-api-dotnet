@@ -23,6 +23,7 @@ public class WeatherRepository : IWeatherRepository
 
         await _context.SaveChangesAsync();
         var weatherConvert = _mapper.Map<Weather>(weatherEntity.Entity);
+
         return weatherConvert;
     }
 
@@ -136,46 +137,39 @@ public class WeatherRepository : IWeatherRepository
               NightTime = x.NightTime
           }).ToListAsync();
 
-            return weatherDataNextSixWeek.AsQueryable();
+          return weatherDataNextSixWeek.AsQueryable();
     }
 
     public async Task<Weather> FindById(Guid idWeather)
     {
-        return await _context.WeatherData.Include(w => w.City).FirstOrDefaultAsync(metData => metData.IdWeather == idWeather);  
+        return await _context.WeatherData.Include(w => w.City).FirstOrDefaultAsync(metData => metData.IdWeather == idWeather);
     }
-
-    //public IEnumerable<Weather> FindByDates(List<DateTime> dates)
-    //{
-    //    return _context.WeatherData
-    //        .Where(w => dates.Contains(w.Date))
-    //        .Include(w => w.City)
-    //        .ToList();
-    //}
 
     public async Task Update (Guid idWheaterData, Weather weather)
     {
-        //var data = await FindById(idWheaterData);
+        var data = await FindById(idWheaterData);
 
-        //if (data == null)
-        //{
-        //    throw new DllNotFoundException("Weather data not found.");
-        //}
+        if (data == null)
+        {
+            throw new DllNotFoundException("Data not found.");
+        }
 
-        //data.Date = weather.Date;
-        //data.MaxTemperature = weather.MaxTemperature;
-        //data.MinTemperature = weather.MinTemperature;
-        //data.Precipitation = weather.Precipitation;
-        //data.Humidity = weather.Humidity;
-        //data.WindSpeed = weather.WindSpeed;
-        //data.DayTime = weather.DayTime;
-        //data.NightTime = weather.NightTime;
+        data.Date = weather.Date;
+        data.MaxTemperature = weather.MaxTemperature;
+        data.MinTemperature = weather.MinTemperature;
+        data.Precipitation = weather.Precipitation;
+        data.Humidity = weather.Humidity;
+        data.WindSpeed = weather.WindSpeed;
+        data.DayTime = weather.DayTime;
+        data.NightTime = weather.NightTime;
 
-        //data.City = weather.City;
+        if (weather.City != null)
+        {
+            data.City = weather.City;
+        }
 
-        _context.Update(weather);
         await _context.SaveChangesAsync();
     }
-
 
     public async Task<bool> DeleteById(Guid idWeather)
     {

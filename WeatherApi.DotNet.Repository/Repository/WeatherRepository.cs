@@ -139,9 +139,9 @@ public class WeatherRepository : IWeatherRepository
             return weatherDataNextSixWeek.AsQueryable();
     }
 
-    public Weather FindById(Guid idWeather)
+    public async Task<Weather> FindById(Guid idWeather)
     {
-        return _context.WeatherData.Include(w => w.City).FirstOrDefault(metData => metData.IdWeather == idWeather);  
+        return await _context.WeatherData.Include(w => w.City).FirstOrDefaultAsync(metData => metData.IdWeather == idWeather);  
     }
 
     //public IEnumerable<Weather> FindByDates(List<DateTime> dates)
@@ -152,27 +152,28 @@ public class WeatherRepository : IWeatherRepository
     //        .ToList();
     //}
 
-    public void Update(Guid idWheaterData, Weather weather)
+    public async Task Update (Guid idWheaterData, Weather weather)
     {
-        var data = FindById(idWheaterData);
+        //var data = await FindById(idWheaterData);
 
-        if (data == null)
-        {
-            throw new DllNotFoundException("Weather data not found.");
-        }
+        //if (data == null)
+        //{
+        //    throw new DllNotFoundException("Weather data not found.");
+        //}
 
-        data.Date = weather.Date;
-        data.MaxTemperature = weather.MaxTemperature;
-        data.MinTemperature = weather.MinTemperature;
-        data.Precipitation = weather.Precipitation;
-        data.Humidity = weather.Humidity;
-        data.WindSpeed = weather.WindSpeed;
-        data.DayTime = weather.DayTime;
-        data.NightTime = weather.NightTime;
+        //data.Date = weather.Date;
+        //data.MaxTemperature = weather.MaxTemperature;
+        //data.MinTemperature = weather.MinTemperature;
+        //data.Precipitation = weather.Precipitation;
+        //data.Humidity = weather.Humidity;
+        //data.WindSpeed = weather.WindSpeed;
+        //data.DayTime = weather.DayTime;
+        //data.NightTime = weather.NightTime;
 
-        data.City = weather.City;
+        //data.City = weather.City;
 
-        _context.SaveChangesAsync();
+        _context.Update(weather);
+        await _context.SaveChangesAsync();
     }
 
 

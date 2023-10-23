@@ -30,9 +30,9 @@ public class WeatherService : IWeatherService
        
         return weatherSaved;
     }
-    public Weather FindById(Guid id)
+    public async Task<Weather> FindById(Guid id)
     {
-        var wheaterById = _weatherRepository.FindById(id);
+        var wheaterById = await _weatherRepository.FindById(id);
         return wheaterById;
     }
 
@@ -56,10 +56,9 @@ public class WeatherService : IWeatherService
         return await _weatherRepository.FindByCityNextSixWeek(cityName);
     }
 
-    public Weather Update(Guid idWheaterData, Weather weather)
+    public async Task<Weather> Update(Guid idWheaterData, Weather weather)
     {
-
-        var data = FindById(idWheaterData);
+        var data = await FindById(idWheaterData);
 
 
         if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
@@ -68,7 +67,7 @@ public class WeatherService : IWeatherService
             throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
         }
 
-        _weatherRepository.Update(idWheaterData, weather);
+        await _weatherRepository.Update(idWheaterData, weather);
 
         return data;
     }

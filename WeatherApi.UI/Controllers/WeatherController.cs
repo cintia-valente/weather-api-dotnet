@@ -76,9 +76,9 @@ public class WeatherController : ControllerBase
     /// Lista registros de dados meteorológicos pelo id.
     /// </summary>
     [HttpGet("{id}")]
-    public IActionResult GetWeatherById(Guid id)
+    public async Task<IActionResult> GetWeatherById(Guid id)
     {
-        var weather = _weatherService.FindById(id);
+        var weather = await _weatherService.FindById(id);
         return weather is null ? NotFound("Weather not found") : Ok(weather);
     }
 
@@ -86,10 +86,10 @@ public class WeatherController : ControllerBase
     /// Atualiza um registro de dado meteorológico.
     /// </summary>
     [HttpPut("{id}")]
-    public IActionResult PutWeather(Guid id, [FromBody] WeatherRequestDTO weatherDto)
+    public async Task<IActionResult> PutWeather(Guid id, [FromBody] WeatherRequestDTO weatherDto)
     {
         var weather = _mapper.Map<Weather>(weatherDto);
-        var updatedWeather =  _weatherService.Update(id, weather);
+        var updatedWeather = await _weatherService.Update(id, weather);
 
         return weatherDto == null ? BadRequest("Invalid weather data.") : (updatedWeather == null ? NotFound("Weather data not found.") : Ok(updatedWeather));
     }

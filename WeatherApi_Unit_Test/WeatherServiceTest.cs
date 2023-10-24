@@ -1,4 +1,6 @@
+using AutoMapper;
 using Moq;
+using WeatherApi.Data.DTOs;
 using WeatherApi.Entity;
 using WeatherApi.Entity.Enums;
 using WeatherApi.Repository.Interfaces;
@@ -12,13 +14,15 @@ public class WeatherServiceTest
     private readonly Mock<IWeatherRepository> _weatherRepositoryMock;
     private readonly Mock<ICityRepository> _cityRepositoryMock;
     private readonly WeatherService _weatherService;
+    private readonly IMapper _mapper;
 
     public WeatherServiceTest()
     {
         _weatherRepositoryMock = new Mock<IWeatherRepository>();
         _cityRepositoryMock = new Mock<ICityRepository>();
+        _mapper = new Mock<IMapper>().Object;
 
-        _weatherService = new WeatherService(_weatherRepositoryMock.Object, _cityRepositoryMock.Object);
+        _weatherService = new WeatherService(_weatherRepositoryMock.Object, _cityRepositoryMock.Object, _mapper);
     }
 
     [Fact(DisplayName = "Dado um objeto Weather, quando salvar o objeto Weather, então chama os métodos FindByID e Save exatamente uma vez.")]
@@ -44,11 +48,13 @@ public class WeatherServiceTest
             }
         };
 
+        var validWeatherDTO = _mapper.Map<WeatherRequestDTO>(validWeather);//cria uma dto
+
         _weatherRepositoryMock.Setup(repo => repo.Save(It.IsAny<Weather>()))
        .ReturnsAsync((Weather w) => w); //Configura (Setup) o comportamento que deve ocorrer quando Save for chamado, Save aceita qualquer obj do tipo Weather e retorna um objeto do tipo Weather quando for chamado.
 
         // Act
-        var result = await _weatherService.Save(validWeather); //chama o método Save com o mock e armazena o resultado.
+        var result = await _weatherService.Save(validWeatherDTO); //chama o método Save com o mock e armazena o resultado.
 
         // Assert
         Assert.NotNull(result);
@@ -82,15 +88,17 @@ public class WeatherServiceTest
             }
         };
 
+        var WeatherDTO = _mapper.Map<WeatherRequestDTO>(invalidWeather);
+
         _weatherRepositoryMock.Setup(repo => repo.Save(It.IsAny<Weather>()))
         .Throws<ArgumentException>();
 
         // Act
-        var exceptionSave = await Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeather));
+        var exceptionSave = await Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(WeatherDTO));
 
         // Assert
         Assert.Equal("Valores inválidos para enums DayTime e/ou NightTime.", exceptionSave.Message);
-        Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeather));
+        Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(WeatherDTO));
     }
 
     [Fact(DisplayName = "Dado um id do Weather, então chama o método FindById exatamente uma vez.")]

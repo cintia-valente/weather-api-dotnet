@@ -4,7 +4,7 @@ using WeatherApi.Data.DTOs;
 using WeatherApi.Entity;
 using WeatherApi.Service.Interfaces;
 
-namespace WeatherApi.Controller;
+namespace WeatherApi.UI.Middlewares;
 
 [ApiController]
 [Route("[controller]/api")]

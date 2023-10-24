@@ -1,13 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Globalization;
-using System.Linq;
+﻿using System.Data;
 using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace WeatherApi.DotNet.Application.Middlewares;
 

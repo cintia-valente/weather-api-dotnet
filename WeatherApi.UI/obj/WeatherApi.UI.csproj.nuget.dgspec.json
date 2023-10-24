@@ -46,12 +46,6 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.Http": {
-              "target": "Package",
-              "version": "[2.1.34, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -329,6 +323,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.1.34, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",

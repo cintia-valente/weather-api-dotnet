@@ -145,9 +145,9 @@ public class WeatherRepository : IWeatherRepository
         return await _context.WeatherData.Include(w => w.City).FirstOrDefaultAsync(metData => metData.IdWeather == idWeather);
     }
 
-    public async Task Update (Guid idWheaterData, Weather weather)
+    public async Task Update (Guid idWeather, Weather weather)
     {
-        var data = await FindById(idWheaterData);
+        var data = await FindById(idWeather);
 
         if (data == null)
         {

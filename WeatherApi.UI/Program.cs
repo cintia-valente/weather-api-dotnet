@@ -7,6 +7,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using WeatherApi.Persistence;
 using System.Text.Json.Serialization;
+using WeatherApi.DotNet.Application.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +53,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
 app.UseHttpsRedirection();
 

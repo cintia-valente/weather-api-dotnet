@@ -1,0 +1,7 @@
+﻿C:\Projetos\WeatherApi\WeatherApi.DotNet.Domain\Data\DTOs\CityRequestDto.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Domain\Data\DTOs\CityResponseDto.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Domain\Data\DTOs\WeatherRequestDTO.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Domain\Entity\City.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Domain\Entity\Enums\DayTimeEnum.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Domain\Entity\Enums\NightTimeEnum.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Domain\Entity\Weather.cs

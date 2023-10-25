@@ -1,0 +1,4 @@
+﻿C:\Projetos\WeatherApi\WeatherApi.DotNet.Persistence\Migrations\20231009190513_init.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Persistence\Migrations\20231009190513_init.Designer.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Persistence\Migrations\WeatherContextModelSnapshot.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Persistence\WeatherContext.cs

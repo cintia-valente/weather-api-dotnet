@@ -23,14 +23,26 @@ public class WeatherService : IWeatherService
     public async Task<Weather> Save(WeatherRequestDTO weatherDto) 
     {
         var weatherConverter = _mapper.Map<Weather>(weatherDto);
-        weatherConverter.City = await _cityRepository.FindById(weatherDto.IdCity);
+
+        //if (weatherDto.IdCity == null)
+        //{
+        //    throw new ArgumentException("IdCity não pode ser nulo.");
+        //}
+
+        var city = await _cityRepository.FindById(weatherDto.IdCity);
+       // weatherConverter.City = city;
+
+        //if (city == null)
+        //{
+        //    throw new ArgumentException("A cidade não foi encontrada.");
+        //}
 
         if (!Enum.IsDefined(typeof(DayTimeEnum), weatherDto.DayTime) ||
             !Enum.IsDefined(typeof(NightTimeEnum), weatherDto.NightTime))
         {
             throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
         }
-       
+
         var weatherSaved = await _weatherRepository.Save(weatherConverter);
        
         return weatherSaved;

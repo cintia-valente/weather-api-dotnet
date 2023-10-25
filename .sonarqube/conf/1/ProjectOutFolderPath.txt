@@ -1,0 +1,1 @@
+C:\Projetos\WeatherApi\.sonarqube\out\1

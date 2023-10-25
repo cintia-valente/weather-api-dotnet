@@ -5,6 +5,7 @@ C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\WeatherApi.UI.deps.json
 C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\WeatherApi.UI.runtimeconfig.json
 C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\WeatherApi.UI.dll
 C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\WeatherApi.UI.pdb
+C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\WeatherApi.UI.xml
 C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\AutoMapper.dll
 C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\Humanizer.dll
@@ -47,8 +48,7 @@ C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\scopedcss\bundle\WeatherAp
 C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.csproj.CopyComplete
 C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.dll
 C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\refint\WeatherApi.UI.dll
+C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.xml
 C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.pdb
 C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.genruntimeconfig.cache
 C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\ref\WeatherApi.UI.dll
-C:\Projetos\WeatherApi\WeatherApi.UI\bin\Debug\net6.0\WeatherApi.UI.xml
-C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.xml

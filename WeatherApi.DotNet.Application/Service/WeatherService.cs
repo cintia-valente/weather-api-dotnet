@@ -11,7 +11,7 @@ public class WeatherService : IWeatherService
 {
     private readonly IWeatherRepository _weatherRepository;
     private readonly ICityRepository _cityRepository;
-    private IMapper _mapper;
+    private readonly IMapper _mapper;
 
     public WeatherService(IWeatherRepository weatherRepository, ICityRepository cityRepository, IMapper mapper)
     {

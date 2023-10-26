@@ -9,8 +9,8 @@ namespace WeatherApi.Service;
 
 public class WeatherService : IWeatherService
 {
-    private IWeatherRepository _weatherRepository;
-    private ICityRepository _cityRepository;
+    private readonly IWeatherRepository _weatherRepository;
+    private readonly ICityRepository _cityRepository;
     private IMapper _mapper;
 
     public WeatherService(IWeatherRepository weatherRepository, ICityRepository cityRepository, IMapper mapper)

@@ -9,8 +9,9 @@ namespace WeatherApi.Repository;
 
 public class WeatherRepository : IWeatherRepository
 {
-    private readonly WeatherContext _context; // Substitua pelo seu contexto de banco de dados
-    private IMapper _mapper;
+    private readonly WeatherContext _context;
+    private readonly IMapper _mapper;
+  
     public WeatherRepository(WeatherContext context, IMapper mapper)
     {
         _context = context;
@@ -19,7 +20,7 @@ public class WeatherRepository : IWeatherRepository
 
     public async Task<Weather> Save(Weather weather)
     {
-        EntityEntry<Weather?> weatherEntity = _context.WeatherData.Add(weather);
+        EntityEntry<Weather> weatherEntity = _context.WeatherData.Add(weather);
 
         await _context.SaveChangesAsync();
         var weatherConvert = _mapper.Map<Weather>(weatherEntity.Entity);

@@ -24,18 +24,7 @@ public class WeatherService : IWeatherService
     {
         var weatherConverter = _mapper.Map<Weather>(weatherDto);
 
-        //if (weatherDto.IdCity == null)
-        //{
-        //    throw new ArgumentException("IdCity não pode ser nulo.");
-        //}
-
-        var city = await _cityRepository.FindById(weatherDto.IdCity);
-       // weatherConverter.City = city;
-
-        //if (city == null)
-        //{
-        //    throw new ArgumentException("A cidade não foi encontrada.");
-        //}
+        weatherConverter.City = await _cityRepository.FindById(weatherDto.IdCity);
 
         if (!Enum.IsDefined(typeof(DayTimeEnum), weatherDto.DayTime) ||
             !Enum.IsDefined(typeof(NightTimeEnum), weatherDto.NightTime))

@@ -1,8 +1,10 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using WeatherApi.Data.DTOs;
 using WeatherApi.Entity;
 using WeatherApi.Service.Interfaces;
+using WeatherApi.UI.Middlewares.Exceptions;
 
 namespace WeatherApi.UI.Middlewares;
 
@@ -41,6 +43,11 @@ public class WeatherController : ControllerBase
     [HttpGet("weather-all")]
     public async Task<IEnumerable<Weather>> GetWeatherWithWeatherData()
     {
+        //if (ModelState.IsValid)
+        //{
+        //    throw new DBConcurrencyException("Erro ao acesssar a base de dados");
+        //}
+
         return await _weatherService.FindAll();
     }
 
@@ -79,7 +86,13 @@ public class WeatherController : ControllerBase
     public async Task<IActionResult> GetWeatherById(Guid id)
     {
         var weather = await _weatherService.FindById(id);
-        return weather is null ? NotFound("Weather not found") : Ok(weather);
+
+        if (weather is null)
+        {
+            throw new NotFoundException("Weather não encontrado");
+        }
+
+        return Ok(weather);
     }
 
     /// <summary>

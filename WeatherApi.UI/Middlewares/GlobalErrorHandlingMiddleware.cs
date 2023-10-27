@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Net;
 using System.Text.Json;
+using WeatherApi.UI.Middlewares.Exceptions;
 
 namespace WeatherApi.DotNet.Application.Middlewares;
 
@@ -28,16 +29,22 @@ public class GlobalErrorHandlingMiddleware
     private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         HttpStatusCode statusCode;
-        string stackTrace = String.Empty; //infos da exception
-        string message; 
+        string message;
         var exceptionType = exception.GetType(); //buscar tipo da exception
 
-        if(exceptionType == typeof(DBConcurrencyException))
+        string stackTrace;
+        if (exceptionType == typeof(DBConcurrencyException))
         {
             message = exception.Message;
             statusCode = HttpStatusCode.BadRequest;
             stackTrace = exception.StackTrace;
-        } 
+        }
+        else if (exceptionType == typeof(NotFoundException))
+        {
+            message = exception.Message;
+            statusCode = HttpStatusCode.NotFound;
+            stackTrace = exception.StackTrace;
+        }
         else
         {
             message = exception.Message;

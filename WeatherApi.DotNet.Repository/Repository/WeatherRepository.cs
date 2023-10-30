@@ -141,19 +141,19 @@ public class WeatherRepository : IWeatherRepository
           return weatherDataNextSixWeek.AsQueryable();
     }
 
-    public async Task<Weather> FindById(Guid idWeather)
+    public async Task<Weather> FindById(Guid idWeather, bool tracking = true)
     {
-        return await _context.WeatherData.Include(w => w.City).FirstOrDefaultAsync(metData => metData.IdWeather == idWeather);
+        if (tracking)
+        {
+            return await _context.WeatherData.Include(w => w.City).FirstOrDefaultAsync(metData => metData.IdWeather == idWeather);
+        }
+
+        return await _context.WeatherData.Include(w => w.City).AsNoTracking().FirstOrDefaultAsync(metData => metData.IdWeather == idWeather);
     }
 
     public async Task Update (Guid idWeather, Weather weather)
     {
         var data = await FindById(idWeather);
-
-        if (data == null)
-        {
-            throw new DllNotFoundException("Data not found.");
-        }
 
         data.Date = weather.Date;
         data.MaxTemperature = weather.MaxTemperature;

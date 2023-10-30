@@ -13,7 +13,7 @@ public interface IWeatherRepository
     Task<IQueryable<Weather>> FindAllByCityName(string cityName, int page, int pageSize);
     Task<IQueryable<Weather>> FindByCityNextSixWeek(string cityName);
 
-    Task<Weather> FindById(Guid idWeather);
+    Task<Weather> FindById(Guid idWeather, bool tracking = true);
 
     Task Update(Guid idWheaterData, Weather weather);
     //void Update(Guid idWheaterData, Weather weather);

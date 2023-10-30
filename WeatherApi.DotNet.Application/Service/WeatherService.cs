@@ -73,6 +73,8 @@ public class WeatherService : IWeatherService
     {
         var data = await FindById(idWeatherData, false);
 
+        Console.WriteLine(data);
+
         if (data is null)
         {
             throw new NotFoundException("Weather não encontrado");

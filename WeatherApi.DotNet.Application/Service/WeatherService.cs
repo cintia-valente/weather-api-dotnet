@@ -20,19 +20,19 @@ public class WeatherService : IWeatherService
     {
         weather.City = await _cityRepository.FindById(weather.IdCity);
 
-        if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
-            !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
-        {
-            throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
-        }
+        //if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
+        //    !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
+        //{
+        //    throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
+        //}
 
         var weatherSaved = await _weatherRepository.Save(weather);
        
         return weatherSaved;
     }
-    public async Task<Weather> FindById(Guid id)
+    public async Task<Weather> FindById(Guid id, bool tracking = true)
     {
-        return await _weatherRepository.FindById(id);
+        return await _weatherRepository.FindById(id, tracking);
     }
 
     public async Task<IEnumerable<Weather>> FindAll()
@@ -55,21 +55,26 @@ public class WeatherService : IWeatherService
         return await _weatherRepository.FindByCityNextSixWeek(cityName);
     }
 
-    public async Task<Weather> Update(Guid idWeatherData, Weather weather)
+    public async Task Update(Guid idWeatherData, Weather weather)
     {
-        var data = await FindById(idWeatherData);
+        var data = await FindById(idWeatherData, false);
+
+        if (data is null)
+        {
+            throw new KeyNotFoundException("Weather não encontrado");
+        }
 
         weather.IdWeather = idWeatherData;
 
-        if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
-        !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
-        {
-            throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
-        }
+        //if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
+        //!Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
+        //{
+        //    throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
+        //}
 
         await _weatherRepository.Update(idWeatherData, weather);
 
-        return data;
+        //return data;
     }
 
     public async Task<bool> DeleteById(Guid idWheaterData)

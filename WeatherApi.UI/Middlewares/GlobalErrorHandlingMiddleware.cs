@@ -39,7 +39,7 @@ public class GlobalErrorHandlingMiddleware
             statusCode = HttpStatusCode.BadRequest;
             stackTrace = exception.StackTrace;
         }
-        else if (exceptionType == typeof(NotFoundException))
+        if (exceptionType == typeof(NotFoundException))
         {
             message = exception.Message;
             statusCode = HttpStatusCode.NotFound;

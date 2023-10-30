@@ -43,12 +43,15 @@ public class WeatherController : ControllerBase
     [HttpGet("weather-all")]
     public async Task<IEnumerable<Weather>> GetWeatherWithWeatherData()
     {
-        //if (ModelState.IsValid)
-        //{
-        //    throw new DBConcurrencyException("Erro ao acesssar a base de dados");
-        //}
+        var weatherAll = await _weatherService.FindAll();
 
-        return await _weatherService.FindAll();
+        if (!ModelState.IsValid)
+        {
+            throw new DBConcurrencyException("Erro ao acessar a base de dados");
+        }
+
+        return weatherAll.ToList();
+
     }
 
     /// <summary>
@@ -102,9 +105,11 @@ public class WeatherController : ControllerBase
     public async Task<IActionResult> PutWeather(Guid id, [FromBody] WeatherRequestDTO weatherDto)
     {
         var weather = _mapper.Map<Weather>(weatherDto);
-        var updatedWeather = await _weatherService.Update(id, weather);
+        await _weatherService.Update(id, weather);
 
-        return weatherDto == null ? BadRequest("Invalid weather data.") : (updatedWeather == null ? NotFound("Weather data not found.") : Ok(updatedWeather));
+        return Ok();
+
+      //  return weatherDto == null ? BadRequest("Invalid weather data.") : (updatedWeather == null ? NotFound("Weather data not found.") : Ok(updatedWeather));
     }
 
     /// <summary>

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using WeatherApi.Data.DTOs;
+using WeatherApi.DotNet.Application.Exceptions;
 using WeatherApi.Entity;
 using WeatherApi.Service.Interfaces;
-using WeatherApi.UI.Middlewares.Exceptions;
 
 namespace WeatherApi.UI.Middlewares;
 
@@ -26,8 +26,6 @@ public class WeatherController : ControllerBase
     public async Task<IActionResult> PostWeather(
         [FromBody] WeatherRequestDTO postWeatherDTO)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-
         var weatherSave = await _weatherService.Save(postWeatherDTO);
 
         return CreatedAtAction(nameof(GetWeatherById), new { id = weatherSave.IdWeather }, weatherSave);
@@ -40,11 +38,6 @@ public class WeatherController : ControllerBase
     public async Task<IEnumerable<Weather>> GetWeatherWithWeatherData()
     {
         var weatherAll = await _weatherService.FindAll();
-
-        if (!ModelState.IsValid)
-        {
-            throw new DBConcurrencyException("Erro ao acessar a base de dados");
-        }
 
         return weatherAll.ToList();
 
@@ -75,6 +68,7 @@ public class WeatherController : ControllerBase
     public async Task<IActionResult> GetWeatherForNext7Days([FromRoute] string cityName)
     {
         var weatherData = await _weatherService.GetWeatherForNext7Days(cityName);
+
         return Ok(weatherData);
     }
 
@@ -100,9 +94,10 @@ public class WeatherController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutWeather(Guid id, [FromBody] WeatherRequestDTO weatherDto)
     {
-        var updatedWeather = await _weatherService.Update(id, weatherDto);
+        await _weatherService.Update(id, weatherDto);
 
-        return weatherDto == null ? BadRequest("Invalid weather data.") : (updatedWeather == null ? NotFound("Weather data not found.") : Ok(updatedWeather));
+        return Ok();
+        //return weatherDto == null ? BadRequest("Invalid weather data.") : (updatedWeather == null ? NotFound("Weather data not found.") : Ok(updatedWeather));
     }
 
     /// <summary>

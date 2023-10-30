@@ -15,6 +15,6 @@ public interface IWeatherService
 
     Task<IEnumerable<Weather>> FindAllPage(int page, int pageSize);
     Task<IEnumerable<Weather>> GetWeatherForNext7Days(string cityName);
-    Task<Weather> Update(Guid idWeatherData, WeatherRequestDTO weatherDto);
+    Task Update(Guid idWeatherData, WeatherRequestDTO weatherDto);
     Task<bool> DeleteById(Guid idWheaterData);
 }

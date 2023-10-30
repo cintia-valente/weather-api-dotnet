@@ -1,7 +1,8 @@
-﻿using System.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Net;
 using System.Text.Json;
-using WeatherApi.UI.Middlewares.Exceptions;
+using WeatherApi.DotNet.Application.Exceptions;
 
 namespace WeatherApi.DotNet.Application.Middlewares;
 
@@ -33,7 +34,7 @@ public class GlobalErrorHandlingMiddleware
         var exceptionType = exception.GetType(); //buscar tipo da exception
 
         string stackTrace;
-        if (exceptionType == typeof(DBConcurrencyException))
+        if (exceptionType == typeof(ArgumentCostumerException))
         {
             message = exception.Message;
             statusCode = HttpStatusCode.BadRequest;

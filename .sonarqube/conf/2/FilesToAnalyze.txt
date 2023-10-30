@@ -1,0 +1,4 @@
+﻿C:\Projetos\WeatherApi\WeatherApi.DotNet.Repository\Repository\CityRepository.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Repository\Repository\Interfaces\ICityRepository.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Repository\Repository\Interfaces\IWeatherRepository.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Repository\Repository\WeatherRepository.cs

@@ -1,0 +1,6 @@
+﻿C:\Projetos\WeatherApi\WeatherApi.DotNet.Application\Profiles\CityProfile.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Application\Profiles\WeatherProfile.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Application\Service\CityService.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Application\Service\Interfaces\ICityService.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Application\Service\Interfaces\IWeatherService.cs
+C:\Projetos\WeatherApi\WeatherApi.DotNet.Application\Service\WeatherService.cs

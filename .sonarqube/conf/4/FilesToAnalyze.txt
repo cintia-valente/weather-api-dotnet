@@ -1,0 +1,12 @@
+﻿C:\Projetos\WeatherApi\WeatherApi.UI\Controllers\CityController.cs
+C:\Projetos\WeatherApi\WeatherApi.UI\Controllers\WeatherController.cs
+C:\Projetos\WeatherApi\WeatherApi.UI\Program.cs
+C:\Projetos\WeatherApi\WeatherApi.UI\WeatherForecast.cs
+C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.GlobalUsings.g.cs
+C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.AssemblyInfo.cs
+C:\Projetos\WeatherApi\WeatherApi.UI\obj\Debug\net6.0\WeatherApi.UI.MvcApplicationPartsAssemblyInfo.cs
+C:\Projetos\WeatherApi\WeatherApi.UI\appsettings.Development.json
+C:\Projetos\WeatherApi\WeatherApi.UI\appsettings.json
+C:\Projetos\WeatherApi\WeatherApi.UI\WeatherApi.UI.csproj.bak
+C:\Projetos\WeatherApi\WeatherApi.UI\Properties\launchSettings.json

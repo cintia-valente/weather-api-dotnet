@@ -1,4 +1,7 @@
+using AutoMapper;
 using Moq;
+using System.Runtime.ConstrainedExecution;
+using WeatherApi.Data.DTOs;
 using WeatherApi.Entity;
 using WeatherApi.Entity.Enums;
 using WeatherApi.Repository.Interfaces;
@@ -11,21 +14,35 @@ public class WeatherServiceTest
 
     private readonly Mock<IWeatherRepository> _weatherRepositoryMock;
     private readonly Mock<ICityRepository> _cityRepositoryMock;
+    private readonly IMapper _mapper;
     private readonly WeatherService _weatherService;
 
     public WeatherServiceTest()
     {
         _weatherRepositoryMock = new Mock<IWeatherRepository>();
         _cityRepositoryMock = new Mock<ICityRepository>();
+       
+        var configuration = new MapperConfiguration(cfg => {
+            cfg.CreateMap<WeatherRequestDTO, Weather>();
+            cfg.CreateMap<CityResponseDto, City>();
+        });
 
-        _weatherService = new WeatherService(_weatherRepositoryMock.Object, _cityRepositoryMock.Object);
+        _mapper = configuration.CreateMapper();
+
+        _weatherService = new WeatherService(_weatherRepositoryMock.Object, _cityRepositoryMock.Object, _mapper);
     }
 
     [Fact(DisplayName = "Dado um objeto Weather, quando salvar o objeto Weather, então chama os métodos FindByID e Save exatamente uma vez.")]
     public async Task SaveWeatherSucess()
     {
         // Arrange
-        var validWeather = new Weather
+        var validcityDto = new CityResponseDto
+        {
+            IdCity = Guid.NewGuid(),
+            Name = "Porto Alegre"
+        };
+
+        var validWeatherDto = new WeatherRequestDTO
         {
             IdWeather = Guid.NewGuid(),
             Date = DateTime.Now,
@@ -37,33 +54,34 @@ public class WeatherServiceTest
             DayTime = DayTimeEnum.SOL,
             NightTime = NightTimeEnum.NEVE,
             IdCity = Guid.NewGuid(),
-            City = new City
-            {
-                IdCity = Guid.NewGuid(),
-                Name = "Porto Alegre"
-            }
+            City = validcityDto
         };
 
+        var validWeather = new Weather(); // Crie um objeto Weather válido conforme necessário
+        var validCity = new City(); // Crie um objeto City válido conforme necessário
+
+        _cityRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
+                          .ReturnsAsync(validCity);
+
         _weatherRepositoryMock.Setup(repo => repo.Save(It.IsAny<Weather>()))
-       .ReturnsAsync((Weather w) => w); //Configura (Setup) o comportamento que deve ocorrer quando Save for chamado, Save aceita qualquer obj do tipo Weather e retorna um objeto do tipo Weather quando for chamado.
+                             .ReturnsAsync(validWeather); // Configura(Setup) o comportamento que deve ocorrer quando Save for chamado, Save aceita qualquer obj do tipo Weather e retorna um objeto do tipo Weather quando for chamado.
 
         // Act
-        var result = await _weatherService.Save(validWeather); //chama o método Save com o mock e armazena o resultado.
+        var result = await _weatherService.Save(validWeatherDto); //chama o método Save com o mock e armazena o resultado.
 
         // Assert
         Assert.NotNull(result);
         Assert.Equal(validWeather, result);//verifica se o mock passado como parâmetro é igual ao obj retornado pelo método Save.
 
         _cityRepositoryMock.Verify(repo => repo.FindById(It.IsAny<Guid>()), Times.Once); //verifica se FindByID foi chamado exatamente uma vez, passando como parâmetro qualquer argumento do tipo GUID.
-        _weatherRepositoryMock.Verify(repo => repo.Save(validWeather), Times.Once); //verifica se Save foi chamado exatamente uma vez, passando como parâmetro o mock criado.
-
+        _weatherRepositoryMock.Verify(repo => repo.Save(It.IsAny<Weather>()), Times.Once); //verifica se Save foi chamado exatamente uma vez, passando como parâmetro o mock criado.
     }
 
     [Fact(DisplayName = "Dado um objeto Weather, quando passar valores de enums inválidos, então lança uma exceção.")]
     public async Task SaveWeatherEnumsError()
     {
         // Arrange
-        var invalidWeather = new Weather
+        var invalidWeatherDto = new WeatherRequestDTO
         {
             IdWeather = Guid.NewGuid(),
             Date = DateTime.Now,
@@ -75,7 +93,7 @@ public class WeatherServiceTest
             DayTime = (DayTimeEnum)10,
             NightTime = (NightTimeEnum).20,
             IdCity = Guid.NewGuid(),
-            City = new City
+            City = new CityResponseDto
             {
                 IdCity = Guid.NewGuid(),
                 Name = "Porto Alegre"
@@ -86,11 +104,11 @@ public class WeatherServiceTest
         .Throws<ArgumentException>();
 
         // Act
-        var exceptionSave = await Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeather));
+        var exceptionSave = await Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeatherDto));
 
         // Assert
         Assert.Equal("Valores inválidos para enums DayTime e/ou NightTime.", exceptionSave.Message);
-        Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeather));
+        _ = Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeatherDto)); // verifica se uma exceção é lançada durante a execução do método, mas não precisa do valor retornado por essa expressão.
     }
 
     [Fact(DisplayName = "Dado um id do Weather, então chama o método FindById exatamente uma vez.")]
@@ -107,11 +125,11 @@ public class WeatherServiceTest
 
         // Assert
         Assert.Equal(idWeather, result.IdWeather);
-        _weatherRepositoryMock.Verify(repo => repo.FindById(It.IsAny<Guid>()), Times.Once);
+        _weatherRepositoryMock.Verify(repo => repo.FindById(idWeather), Times.Once);
     }
 
     [Fact(DisplayName = "Dado um id do Weather, quando chamar o método FindById, então lança uma exceção.")]
-    public async Task FindByIdError()
+    public void FindByIdError()
     {
         // Arrange
         Guid idWeather = Guid.NewGuid();
@@ -123,7 +141,7 @@ public class WeatherServiceTest
         var exceptionFindById = Assert.ThrowsAsync<Exception>(() => _weatherService.FindById(idWeather));
 
         // Assert
-        Assert.ThrowsAsync<Exception>(() => _weatherService.FindById(idWeather));
+        _ = Assert.ThrowsAsync<Exception>(() => _weatherService.FindById(idWeather));
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método FindAll, então deve retornar uma lista de weather.")]
@@ -164,7 +182,7 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método FindAll, então lança uma exceção.")]
-    public async Task FindAllError()
+    public void FindAllError()
     {
         // Arrange
         _weatherRepositoryMock.Setup(repo => repo.FindAll())
@@ -174,7 +192,7 @@ public class WeatherServiceTest
         var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.FindAll());
 
         // Assert
-        Assert.ThrowsAsync<Exception>(() => _weatherService.FindAll());
+        _ = Assert.ThrowsAsync<Exception>(() => _weatherService.FindAll());
     }
 
     [Fact(DisplayName = "Dado uma page e pageSize, então chama o método FindAllByOrderByDateDesc exatamente uma vez.")]
@@ -239,7 +257,7 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método FindAllPage, então lança uma exceção.")]
-    public async Task FindAllPageError()
+    public void FindAllPageError()
     {
         // Arrange
         var page = 1;
@@ -252,7 +270,7 @@ public class WeatherServiceTest
         var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.FindAllPage(page, pageSize));
 
         // Assert
-        Assert.ThrowsAsync<Exception>(() => _weatherService.FindAllPage(page, pageSize));
+        _ = Assert.ThrowsAsync<Exception>(() => _weatherService.FindAllPage(page, pageSize));
     }
 
     [Fact(DisplayName = "Dado uma cidade, page e uma pageSize, então chama o método FindAllByCityName exatamente uma vez.")]
@@ -306,12 +324,16 @@ public class WeatherServiceTest
         .ReturnsAsync(weatherList.AsQueryable());
 
         // Act
+        #pragma warning disable CS8602 // Dereference of a possibly null reference.
         var result = await _weatherService.FindAllPageByNameCity(weatherList[0].City.Name, page, pageSize);
         var sortedByDateDescending = result.OrderByDescending(x => x.Date);//ordena o retorno
 
         // Assert
         Assert.Equal(weatherList, result);
+
+        #pragma warning disable CS8602 // Dereference of a possibly null reference.
         Assert.Equal(weatherList[0].City.Name, sortedByDateDescending.First().City.Name);
+
         Assert.Equal(pageSize, weatherList.Count());
         Assert.Equal(sortedByDateDescending, weatherList);//verifica se a lista ordenada é igual à lista mockada 
         _weatherRepositoryMock.Verify(repo => repo.FindAllByCityName(weatherList[0].City.Name, page, pageSize), Times.Once);
@@ -433,48 +455,48 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método GetWeatherForNext7Days, então lança uma exceção.")]
-    public async Task GetWeatherForNext7DaysError()
+    public void GetWeatherForNext7DaysError()
     {
         // Arrange
         var weatherList = new List<Weather>
+         {
+                new Weather
             {
-                 new Weather
+                IdWeather = Guid.NewGuid(),
+                Date = DateTime.Now.AddDays(-1),
+                MaxTemperature = 15,
+                MinTemperature = 5,
+                Precipitation = 70,
+                Humidity = 50,
+                WindSpeed = 30,
+                DayTime = DayTimeEnum.CHUVA,
+                NightTime = NightTimeEnum.CHUVA,
+                IdCity = Guid.NewGuid(),
+                City = new City
                 {
-                    IdWeather = Guid.NewGuid(),
-                    Date = DateTime.Now.AddDays(-1),
-                    MaxTemperature = 15,
-                    MinTemperature = 5,
-                    Precipitation = 70,
-                    Humidity = 50,
-                    WindSpeed = 30,
-                    DayTime = DayTimeEnum.CHUVA,
-                    NightTime = NightTimeEnum.CHUVA,
                     IdCity = Guid.NewGuid(),
-                    City = new City
-                    {
-                        IdCity = Guid.NewGuid(),
-                        Name = "Porto Alegre"
-                    }
-                },
-                  new Weather
-                {
-                    IdWeather = Guid.NewGuid(),
-                    Date = DateTime.Now,
-                    MaxTemperature = 30,
-                    MinTemperature = 20,
-                    Precipitation = 30,
-                    Humidity = 20,
-                    WindSpeed = 30,
-                    DayTime = DayTimeEnum.SOL,
-                    NightTime = NightTimeEnum.LIMPO,
-                    IdCity = Guid.NewGuid(),
-                    City = new City
-                    {
-                        IdCity = Guid.NewGuid(),
-                        Name = "Porto Alegre"
-                    }
+                    Name = "Porto Alegre"
                 }
-            };
+            },
+                new Weather
+            {
+                IdWeather = Guid.NewGuid(),
+                Date = DateTime.Now,
+                MaxTemperature = 30,
+                MinTemperature = 20,
+                Precipitation = 30,
+                Humidity = 20,
+                WindSpeed = 30,
+                DayTime = DayTimeEnum.SOL,
+                NightTime = NightTimeEnum.LIMPO,
+                IdCity = Guid.NewGuid(),
+                City = new City
+                {
+                    IdCity = Guid.NewGuid(),
+                    Name = "Porto Alegre"
+                }
+            }
+         };
 
         _weatherRepositoryMock.Setup(repo => repo.FindByCityNextSixWeek(weatherList[0].City.Name))
            .Throws<Exception>();
@@ -483,33 +505,20 @@ public class WeatherServiceTest
         var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.GetWeatherForNext7Days(weatherList[0].City.Name));
 
         // Assert
-        Assert.ThrowsAsync<Exception>(() => _weatherService.GetWeatherForNext7Days(weatherList[0].City.Name));
+        _ = Assert.ThrowsAsync<Exception>(() => _weatherService.GetWeatherForNext7Days(weatherList[0].City.Name));
     }
 
     [Fact(DisplayName = "Dado um objeto Weather, quando editar o objeto, então chama os métodos FindById e Update exatamente uma vez.")]
-    public async Task UpdateSucess()
+    public async Task UpdateSucessAsync()
     {
         // Arrange
-        var weather = new Weather
+        var validcityDto = new CityResponseDto
         {
-            IdWeather = Guid.NewGuid(),
-            Date = DateTime.Now,
-            MaxTemperature = 20,
-            MinTemperature = 10,
-            Precipitation = 30,
-            Humidity = 20,
-            WindSpeed = 30,
-            DayTime = DayTimeEnum.SOL,
-            NightTime = NightTimeEnum.NEVE,
             IdCity = Guid.NewGuid(),
-            City = new City
-            {
-                IdCity = Guid.NewGuid(),
-                Name = "Porto Alegre"
-            }
+            Name = "Porto Alegre"
         };
 
-        var updateWeather = new Weather
+        var updateWeatherDto = new WeatherRequestDTO
         {
             IdWeather = Guid.NewGuid(),
             Date = DateTime.Now,
@@ -521,59 +530,29 @@ public class WeatherServiceTest
             DayTime = DayTimeEnum.SOL,
             NightTime = NightTimeEnum.CHUVA,
             IdCity = Guid.NewGuid(),
-            City = new City
-            {
-                IdCity = Guid.NewGuid(),
-                Name = "Porto Alegre"
-            }
+            City = validcityDto
         };
 
-        _weatherRepositoryMock.Setup(repo => repo.FindById(weather.IdWeather))
-           .ReturnsAsync(weather);
+        var validWeather = new Weather();
 
-        Weather capturedWeather = null;
-
-        _weatherRepositoryMock.Setup(repo => repo.Update(It.IsAny<Guid>(), It.IsAny<Weather>()))
-        .Callback<Guid, Weather>((id, weather) =>
-        {
-            capturedWeather = weather;
-        });
+        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
+           .ReturnsAsync(validWeather);
 
         // Act
-        _weatherService.Update(weather.IdWeather, updateWeather);
+        var result = await _weatherService.Update(validWeather.IdWeather, updateWeatherDto);
 
         // Assert
-        Assert.NotNull(capturedWeather);
-        Assert.Equal(updateWeather, capturedWeather);
-
-        _weatherRepositoryMock.Verify(repo => repo.FindById(weather.IdWeather), Times.Once);
-        _weatherRepositoryMock.Verify(repo => repo.Update(weather.IdWeather, updateWeather), Times.Once);
+        Assert.NotNull(result);
+        Assert.Equal(validWeather, result);
+        _weatherRepositoryMock.Verify(repo => repo.FindById(validWeather.IdWeather), Times.Once);
+        _weatherRepositoryMock.Verify(repo => repo.Update(validWeather.IdWeather, It.IsAny<Weather>()), Times.Once);
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método UpdateError, então lança uma exceção.")]
-    public async Task UpdateError()
+    public void UpdateError()
     {
         // Arrange
-        var weather = new Weather
-        {
-            IdWeather = Guid.NewGuid(),
-            Date = DateTime.Now,
-            MaxTemperature = 20,
-            MinTemperature = 10,
-            Precipitation = 30,
-            Humidity = 20,
-            WindSpeed = 30,
-            DayTime = DayTimeEnum.SOL,
-            NightTime = NightTimeEnum.NEVE,
-            IdCity = Guid.NewGuid(),
-            City = new City
-            {
-                IdCity = Guid.NewGuid(),
-                Name = "Porto Alegre"
-            }
-        };
-
-        var updateWeather = new Weather
+        var updateWeather = new WeatherRequestDTO
         {
             IdWeather = Guid.NewGuid(),
             Date = DateTime.Now,
@@ -585,26 +564,26 @@ public class WeatherServiceTest
             DayTime = DayTimeEnum.SOL,
             NightTime = NightTimeEnum.CHUVA,
             IdCity = Guid.NewGuid(),
-            City = new City
+            City = new CityResponseDto
             {
                 IdCity = Guid.NewGuid(),
                 Name = "Porto Alegre"
             }
         };
 
-        _weatherRepositoryMock.Setup(repo => repo.FindById(weather.IdWeather))
-           .Throws<Exception>();
+        var validWeather = new Weather();
 
-        Weather capturedWeather = null;
+        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
+           .Throws<Exception>();
 
         _weatherRepositoryMock.Setup(repo => repo.Update(It.IsAny<Guid>(), It.IsAny<Weather>()))
          .Throws<Exception>();
 
         // Act
-        var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.Update(updateWeather.IdWeather, weather));
+        var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.Update(validWeather.IdWeather, updateWeather));
 
         // Assert
-        Assert.ThrowsAsync<Exception>(() => _weatherService.Update(updateWeather.IdWeather, weather));
+        _ = Assert.ThrowsAsync<Exception>(() => _weatherService.Update(validWeather.IdWeather, updateWeather));
     }
 
     [Fact(DisplayName = "Dado um id do Weather, quando editar o objeto, então chama o método DeleteById exatamente uma vez.")]
@@ -625,18 +604,18 @@ public class WeatherServiceTest
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método DeleteById, então lança uma exceção.")]
-    public async Task DeleteByIdError()
+    public void DeleteByIdError()
     {
         // Arrange
         Guid idWeather = Guid.NewGuid();
 
-        _weatherRepositoryMock.Setup(repo => repo.DeleteById(idWeather))
+        _weatherRepositoryMock.Setup(repo => repo.DeleteById(It.IsAny<Guid>()))
         .Throws<Exception>();
 
         // Act
         var exceptionSave = Assert.ThrowsAsync<Exception>(() => _weatherService.DeleteById(idWeather));
 
         // Assert
-        Assert.ThrowsAsync<Exception>(() => _weatherService.DeleteById(idWeather));
+        _ = Assert.ThrowsAsync<Exception>(() => _weatherService.DeleteById(idWeather));
     }
 }

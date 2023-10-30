@@ -5,7 +5,7 @@ namespace WeatherApi.Service;
 
 public class CityService : ICityService
 {
-    private ICityRepository _cityRepository;
+    private readonly ICityRepository _cityRepository;
 
     public CityService(ICityRepository cityRepository)
     {

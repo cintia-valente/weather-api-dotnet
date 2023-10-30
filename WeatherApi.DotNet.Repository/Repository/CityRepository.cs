@@ -36,7 +36,7 @@ public class CityRepository : ICityRepository
         return await _context.CityData.FirstOrDefaultAsync(c => c.Name == cityName); 
     }
 
-    public async Task<City?> FindById(Guid idCity)
+    public async Task<City> FindById(Guid idCity)
     {
         return await _context.CityData.Include(city => city.WeatherDataList).FirstOrDefaultAsync(data => data.IdCity == idCity);
 

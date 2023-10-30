@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using WeatherApi.Data.DTOs;
@@ -13,12 +12,10 @@ namespace WeatherApi.UI.Middlewares;
 public class WeatherController : ControllerBase
 {
     private IWeatherService _weatherService;
-    private IMapper _mapper;
 
-    public WeatherController(IWeatherService weatherService, IMapper mapper)
+    public WeatherController(IWeatherService weatherService)
     {
         _weatherService = weatherService;
-        _mapper = mapper;
     }
 
     /// <summary>
@@ -31,8 +28,7 @@ public class WeatherController : ControllerBase
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var weatherConverter = _mapper.Map<Weather>(postWeatherDTO);
-        var weatherSave = await _weatherService.Save(weatherConverter);
+        var weatherSave = await _weatherService.Save(postWeatherDTO);
 
         return CreatedAtAction(nameof(GetWeatherById), new { id = weatherSave.IdWeather }, weatherSave);
     }
@@ -104,12 +100,9 @@ public class WeatherController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutWeather(Guid id, [FromBody] WeatherRequestDTO weatherDto)
     {
-        var weather = _mapper.Map<Weather>(weatherDto);
-        await _weatherService.Update(id, weather);
+        var updatedWeather = await _weatherService.Update(id, weatherDto);
 
-        return Ok();
-
-      //  return weatherDto == null ? BadRequest("Invalid weather data.") : (updatedWeather == null ? NotFound("Weather data not found.") : Ok(updatedWeather));
+        return weatherDto == null ? BadRequest("Invalid weather data.") : (updatedWeather == null ? NotFound("Weather data not found.") : Ok(updatedWeather));
     }
 
     /// <summary>

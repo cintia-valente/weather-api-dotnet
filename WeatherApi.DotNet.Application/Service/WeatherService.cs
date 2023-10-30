@@ -1,4 +1,6 @@
-﻿using WeatherApi.Entity;
+﻿using AutoMapper;
+using WeatherApi.Data.DTOs;
+using WeatherApi.Entity;
 using WeatherApi.Entity.Enums;
 using WeatherApi.Repository.Interfaces;
 using WeatherApi.Service.Interfaces;
@@ -7,26 +9,30 @@ namespace WeatherApi.Service;
 
 public class WeatherService : IWeatherService
 {
-    private IWeatherRepository _weatherRepository;
-    private ICityRepository _cityRepository;
+    private readonly IWeatherRepository _weatherRepository;
+    private readonly ICityRepository _cityRepository;
+    private readonly IMapper _mapper;
 
-    public WeatherService(IWeatherRepository weatherRepository, ICityRepository cityRepository)
+    public WeatherService(IWeatherRepository weatherRepository, ICityRepository cityRepository, IMapper mapper)
     {
         _weatherRepository = weatherRepository;
         _cityRepository = cityRepository;
+        _mapper = mapper;
     }
 
-    public async Task<Weather> Save(Weather weather) 
+    public async Task<Weather> Save(WeatherRequestDTO weatherDto) 
     {
-        weather.City = await _cityRepository.FindById(weather.IdCity);
+        var weatherConverter = _mapper.Map<Weather>(weatherDto);
 
-        //if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
-        //    !Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
-        //{
-        //    throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
-        //}
+        weatherConverter.City = await _cityRepository.FindById(weatherDto.IdCity);
 
-        var weatherSaved = await _weatherRepository.Save(weather);
+        if (!Enum.IsDefined(typeof(DayTimeEnum), weatherDto.DayTime) ||
+            !Enum.IsDefined(typeof(NightTimeEnum), weatherDto.NightTime))
+        {
+            throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
+        }
+
+        var weatherSaved = await _weatherRepository.Save(weatherConverter);
        
         return weatherSaved;
     }
@@ -64,13 +70,15 @@ public class WeatherService : IWeatherService
             throw new KeyNotFoundException("Weather não encontrado");
         }
 
-        weather.IdWeather = idWeatherData;
+        weatherDto.IdWeather = idWeatherData;
 
         //if (!Enum.IsDefined(typeof(DayTimeEnum), weather.DayTime) ||
         //!Enum.IsDefined(typeof(NightTimeEnum), weather.NightTime))
         //{
         //    throw new ArgumentException("Valores inválidos para enums DayTime e/ou NightTime.");
         //}
+
+        var weather = _mapper.Map<Weather>(weatherDto);
 
         await _weatherRepository.Update(idWeatherData, weather);
 

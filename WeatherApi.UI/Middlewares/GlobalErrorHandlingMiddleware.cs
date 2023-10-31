@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Data;
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
 using WeatherApi.DotNet.Application.Exceptions;
 

@@ -44,7 +44,14 @@ public class WeatherService : IWeatherService
     }
     public async Task<Weather> FindById(Guid id, bool tracking = true)
     {
-        return await _weatherRepository.FindById(id, tracking);
+        var weatherData = await _weatherRepository.FindById(id, tracking);
+
+        if (weatherData is null)
+        {
+            throw new NotFoundException("Weather não encontrado");
+        }
+
+        return weatherData;
     }
 
     public async Task<IEnumerable<Weather>> FindAll()

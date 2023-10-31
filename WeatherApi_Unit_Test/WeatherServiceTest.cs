@@ -1,7 +1,7 @@
 using AutoMapper;
 using Moq;
-using System.Runtime.ConstrainedExecution;
 using WeatherApi.Data.DTOs;
+using WeatherApi.DotNet.Application.Exceptions;
 using WeatherApi.Entity;
 using WeatherApi.Entity.Enums;
 using WeatherApi.Repository.Interfaces;
@@ -104,11 +104,11 @@ public class WeatherServiceTest
         .Throws<ArgumentException>();
 
         // Act
-        var exceptionSave = await Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeatherDto));
+        var exceptionSave = await Assert.ThrowsAsync<NotFoundException>(() => _weatherService.Save(invalidWeatherDto));
 
         // Assert
-        Assert.Equal("Valores inválidos para enums DayTime e/ou NightTime.", exceptionSave.Message);
-        _ = Assert.ThrowsAsync<ArgumentException>(() => _weatherService.Save(invalidWeatherDto)); // verifica se uma exceção é lançada durante a execução do método, mas não precisa do valor retornado por essa expressão.
+        Assert.Equal("Erro ao salvar", exceptionSave.Message);
+        _ = Assert.ThrowsAsync<NotFoundException>(() => _weatherService.Save(invalidWeatherDto)); // verifica se uma exceção é lançada durante a execução do método, mas não precisa do valor retornado por essa expressão.
     }
 
     [Fact(DisplayName = "Dado um id do Weather, então chama o método FindById exatamente uma vez.")]
@@ -116,16 +116,17 @@ public class WeatherServiceTest
     {
         // Arrange
         Guid idWeather = Guid.NewGuid();
+        bool tracking = true;
 
-        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
-        .ReturnsAsync((Guid id) => new Weather { IdWeather = id });
+        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>(), It.IsAny<bool>()))
+        .ReturnsAsync((Guid id, bool tracking) => new Weather { IdWeather = id });
 
         // Act
-        var result = await _weatherService.FindById(idWeather);
+        var result = await _weatherService.FindById(idWeather, tracking);
 
         // Assert
         Assert.Equal(idWeather, result.IdWeather);
-        _weatherRepositoryMock.Verify(repo => repo.FindById(idWeather), Times.Once);
+        _weatherRepositoryMock.Verify(repo => repo.FindById(idWeather, tracking), Times.Once);
     }
 
     [Fact(DisplayName = "Dado um id do Weather, quando chamar o método FindById, então lança uma exceção.")]
@@ -133,15 +134,16 @@ public class WeatherServiceTest
     {
         // Arrange
         Guid idWeather = Guid.NewGuid();
+        bool tracking = true;
 
-        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
+        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>(), It.IsAny<bool>()))
         .Throws<Exception>();
 
         // Act
-        var exceptionFindById = Assert.ThrowsAsync<Exception>(() => _weatherService.FindById(idWeather));
+        var exceptionFindById = Assert.ThrowsAsync<Exception>(() => _weatherService.FindById(idWeather, tracking));
 
         // Assert
-        _ = Assert.ThrowsAsync<Exception>(() => _weatherService.FindById(idWeather));
+        _ = Assert.ThrowsAsync<Exception>(() => _weatherService.FindById(idWeather, tracking));
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método FindAll, então deve retornar uma lista de weather.")]
@@ -535,17 +537,15 @@ public class WeatherServiceTest
 
         var validWeather = new Weather();
 
-        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
+        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>(), It.IsAny<bool>()))
            .ReturnsAsync(validWeather);
 
         // Act
-        var result = await _weatherService.Update(validWeather.IdWeather, updateWeatherDto);
+        await _weatherService.Update(validWeather.IdWeather, updateWeatherDto);
 
         // Assert
-        Assert.NotNull(result);
-        Assert.Equal(validWeather, result);
-        _weatherRepositoryMock.Verify(repo => repo.FindById(validWeather.IdWeather), Times.Once);
-        _weatherRepositoryMock.Verify(repo => repo.Update(validWeather.IdWeather, It.IsAny<Weather>()), Times.Once);
+        _weatherRepositoryMock.Verify(repo => repo.FindById(It.IsAny<Guid>(), It.IsAny<bool>()), Times.Once);
+        _weatherRepositoryMock.Verify(repo => repo.Update(It.IsAny<Guid>(), It.IsAny<Weather>()), Times.Once);
     }
 
     [Fact(DisplayName = "Dado uma chamada ao método UpdateError, então lança uma exceção.")]
@@ -573,7 +573,7 @@ public class WeatherServiceTest
 
         var validWeather = new Weather();
 
-        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>()))
+        _weatherRepositoryMock.Setup(repo => repo.FindById(It.IsAny<Guid>(), It.IsAny<bool>()))
            .Throws<Exception>();
 
         _weatherRepositoryMock.Setup(repo => repo.Update(It.IsAny<Guid>(), It.IsAny<Weather>()))

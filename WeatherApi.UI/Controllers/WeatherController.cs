@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 using WeatherApi.Data.DTOs;
-using WeatherApi.DotNet.Application.Exceptions;
 using WeatherApi.Entity;
 using WeatherApi.Service.Interfaces;
 
@@ -80,11 +78,6 @@ public class WeatherController : ControllerBase
     {
         var weather = await _weatherService.FindById(id);
 
-        if (weather is null)
-        {
-            throw new NotFoundException("Weather não encontrado");
-        }
-
         return Ok(weather);
     }
 
@@ -107,6 +100,7 @@ public class WeatherController : ControllerBase
     public async Task<IActionResult> DeleteWeather(Guid id)
     {
         await _weatherService.DeleteById(id);
+
         return NoContent();
     }
 

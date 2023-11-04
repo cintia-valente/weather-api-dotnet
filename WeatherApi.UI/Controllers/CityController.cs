@@ -25,7 +25,7 @@ public class CityController : ControllerBase
     /// </summary>
     [HttpPost("register-city")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<IActionResult> PostWeather(
+    public async Task<IActionResult> PostCity(
         [FromBody] CityRequestDto postCityDTO)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -40,7 +40,7 @@ public class CityController : ControllerBase
     /// Lista todas as cidades
     /// </summary>
     [HttpGet("cities/all")]
-    public async Task<IEnumerable<City>> GetCitiesWithWeatherData()
+    public async Task<IEnumerable<City>> GetCitiesWithCityData()
     {
         var result = await _cityService.FindAll();
         return (IEnumerable<City>)result;
@@ -53,7 +53,7 @@ public class CityController : ControllerBase
     public async Task<IActionResult> GetCityForId(Guid id)
     {
         var city = await _cityService.FindById(id);
-        return city is null ? NotFound("Weather not found") : Ok(city);
+        return city is null ? NotFound("City not found") : Ok(city);
     }
 
 }

@@ -17,8 +17,8 @@ public class CityServiceTest
         _cityService = new CityService(_cityRepositoryMock.Object);
     }
 
-    [Fact(DisplayName = "Dado um objeto City, quando salvar o objeto Weather, então chama os métodos FindByID e Save exatamente uma vez.")]
-    public async Task SaveWeatherSucess()
+    [Fact(DisplayName = "Dado um objeto City, quando salvar o objeto, então chama os métodos FindByID e Save exatamente uma vez.")]
+    public async Task SaveCitySucess()
     {
         // Arrange
         var validCity = new City
@@ -41,7 +41,7 @@ public class CityServiceTest
     }
 
     [Fact(DisplayName = "Dado uma chamada de Save, então lança uma exceção.")]
-    public async Task SaveWeatherEnumsError()
+    public async Task SaveCityError()
     {
         // Arrange
         var invalidCity = new City

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WeatherApi.Data.DTOs;
 using WeatherApi.Entity;
+using WeatherApi.Service;
 using WeatherApi.Service.Interfaces;
 
 namespace WeatherApi.Controller;
@@ -30,8 +31,7 @@ public class CityController : ControllerBase
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var cityConverter = _mapper.Map<City>(postCityDTO);
-        var citySave =  await _cityService.Save(cityConverter);
+        var citySave =  await _cityService.Save(postCityDTO);
 
         return CreatedAtAction(nameof(GetCityForId), new { id = citySave.IdCity }, citySave);
     }
